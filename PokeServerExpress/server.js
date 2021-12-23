@@ -8,6 +8,7 @@ const io = require("socket.io")(3001, {
 stream = new Sim.BattleStream();
 players = 0;
 
+//Battle Stream
 (async () => {
   for await (const output of stream) {
     console.log("-->" + output);

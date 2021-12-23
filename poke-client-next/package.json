@@ -12,6 +12,7 @@
     "@emotion/react": "latest",
     "@emotion/server": "latest",
     "@emotion/styled": "latest",
+    "@mui/icons-material": "^5.2.5",
     "@mui/material": "latest",
     "clsx": "latest",
     "next": "12.0.7",
@@ -19,6 +20,7 @@
     "pokemon-showdown": "^0.11.7",
     "prop-types": "latest",
     "react": "17.0.2",
+    "react-beautiful-dnd": "^13.1.0",
     "react-dom": "17.0.2",
     "socket.io-client": "^4.4.0"
   },

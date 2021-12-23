@@ -19,8 +19,12 @@ const HtmlTooltip = styled(({ className, ...props }) => (
 const SwitchButton = ({ poke, sendSwitchChoice }) => {
   const toolTipTitle = (
     <React.Fragment>
-      <Typography>{poke.details}</Typography>
-      <Typography>{poke.condition}</Typography>
+      <Typography>
+        <b>{poke.details}</b>
+      </Typography>
+      <Typography>
+        <b>{poke.condition}</b>
+      </Typography>
       <Typography>
         <b>Item:</b> {poke.item}
       </Typography>

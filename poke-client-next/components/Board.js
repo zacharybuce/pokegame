@@ -9,6 +9,33 @@ const Board = ({ id }) => {
   const [team, setTeam] = useState();
   const [field, setField] = useState();
 
+  const fieldUpdate = () => {
+    if (socket === undefined) return;
+
+    socket.on("update", (fieldUpdate) => setField(fieldUpdate));
+    console.log(field);
+    return () => socket.off("update");
+  };
+
+  const sideUpdate = () => {
+    if (socket === undefined) return;
+
+    socket.on("side-update", (team, player1) => {
+      setTeam(team);
+      setPlayer1(player1);
+    });
+
+    return () => socket.off("side-update");
+  };
+
+  if (!field) {
+    fieldUpdate();
+  }
+
+  if (!team) {
+    sideUpdate();
+  }
+
   /*------SIDEUPDATE----------*/
   useEffect(() => {
     if (socket === undefined) return;
@@ -31,6 +58,7 @@ const Board = ({ id }) => {
   }, [socket, field]);
 
   const sendMoveChoice = (moveIndex) => {
+    console.log("sending choice...");
     socket.emit("send-move", moveIndex, id);
   };
 
@@ -40,7 +68,12 @@ const Board = ({ id }) => {
 
   return (
     <div>
-      {field ? <BattleDisplay field={field} player1={player1} /> : <div></div>}
+      {field ? (
+        <BattleDisplay field={field} team={team} player1={player1} />
+      ) : (
+        <div></div>
+      )}
+
       {team ? (
         <BattleOptions
           team={team}

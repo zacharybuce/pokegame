@@ -2,13 +2,16 @@ import React, { useState, useEffect } from "react";
 import { Grid } from "@mui/material";
 import PokeStatDisplay from "./PokeStatDisplay";
 import { useSnackbar } from "notistack";
+import StatusDisplay from "./StatusDisplay";
 
 export const BattleDisplay = ({ field, player1 }) => {
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
   const [p1Poke, setP1Poke] = useState(null);
   const [p2Poke, setP2Poke] = useState(null);
   const [p1PokeHealth, setP1PokeHealth] = useState(100);
   const [p2PokeHealth, setP2PokeHealth] = useState(100);
+  const [p1PokeStatus, setP1PokeStatus] = useState([]);
+  const [p2PokeStatus, setP2PokeStatus] = useState([]);
   const [battleEnd, setBattleEnd] = useState(false);
 
   var delay = 300;
@@ -31,34 +34,55 @@ export const BattleDisplay = ({ field, player1 }) => {
 
       //Set the images and health on switches
       if (token.startsWith("|switch|p1a:")) {
+        setP1PokeStatus([]);
+
         var splitToken = token.split("|");
         setP1Poke(splitToken[3].split(",")[0]);
         setP1PokeHealth(splitToken[4].split("/")[0]);
+        //set status on switch in
+        if (splitToken[4].split(" ").length == 2)
+          setP1PokeStatus((prevState) => [
+            ...prevState,
+            "status " + splitToken[4].split(" ")[1],
+          ]);
       }
       if (token.startsWith("|switch|p2a:")) {
+        setP2PokeStatus([]);
+
         var splitToken = token.split("|");
         setP2Poke(splitToken[3].split(",")[0]);
         setP2PokeHealth(splitToken[4].split("/")[0]);
+        //set status on switch in
+        if (splitToken[4].split(" ").length == 2)
+          setP2PokeStatus((prevState) => [
+            ...prevState,
+            "status " + splitToken[4].split(" ")[1],
+          ]);
       }
 
       //set the health display on damage and heal
-      if (
-        (token.startsWith("|-damage|p1a:") &&
-          token.split("|")[3].split("/")[1] == "100") ||
-        token.startsWith("|-heal|p1a:")
-      ) {
-        var splitToken = token.split("|");
-        setP1PokeHealth(splitToken[3].split("/")[0]);
+      if (token.startsWith("|-damage|") && token.split("|")[3] != "0 fnt") {
+        if (
+          (token.startsWith("|-damage|p1a:") &&
+            token.split("|")[3].split("/")[1] == "100") ||
+          token.startsWith("|-heal|p1a:") ||
+          (token.startsWith("|-damage|p1a:") &&
+            token.split("|")[3].split("/")[1].split(" ")[0] == "100")
+        ) {
+          var splitToken = token.split("|");
+          setP1PokeHealth(splitToken[3].split("/")[0]);
+        }
+        if (
+          (token.startsWith("|-damage|p2a:") &&
+            token.split("|")[3].split("/")[1] == "100") ||
+          token.startsWith("|-heal|p2a:") ||
+          (token.startsWith("|-damage|p2a:") &&
+            token.split("|")[3].split("/")[1].split(" ")[0] == "100")
+        ) {
+          var splitToken = token.split("|");
+          setP2PokeHealth(splitToken[3].split("/")[0]);
+        }
       }
-      if (
-        (token.startsWith("|-damage|p2a:") &&
-          token.split("|")[3].split("/")[1] == "100") ||
-        token.startsWith("|-heal|p2a:")
-      ) {
-        var splitToken = token.split("|");
-        setP2PokeHealth(splitToken[3].split("/")[0]);
-      }
-
       //set health to 0 on faint
       if (token.startsWith("|faint|p1a:")) {
         setP1PokeHealth(0);
@@ -66,11 +90,38 @@ export const BattleDisplay = ({ field, player1 }) => {
       if (token.startsWith("|faint|p2a:")) {
         setP2PokeHealth(0);
       }
-    }
 
-    if (token.startsWith("|win")) {
-      setBattleEnd(true);
-    }
+      //set status
+      if (token.startsWith("|-status|p1a:")) {
+        var splitToken = token.split("|");
+        console.log("in stat");
+        setP1PokeStatus((prevState) => [
+          ...prevState,
+          "status " + splitToken[3],
+        ]);
+      }
+      if (token.startsWith("|-status|p2a:")) {
+        var splitToken = token.split("|");
+        setP2PokeStatus((prevState) => [
+          ...prevState,
+          "status " + splitToken[3],
+        ]);
+      }
+
+      //set boost and unboost
+      if (token.startsWith("|-unboost|p1a:")) {
+        var splitToken = token.split("|");
+
+        setP1PokeStatus((prevState) => [
+          ...prevState,
+          "unboost " + splitToken[3],
+        ]);
+      }
+
+      if (token.startsWith("|win")) {
+        setBattleEnd(true);
+      }
+    } //end tok
 
     delay = 300;
   };
@@ -79,14 +130,18 @@ export const BattleDisplay = ({ field, player1 }) => {
   const snackDisplay = (token) => {
     if (token.startsWith("|move")) {
       var splitToken = token.split("|");
-      var user = splitToken[2].split(" ")[1];
-      var move = splitToken[3];
       var opp = splitToken[4].split(" ")[1];
-      setTimeout(
-        () => enqueueSnackbar(`${user} used ${move} on ${opp}`),
-        delay
-      );
-      delay += addDelay;
+
+      if (opp != undefined) {
+        var user = splitToken[2].split(" ")[1];
+        var move = splitToken[3];
+
+        setTimeout(
+          () => enqueueSnackbar(`${user} used ${move} on ${opp}`),
+          delay
+        );
+        delay += addDelay;
+      }
     }
 
     if (token.startsWith("|-supereffective")) {
@@ -234,7 +289,6 @@ export const BattleDisplay = ({ field, player1 }) => {
       var splitToken = token.split("|");
       var poke = splitToken[2].split(" ")[1];
       var status = splitToken[3];
-
       if (splitToken.length == 5) {
         var cause = JSON.stringify(splitToken[4]).replace(/['"]+/g, "");
         cause = cause.replace(/[\[\]]+/g, "");
@@ -292,6 +346,7 @@ export const BattleDisplay = ({ field, player1 }) => {
 
       if (splitToken.length == 5) {
         var weather = splitToken[2].split(" ")[1];
+        if (weather == undefined) weather = splitToken[2];
         var poke = splitToken[4].split(" ").at(-1);
         var ability = splitToken[3]
           .replace(/['"]+/g, "")
@@ -299,7 +354,7 @@ export const BattleDisplay = ({ field, player1 }) => {
 
         setTimeout(
           () =>
-            enqueueSnackbar(`${poke} caused ${weather} ${ability}!`, {
+            enqueueSnackbar(`${poke} caused ${weather} ${ability} !`, {
               variant: "warning",
             }),
           delay
@@ -317,6 +372,19 @@ export const BattleDisplay = ({ field, player1 }) => {
           delay
         );
         delay += addDelay;
+      }
+
+      if (splitToken.length == 3) {
+        if (splitToken[2] == "none") {
+          setTimeout(
+            () =>
+              enqueueSnackbar(`The weather stopped...`, {
+                variant: "warning",
+              }),
+            delay
+          );
+          delay += addDelay;
+        }
       }
     }
 
@@ -364,6 +432,42 @@ export const BattleDisplay = ({ field, player1 }) => {
         );
         delay += addDelay;
       }
+    }
+
+    if (token.startsWith("|-anim")) {
+      var splitToken = token.split("|");
+      var user = splitToken[2].split(" ")[1];
+      var move = splitToken[3];
+      var opp = splitToken[4].split(" ")[1];
+      setTimeout(
+        () => enqueueSnackbar(`${user} used ${move} on ${opp}`),
+        delay
+      );
+      delay += addDelay;
+    }
+
+    if (token.startsWith("|-prepare")) {
+      var splitToken = token.split("|");
+      var user = splitToken[2].split(" ")[1];
+      var move = splitToken[3];
+
+      setTimeout(() => enqueueSnackbar(`${user} is preparing ${move}`), delay);
+      delay += addDelay;
+    }
+
+    if (token.startsWith("|-ability")) {
+      var splitToken = token.split("|");
+      var user = splitToken[2].split(" ")[1];
+      var ability = splitToken[3];
+
+      setTimeout(
+        () =>
+          enqueueSnackbar(`${user}'s ${ability} was activated!`, {
+            variant: "warning",
+          }),
+        delay
+      );
+      delay += addDelay;
     }
   };
 
@@ -436,6 +540,7 @@ export const BattleDisplay = ({ field, player1 }) => {
               health={!player1 ? p1PokeHealth : p2PokeHealth}
               name={!player1 ? p1Poke : p2Poke}
             />
+            <StatusDisplay statuses={!player1 ? p1PokeStatus : p2PokeStatus} />
           </Grid>
           <Grid item xs={6} sx={{ textAlign: "center" }}>
             {displayOpponentPoke() ? displayOpponentPoke() : <div></div>}
@@ -451,6 +556,7 @@ export const BattleDisplay = ({ field, player1 }) => {
               health={player1 ? p1PokeHealth : p2PokeHealth}
               name={player1 ? p1Poke : p2Poke}
             />
+            <StatusDisplay statuses={player1 ? p1PokeStatus : p2PokeStatus} />
           </Grid>
         </Grid>
       </Grid>
