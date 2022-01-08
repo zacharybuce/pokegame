@@ -4,7 +4,13 @@ import PokeStatDisplay from "./PokeStatDisplay";
 import { useSnackbar } from "notistack";
 import StatusDisplay from "./StatusDisplay";
 
-export const BattleDisplay = ({ field, player1 }) => {
+export const BattleDisplay = ({
+  field,
+  player1,
+  id,
+  setBattleEnd,
+  setRewards,
+}) => {
   const { enqueueSnackbar } = useSnackbar();
   const [p1Poke, setP1Poke] = useState(null);
   const [p2Poke, setP2Poke] = useState(null);
@@ -12,7 +18,6 @@ export const BattleDisplay = ({ field, player1 }) => {
   const [p2PokeHealth, setP2PokeHealth] = useState(100);
   const [p1PokeStatus, setP1PokeStatus] = useState([]);
   const [p2PokeStatus, setP2PokeStatus] = useState([]);
-  const [battleEnd, setBattleEnd] = useState(false);
 
   var delay = 300;
   var p1Heal = false;
@@ -117,9 +122,37 @@ export const BattleDisplay = ({ field, player1 }) => {
           "unboost " + splitToken[3],
         ]);
       }
+      if (token.startsWith("|-unboost|p2a:")) {
+        var splitToken = token.split("|");
+
+        setP2PokeStatus((prevState) => [
+          ...prevState,
+          "unboost " + splitToken[3],
+        ]);
+      }
+      if (token.startsWith("|-boost|p1a:")) {
+        var splitToken = token.split("|");
+
+        setP1PokeStatus((prevState) => [
+          ...prevState,
+          "boost " + splitToken[3],
+        ]);
+      }
+      if (token.startsWith("|-boost|p2a:")) {
+        var splitToken = token.split("|");
+
+        setP2PokeStatus((prevState) => [
+          ...prevState,
+          "boost " + splitToken[3],
+        ]);
+      }
 
       if (token.startsWith("|win")) {
+        var splitToken = token.split("|");
+        var winner = splitToken[2];
         setBattleEnd(true);
+        if (id == winner.replace(/['"]+/g, "")) setRewards(1000, 2);
+        else setRewards(-500, 1);
       }
     } //end tok
 
@@ -464,6 +497,19 @@ export const BattleDisplay = ({ field, player1 }) => {
         () =>
           enqueueSnackbar(`${user}'s ${ability} was activated!`, {
             variant: "warning",
+          }),
+        delay
+      );
+      delay += addDelay;
+    }
+
+    if (token.startsWith("|win")) {
+      var splitToken = token.split("|");
+      var winner = splitToken[2];
+      setTimeout(
+        () =>
+          enqueueSnackbar(`${winner} won the battle!`, {
+            variant: "info",
           }),
         delay
       );

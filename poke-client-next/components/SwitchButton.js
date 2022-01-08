@@ -16,7 +16,7 @@ const HtmlTooltip = styled(({ className, ...props }) => (
   },
 }));
 
-const SwitchButton = ({ poke, sendSwitchChoice }) => {
+const SwitchButton = ({ poke, sendSwitchChoice, slot }) => {
   const toolTipTitle = (
     <React.Fragment>
       <Typography>
@@ -52,7 +52,7 @@ const SwitchButton = ({ poke, sendSwitchChoice }) => {
               .split(",")[0]
               .toLowerCase()
               .replace(/\s/g, "");
-            sendSwitchChoice(name);
+            sendSwitchChoice(slot + 1);
           }}
         >
           <PokeIcon name={poke.details.split(",")[0]} />

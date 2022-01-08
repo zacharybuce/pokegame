@@ -25,6 +25,12 @@ const StatusDisplay = ({ statuses }) => {
               <ArrowUpwardIcon />
             </Tooltip>
           );
+        case "spe":
+          return (
+            <Tooltip title={"Speed Up"}>
+              <ArrowUpwardIcon />
+            </Tooltip>
+          );
       }
     }
 

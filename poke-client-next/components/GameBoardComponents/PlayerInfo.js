@@ -1,22 +1,35 @@
-import { Box, Typography, Grid } from "@mui/material";
+import { Box, Typography, Grid, Tooltip } from "@mui/material";
 import React from "react";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import CatchingPokemonIcon from "@mui/icons-material/CatchingPokemon";
+import CookieIcon from "@mui/icons-material/Cookie";
 
-const PlayerInfo = ({ id, money, balls }) => {
+const PlayerInfo = ({ id, money, balls, candies }) => {
   return (
     <Box
       sx={{ p: 2, borderRadius: "5px", border: "solid", borderWidth: "1px" }}
     >
       <Grid container textAlign={"center"} spacing={1}>
-        <Grid item xs={4}>
+        <Grid item xs={3}>
           <Typography>{id}</Typography>
         </Grid>
-        <Grid item container xs={4}>
-          <AttachMoneyIcon />: {money}
+        <Grid item container xs={3}>
+          <Tooltip title="Money">
+            <AttachMoneyIcon />
+          </Tooltip>
+          : {money}
         </Grid>
-        <Grid item container xs={4}>
-          <CatchingPokemonIcon /> : {balls}
+        <Grid item container xs={3}>
+          <Tooltip title="Pokeballs">
+            <CatchingPokemonIcon />
+          </Tooltip>{" "}
+          : {balls}
+        </Grid>
+        <Grid item container xs={3}>
+          <Tooltip title="Candies">
+            <CookieIcon />
+          </Tooltip>{" "}
+          :{candies}
         </Grid>
       </Grid>
     </Box>

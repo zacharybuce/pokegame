@@ -1,0 +1,14 @@
+{
+  "bulbasaur": {
+    "species": "Bulbasaur",
+    "moves": ["Tackle", "Razor Leaf", "Leech Seed", "Sleep Powder"]
+  },
+  "charmander": {
+    "species": "Charmander",
+    "moves": ["Scratch", "Ember", "Smokescreen", "Dragon Breath"]
+  },
+  "pikachu": {
+    "species": "Pikachu",
+    "moves": ["Quick Attack", "Thunder Shock", "Nuzzle", "Sweet Kiss"]
+  }
+}

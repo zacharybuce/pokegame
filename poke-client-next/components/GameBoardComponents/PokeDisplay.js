@@ -63,28 +63,36 @@ const TeamDisplay = ({ team, setTeam, box, setBox }) => {
               minHeight: "15vh",
             }}
           >
-            <Droppable droppableId="team">
-              {(provided) => (
-                <Box {...provided.droppableProps} ref={provided.innerRef}>
-                  {team.map((poke, index) => {
-                    return (
-                      <Draggable key={poke} draggableId={poke} index={index}>
-                        {(provided) => (
-                          <span
-                            ref={provided.innerRef}
-                            {...provided.draggableProps}
-                            {...provided.dragHandleProps}
-                          >
-                            <PokemonPiece name={poke} />
-                          </span>
-                        )}
-                      </Draggable>
-                    );
-                  })}
-                  {provided.placeholder}
-                </Box>
-              )}
-            </Droppable>
+            {team.length ? (
+              <Droppable droppableId="team">
+                {(provided) => (
+                  <Box {...provided.droppableProps} ref={provided.innerRef}>
+                    {team.map((poke, index) => {
+                      return (
+                        <Draggable
+                          key={poke.species}
+                          draggableId={poke.species}
+                          index={index}
+                        >
+                          {(provided) => (
+                            <span
+                              ref={provided.innerRef}
+                              {...provided.draggableProps}
+                              {...provided.dragHandleProps}
+                            >
+                              <PokemonPiece poke={poke} />
+                            </span>
+                          )}
+                        </Draggable>
+                      );
+                    })}
+                    {provided.placeholder}
+                  </Box>
+                )}
+              </Droppable>
+            ) : (
+              <div></div>
+            )}
           </Box>
         </Grid>
         <Grid item textAlign="center" xs={10}>
@@ -99,33 +107,41 @@ const TeamDisplay = ({ team, setTeam, box, setBox }) => {
               minHeight: "15vh",
             }}
           >
-            <Droppable droppableId="box" direction="horizontal">
-              {(provided) => (
-                <div {...provided.droppableProps} ref={provided.innerRef}>
-                  {box.map((poke, index) => {
-                    return (
-                      <Draggable key={poke} draggableId={poke} index={index}>
-                        {(provided) => (
-                          <span
-                            ref={provided.innerRef}
-                            {...provided.draggableProps}
-                            {...provided.dragHandleProps}
-                          >
-                            <PokemonPiece
+            {box.length ? (
+              <Droppable droppableId="box" direction="horizontal">
+                {(provided) => (
+                  <div {...provided.droppableProps} ref={provided.innerRef}>
+                    {box.map((poke, index) => {
+                      return (
+                        <Draggable
+                          key={poke.species}
+                          draggableId={poke.species}
+                          index={index}
+                        >
+                          {(provided) => (
+                            <span
                               ref={provided.innerRef}
                               {...provided.draggableProps}
                               {...provided.dragHandleProps}
-                              name={poke}
-                            />
-                          </span>
-                        )}
-                      </Draggable>
-                    );
-                  })}
-                  {provided.placeholder}
-                </div>
-              )}
-            </Droppable>
+                            >
+                              <PokemonPiece
+                                ref={provided.innerRef}
+                                {...provided.draggableProps}
+                                {...provided.dragHandleProps}
+                                poke={poke}
+                              />
+                            </span>
+                          )}
+                        </Draggable>
+                      );
+                    })}
+                    {provided.placeholder}
+                  </div>
+                )}
+              </Droppable>
+            ) : (
+              <div></div>
+            )}
           </Box>
         </Grid>
       </Grid>

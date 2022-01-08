@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
 import { styled } from "@mui/material/styles";
-import { Button } from "@mui/material";
+import { Box } from "@mui/material";
 
 const HtmlTooltip = styled(({ className, ...props }) => (
   <Tooltip {...props} classes={{ popper: className }} />
@@ -41,7 +41,7 @@ const Item = ({ name }) => {
     );
     return (
       <HtmlTooltip title={tooltip}>
-        <Button>
+        <Box>
           <img
             src={
               "https://play.pokemonshowdown.com/sprites/itemicons/" +
@@ -49,7 +49,7 @@ const Item = ({ name }) => {
               ".png"
             }
           />
-        </Button>
+        </Box>
       </HtmlTooltip>
     );
   }

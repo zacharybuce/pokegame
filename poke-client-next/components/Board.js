@@ -2,12 +2,14 @@ import React, { useState, useEffect, useCallback } from "react";
 import { useSocket } from "../contexts/SocketProvider";
 import { BattleOptions } from "./BattleOptions";
 import { BattleDisplay } from "./BattleDisplay";
+import { Button, Dialog } from "@mui/material";
 
-const Board = ({ id }) => {
+const Board = ({ id, handleClose, setMoney, setCandies }) => {
   const socket = useSocket();
   const [player1, setPlayer1] = useState();
   const [team, setTeam] = useState();
   const [field, setField] = useState();
+  const [battleEnd, setBattleEnd] = useState(false);
 
   const fieldUpdate = () => {
     if (socket === undefined) return;
@@ -66,10 +68,24 @@ const Board = ({ id }) => {
     socket.emit("send-switch", pokeid, id);
   };
 
+  const setRewards = (money, candies) => {
+    const len = JSON.parse(team).side.pokemon.length;
+
+    setMoney((prevState) => prevState + money);
+    setCandies((prevState) => prevState + candies * len);
+  };
+
   return (
     <div>
       {field ? (
-        <BattleDisplay field={field} team={team} player1={player1} />
+        <BattleDisplay
+          field={field}
+          team={team}
+          player1={player1}
+          id={id}
+          setBattleEnd={setBattleEnd}
+          setRewards={setRewards}
+        />
       ) : (
         <div></div>
       )}
@@ -83,6 +99,9 @@ const Board = ({ id }) => {
       ) : (
         <div></div>
       )}
+      <Dialog maxWidth={"sm"} open={battleEnd}>
+        <Button onClick={() => handleClose()}>Close Battle</Button>
+      </Dialog>
     </div>
   );
 };

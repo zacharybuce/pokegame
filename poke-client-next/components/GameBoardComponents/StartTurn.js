@@ -1,9 +1,9 @@
 import { Button } from "@mui/material";
 import React from "react";
 
-const StartTurn = () => {
+const StartTurn = ({ startTurn }) => {
   return (
-    <Button fullWidth variant="contained">
+    <Button onClick={() => startTurn()} fullWidth variant="contained">
       Start Turn
     </Button>
   );

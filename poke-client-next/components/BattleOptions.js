@@ -40,10 +40,14 @@ export const BattleOptions = ({ team, sendMoveChoice, sendSwitchChoice }) => {
       </Grid>
 
       {team ? (
-        JSON.parse(team).side.pokemon.map((poke) => {
+        JSON.parse(team).side.pokemon.map((poke, index) => {
           if (!poke.active && poke.condition != "0 fnt")
             return (
-              <SwitchButton poke={poke} sendSwitchChoice={sendSwitchChoice} />
+              <SwitchButton
+                poke={poke}
+                sendSwitchChoice={sendSwitchChoice}
+                slot={index}
+              />
             );
         })
       ) : (

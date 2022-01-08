@@ -39,6 +39,8 @@ export default function Index() {
     } else {
       return <GameBoard id={id} />;
     }
+
+    //return <GameBoard id={id} />;
   };
 
   return (
