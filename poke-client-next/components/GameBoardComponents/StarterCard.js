@@ -11,7 +11,9 @@ const StarterCard = ({ name, chooseStarter }) => {
   const [pokeData, setPokeData] = useState(null);
 
   const getPokeData = async () => {
-    const bRes = await fetch("http://localhost:3000/api/pokemon/" + name);
+    const bRes = await fetch(
+      process.env.NEXT_PUBLIC_ROOT_URL + "/api/pokemon/" + name
+    );
     const pokeData = await bRes.json();
     setPokeData(pokeData.data);
   };

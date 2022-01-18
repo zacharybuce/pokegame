@@ -1,26 +1,29 @@
 import React, { useState } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import PokemonPiece from "./PokemonPiece";
-import { List, ListItem, Grid, Box, Typography, Divider } from "@mui/material";
+import {
+  List,
+  ListItem,
+  Grid,
+  Box,
+  Typography,
+  Divider,
+  Button,
+} from "@mui/material";
+import PokeInfoMove from "./PokeInfoMove";
 
-const TeamDisplay = ({
-  team,
-  setTeam,
-  box,
-  setBox,
-  candies,
-  setCandies,
-  setBag,
-}) => {
+const EditMoves = ({ currentMoves, learnMoves, setEditing, handleSubmit }) => {
+  const [moves, setMoves] = useState(currentMoves);
+  const [newMoves, setNewMoves] = useState(learnMoves);
+
   const handleOnDragEnd = (result) => {
     const { destination, source, draggableId } = result;
 
     if (!destination) return;
 
     if (
-      destination.droppableId == "team" &&
-      source.droppableId == "box" &&
-      team.length == 3
+      destination.droppableId == "moves" &&
+      source.droppableId == "newMoves" &&
+      moves.length == 4
     )
       return;
 
@@ -30,42 +33,42 @@ const TeamDisplay = ({
     if (start == end) {
       const items = [];
 
-      if (start == "team") items = Array.from(team);
-      else items = Array.from(box);
+      if (start == "moves") items = Array.from(moves);
+      else items = Array.from(newMoves);
 
       const [reorderedItem] = items.splice(result.source.index, 1);
       items.splice(result.destination.index, 0, reorderedItem);
 
-      if (start == "team") setTeam(items);
-      else setBox(items);
+      if (start == "moves") setMoves(items);
+      else setNewMoves(items);
     } else {
       var items = [];
 
-      if (start == "team") items = Array.from(team);
-      else items = Array.from(box);
+      if (start == "moves") items = Array.from(moves);
+      else items = Array.from(newMoves);
 
       const [reorderedItem] = items.splice(result.source.index, 1);
       // items.splice(result.destination.index, 0, reorderedItem);
 
-      if (start == "team") setTeam(items);
-      else setBox(items);
+      if (start == "moves") setMoves(items);
+      else setNewMoves(items);
 
       items = [];
 
-      if (end == "team") items = Array.from(team);
-      else items = Array.from(box);
+      if (end == "moves") items = Array.from(moves);
+      else items = Array.from(newMoves);
 
       items.splice(result.destination.index, 0, reorderedItem);
-      if (end == "team") setTeam(items);
-      else setBox(items);
+      if (end == "moves") setMoves(items);
+      else setNewMoves(items);
     }
   };
 
   return (
     <DragDropContext onDragEnd={handleOnDragEnd}>
       <Grid container sx={{ mt: "1vh" }} spacing={1}>
-        <Grid textAlign="center" item xs={2}>
-          <Typography>Party</Typography>
+        <Grid item xs={6}>
+          <Typography variant="h5">Current Moves</Typography>
           <Box
             sx={{
               mt: "1vh",
@@ -73,35 +76,23 @@ const TeamDisplay = ({
               borderRadius: "5px",
               border: "solid",
               borderWidth: "1px",
-              minHeight: "15vh",
             }}
           >
-            {team.length ? (
-              <Droppable droppableId="team">
+            {moves.length ? (
+              <Droppable droppableId="moves">
                 {(provided) => (
                   <Box {...provided.droppableProps} ref={provided.innerRef}>
-                    {team.map((poke, index) => {
+                    {moves.map((move, index) => {
                       return (
-                        <Draggable
-                          key={poke.species}
-                          draggableId={poke.species}
-                          index={index}
-                        >
+                        <Draggable key={move} draggableId={move} index={index}>
                           {(provided) => (
                             <Box
                               ref={provided.innerRef}
                               {...provided.draggableProps}
                               {...provided.dragHandleProps}
-                              sx={{ width: "68px" }}
+                              sx={{ mb: "1vh" }}
                             >
-                              <PokemonPiece
-                                poke={poke}
-                                candies={candies}
-                                setCandies={setCandies}
-                                team={team}
-                                setTeam={setTeam}
-                                setBag={setBag}
-                              />
+                              <PokeInfoMove move={move} />
                             </Box>
                           )}
                         </Draggable>
@@ -116,8 +107,8 @@ const TeamDisplay = ({
             )}
           </Box>
         </Grid>
-        <Grid item textAlign="center" xs={10}>
-          <Typography>Box</Typography>
+        <Grid item xs={6}>
+          <Typography variant="h5">Learnable Moves</Typography>
           <Box
             sx={{
               mt: "1vh",
@@ -125,39 +116,23 @@ const TeamDisplay = ({
               borderRadius: "5px",
               border: "solid",
               borderWidth: "1px",
-              minHeight: "15vh",
             }}
           >
-            {box.length ? (
-              <Droppable droppableId="box" direction="horizontal">
+            {newMoves.length ? (
+              <Droppable droppableId="newMoves">
                 {(provided) => (
-                  <Box
-                    {...provided.droppableProps}
-                    ref={provided.innerRef}
-                    sx={{ width: "100%", display: "flex" }}
-                  >
-                    {box.map((poke, index) => {
+                  <Box {...provided.droppableProps} ref={provided.innerRef}>
+                    {newMoves.map((move, index) => {
                       return (
-                        <Draggable
-                          key={poke.species}
-                          draggableId={poke.species}
-                          index={index}
-                        >
+                        <Draggable key={move} draggableId={move} index={index}>
                           {(provided) => (
                             <Box
                               ref={provided.innerRef}
                               {...provided.draggableProps}
                               {...provided.dragHandleProps}
-                              sx={{ width: "68px" }}
+                              sx={{ mb: "1vh" }}
                             >
-                              <PokemonPiece
-                                poke={poke}
-                                candies={candies}
-                                setCandies={setCandies}
-                                team={box}
-                                setTeam={setBox}
-                                setBag={setBag}
-                              />
+                              <PokeInfoMove move={move} />
                             </Box>
                           )}
                         </Draggable>
@@ -171,10 +146,36 @@ const TeamDisplay = ({
               <div></div>
             )}
           </Box>
+        </Grid>
+        <Grid item xs={6} sx={{ mt: "3vh", textAlign: "center" }}>
+          {moves.length < 4 ? (
+            <Typography>Can't have less than 4 moves</Typography>
+          ) : (
+            <div></div>
+          )}
+          <Button
+            onClick={() => handleSubmit(moves, newMoves)}
+            variant="contained"
+            sx={{ width: "75%" }}
+            disabled={moves.length < 4}
+          >
+            Submit
+          </Button>
+        </Grid>
+        <Grid item xs={6} sx={{ mt: "3vh", textAlign: "center" }}>
+          <Button
+            onClick={() => setEditing(false)}
+            fullWidth
+            variant="contained"
+            color="error"
+            sx={{ width: "75%" }}
+          >
+            Cancel
+          </Button>
         </Grid>
       </Grid>
     </DragDropContext>
   );
 };
 
-export default TeamDisplay;
+export default EditMoves;

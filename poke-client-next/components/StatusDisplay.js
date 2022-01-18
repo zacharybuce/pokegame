@@ -4,6 +4,7 @@ import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import BoltIcon from "@mui/icons-material/Bolt";
 import BubbleChartIcon from "@mui/icons-material/BubbleChart";
 import LocalFireDepartmentIcon from "@mui/icons-material/LocalFireDepartment";
+import HotelIcon from "@mui/icons-material/Hotel";
 import { Tooltip } from "@mui/material";
 const StatusDisplay = ({ statuses }) => {
   //boost atk
@@ -48,6 +49,18 @@ const StatusDisplay = ({ statuses }) => {
               <ArrowDownwardIcon />
             </Tooltip>
           );
+        case "spe":
+          return (
+            <Tooltip title={"Speed Down"}>
+              <ArrowDownwardIcon />
+            </Tooltip>
+          );
+        case "def":
+          return (
+            <Tooltip title={"Defence Down"}>
+              <ArrowDownwardIcon />
+            </Tooltip>
+          );
       }
     }
 
@@ -78,6 +91,12 @@ const StatusDisplay = ({ statuses }) => {
           return (
             <Tooltip title={"Burn"}>
               <LocalFireDepartmentIcon key={"brn"} />
+            </Tooltip>
+          );
+        case "slp":
+          return (
+            <Tooltip title={"Sleep"}>
+              <HotelIcon key={"slp"} />
             </Tooltip>
           );
       }

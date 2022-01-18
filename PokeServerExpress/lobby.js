@@ -176,8 +176,8 @@ const game = (socket, id) => {
 
 const genWildAreas = (round) => {
   var choices = [];
-  for (let i = 0; i < 3; i++) {
-    let rand = Math.floor(Math.random() * 10);
+  for (let i = 0; i < 2; i++) {
+    let rand = Math.floor(Math.random() * 100);
     let area = wildArea(round, rand);
     if (!choices.includes(area)) choices.push(area);
     else i--;
@@ -188,29 +188,23 @@ const genWildAreas = (round) => {
 const wildArea = (round, num) => {
   var area = "";
   if (round <= 3) {
-    switch (num) {
-      case 0:
-      case 1:
-      case 2:
-        area = "Viridian Forest";
-        break;
-      case 3:
-      case 4:
-      case 5:
-        area = "Grassland Route";
-        break;
-      case 6:
-      case 7:
-      case 8:
-        area = "Mt.Moon";
-        break;
-      case 9:
-        area = "Dark Cave";
-        break;
-    }
+    area = r3Areas(num);
   }
 
   return area;
+};
+
+const r3Areas = (num) => {
+  if (num < 20) return "Viridian Forest";
+  if (20 <= num && num < 40) return "Grassland Route";
+  if (40 <= num && num < 60) return "Dark Cave";
+  if (60 <= num && num < 75) return "Sprout Tower";
+  if (75 <= num && num < 90) return "Mt.Moon";
+  if (num >= 90) return "Union Cave";
+  else {
+    console.log(num);
+    return "error";
+  }
 };
 
 const startGameIfReady = () => {

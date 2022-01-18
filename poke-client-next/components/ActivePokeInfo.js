@@ -26,11 +26,15 @@ const ActivePokeInfo = ({ team }) => {
     const item = poke.item ? poke.item : "none";
     const itemData = "";
 
-    const aRes = await fetch("http://localhost:3000/api/abilities/" + ability);
+    const aRes = await fetch(
+      process.env.NEXT_PUBLIC_ROOT_URL + "/api/abilities/" + ability
+    );
     const abilityData = await aRes.json();
 
     if (item != "none") {
-      const bRes = await fetch("http://localhost:3000/api/items/" + item);
+      const bRes = await fetch(
+        process.env.NEXT_PUBLIC_ROOT_URL + "/api/items/" + item
+      );
       itemData = await bRes.json();
     }
 

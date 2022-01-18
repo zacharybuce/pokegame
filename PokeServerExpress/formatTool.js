@@ -32,9 +32,11 @@ const mon = {
   moves: ["Ice Beam", "Hurricane", "Substitute", "Roost"],
 };
 
-const baseStats = Dex.species.get("Articuno").baseStats;
-const poke = battle.spreadModify(baseStats, mon);
-console.log(Dex.species.get("pikachu"));
+console.log(Dex.items.get("Aguav Berry"));
+
+// const baseStats = Dex.species.get("Articuno").baseStats;
+// const poke = battle.spreadModify(baseStats, mon);
+// console.log(Dex.species.get("raichu"));
 
 // console.log(Teams.pack(upTeam));
 

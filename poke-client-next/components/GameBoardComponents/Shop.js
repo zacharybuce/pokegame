@@ -6,6 +6,7 @@ import {
   DialogTitle,
   Grid,
   Tooltip,
+  Typography,
 } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -13,11 +14,15 @@ import ShopItem from "./ShopItem";
 import CatchingPokemonIcon from "@mui/icons-material/CatchingPokemon";
 import { useSnackbar } from "notistack";
 
-const Shop = ({ money, setMoney, setBalls, setBag }) => {
+const Shop = ({ money, setMoney, setBalls, setBag, shopItems }) => {
   const { enqueueSnackbar } = useSnackbar();
   const [open, setOpen] = useState(false);
-  const [items, setItems] = useState(["leftovers", "life-orb", "sitrus-berry"]);
+  const [items, setItems] = useState(shopItems);
   const [boughtItem, setBoughtItem] = useState();
+
+  useEffect(() => {
+    setItems(shopItems);
+  }, [shopItems]);
 
   useEffect(() => {
     if (!boughtItem) return;
@@ -29,7 +34,7 @@ const Shop = ({ money, setMoney, setBalls, setBag }) => {
       })
     );
     setBag((prevState) => [...prevState, boughtItem]);
-    enqueueSnackbar(`You bought a ${boughtItem}`, {
+    enqueueSnackbar(`You bought a ${boughtItem.split("|")[0]}`, {
       variant: "success",
     });
   }, [boughtItem]);
@@ -69,18 +74,24 @@ const Shop = ({ money, setMoney, setBalls, setBag }) => {
         <Box sx={{ backgroundColor: "#fafafa" }}>
           <DialogTitle>Shop</DialogTitle>
           <DialogContent>
-            <Grid container spacing={1} sx={{ textAlign: "center" }}>
-              {items.map((item) => {
-                return (
-                  <ShopItem
-                    name={item}
-                    setBoughtItem={setBoughtItem}
-                    money={money}
-                    setMoney={setMoney}
-                  />
-                );
-              })}
-            </Grid>
+            {items.length ? (
+              <Grid container spacing={1} sx={{ textAlign: "center" }}>
+                {items.map((item) => {
+                  return (
+                    <ShopItem
+                      name={item}
+                      setBoughtItem={setBoughtItem}
+                      money={money}
+                      setMoney={setMoney}
+                    />
+                  );
+                })}
+              </Grid>
+            ) : (
+              <Box sx={{ textAlign: "center" }}>
+                <Typography variant="h5">No Items in the Shop</Typography>
+              </Box>
+            )}
             <Grid item xs={12}>
               <Tooltip title={"Buy a Pokeball"}>
                 <Button onClick={() => buyPokeBall()}>

@@ -11,7 +11,9 @@ export function SocketProvider({ id, children }) {
   const [socket, setSocket] = useState();
 
   useEffect(() => {
-    const newSocket = io("http://localhost:3001", { query: { id } });
+    const newSocket = io(process.env.NEXT_PUBLIC_SERVER_URL, {
+      query: { id },
+    });
     setSocket(newSocket);
 
     return () => newSocket.close();

@@ -8,7 +8,9 @@ const Starter = ({ setTeam, handleClose }) => {
   const starters = ["Charmander", "Squirtle", "Bulbasaur"];
 
   const chooseStarter = async (poke) => {
-    const res = await fetch("http://localhost:3000/api/genmon/" + poke);
+    const res = await fetch(
+      process.env.NEXT_PUBLIC_ROOT_URL + "/api/genmon/" + poke
+    );
     const data = await res.json();
 
     setTeam([data.data]);

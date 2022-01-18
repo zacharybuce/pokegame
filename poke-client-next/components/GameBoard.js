@@ -7,7 +7,6 @@ import Shop from "./GameBoardComponents/Shop";
 import RoundDisplay from "./GameBoardComponents/RoundDisplay";
 import { useSocket } from "../contexts/SocketProvider";
 import PlayerDisplay from "./GameBoardComponents/PlayerDisplay";
-import EndTurn from "./GameBoardComponents/EndTurn";
 import StartTurn from "./GameBoardComponents/StartTurn";
 import RoundDialog from "./GameBoardComponents/RoundDialog";
 const PokeDisplay = dynamic(import("./GameBoardComponents/PokeDisplay"));
@@ -34,6 +33,7 @@ const GameBoard = ({ id }) => {
   const [roundOpen, setRoundOpen] = useState(false); //state for round Dialog
   const [roundType, setRoundType] = useState();
   const [roundDone, setRoundDone] = useState(false); //if round action has been completed
+  const [shopItems, setShopItems] = useState([]);
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -57,6 +57,7 @@ const GameBoard = ({ id }) => {
       if (inLobby.newRound) {
         setRoundDone(false);
         setReady(false);
+        getNewShop();
       }
     });
     console.log("lobby update");
@@ -65,7 +66,15 @@ const GameBoard = ({ id }) => {
   }, [socket, lobby]);
 
   useEffect(() => {
-    socket.emit("update-team", id, team);
+    var newTeam = team;
+
+    for (let i = 0; i < team.length; i++) {
+      if (team[i].item) {
+        newTeam[i].item = team[i].item.split("|")[0];
+      }
+    }
+
+    socket.emit("update-team", id, newTeam);
   }, [team]);
 
   const endTurn = () => {
@@ -104,6 +113,14 @@ const GameBoard = ({ id }) => {
     return "wild";
   };
 
+  const getNewShop = async () => {
+    const res = await fetch(process.env.NEXT_PUBLIC_ROOT_URL + "/api/getshop");
+    const json = await res.json();
+
+    console.log(json.data);
+    setShopItems(json.data);
+  };
+
   return (
     <Grid container>
       <Grid item container xs={10} spacing={1}>
@@ -120,13 +137,22 @@ const GameBoard = ({ id }) => {
               setTeam={setTeam}
               box={box}
               setBox={setBox}
+              candies={candies}
+              setCandies={setCandies}
+              setBag={setBag}
             />
           ) : (
             <div></div>
           )}
         </Grid>
         <Grid item xs={2}>
-          <ItemBag items={items} />
+          <ItemBag
+            items={items}
+            team={team}
+            setTeam={setTeam}
+            setItems={setBag}
+            setMoney={setMoney}
+          />
         </Grid>
         <Grid item container xs={12}>
           <Grid item xs={4}>
@@ -135,6 +161,7 @@ const GameBoard = ({ id }) => {
               setMoney={setMoney}
               setBalls={setBalls}
               setBag={setBag}
+              shopItems={shopItems}
             />
           </Grid>
           {!ready ? (

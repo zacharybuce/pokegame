@@ -1,10 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Grid, Typography, Tooltip, Alert, Box } from "@mui/material";
 import MoveButton from "./MoveButton";
 import SwitchButton from "./SwitchButton";
 import ActivePokeInfo from "./ActivePokeInfo";
 
 export const BattleOptions = ({ team, sendMoveChoice, sendSwitchChoice }) => {
+  const [trapped, setTrapped] = useState(false);
+
+  useEffect(() => {
+    if (JSON.parse(team).active) setTrapped(JSON.parse(team).active[0].trapped);
+    else setTrapped(false);
+  }, [team]);
   console.log(team);
 
   if (JSON.parse(team).wait)
@@ -41,7 +47,7 @@ export const BattleOptions = ({ team, sendMoveChoice, sendSwitchChoice }) => {
 
       {team ? (
         JSON.parse(team).side.pokemon.map((poke, index) => {
-          if (!poke.active && poke.condition != "0 fnt")
+          if (!poke.active && poke.condition != "0 fnt" && !trapped)
             return (
               <SwitchButton
                 poke={poke}

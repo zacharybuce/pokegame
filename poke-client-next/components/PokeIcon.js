@@ -8,7 +8,8 @@ const PokeIcon = ({ name }) => {
   }, [name]);
   const getId = async () => {
     const res = await fetch(
-      "http://localhost:3000/api/pokemon/" +
+      process.env.NEXT_PUBLIC_ROOT_URL +
+        "/api/pokemon/" +
         name.toLowerCase().replace(/\s/g, "")
     );
     const data = await res.json();

@@ -10,10 +10,15 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 const PokeInfoMove = ({ move }) => {
   const [moveInfo, setMoveInfo] = useState(null);
-
+  const [expand, setExpand] = useState(false);
+  const toggleAcordion = () => {
+    setExpand((prev) => !prev);
+  };
   const getMoveInfo = async () => {
     const res = await fetch(
-      "http://localhost:3000/api/moves/" + move.toLowerCase().replace(/\s/g, "")
+      process.env.NEXT_PUBLIC_ROOT_URL +
+        "/api/moves/" +
+        move.toLowerCase().replace(/\s/g, "")
     );
     const data = await res.json();
     setMoveInfo(data.data);
@@ -67,12 +72,22 @@ const PokeInfoMove = ({ move }) => {
   if (moveInfo)
     return (
       <Accordion
+        expanded={expand}
         sx={{ backgroundColor: typeColor(moveInfo.type), color: "#fafafa" }}
       >
         <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
+          sx={{
+            pointerEvents: "none",
+          }}
+          expandIcon={
+            <ExpandMoreIcon
+              onClick={() => toggleAcordion()}
+              sx={{
+                pointerEvents: "auto",
+              }}
+            />
+          }
           aria-controls="panel1a-content"
-          id="panel1a-header"
         >
           <Typography>{move}</Typography>
         </AccordionSummary>

@@ -12,13 +12,17 @@ import { useSnackbar } from "notistack";
 const displayImg = (name) => {
   switch (name) {
     case "Viridian Forest":
-      return "https://archives.bulbagarden.net/media/upload/e/e3/FL_Viridian_Forest.png";
+      return "/HGSSViridianForest.png";
     case "Grassland Route":
-      return "https://archives.bulbagarden.net/media/upload/0/01/HGSS_National_Park-Day.png";
+      return "/NationalPark.png";
     case "Mt.Moon":
-      return "https://archives.bulbagarden.net/media/upload/2/2c/FL_Mt_Moon.png";
+      return "/HGSSMtMoon.png";
     case "Dark Cave":
-      return "https://archives.bulbagarden.net/media/upload/4/4a/HGSS_Dark_Cave-Route_45-Morning.png";
+      return "/DarkCave.png";
+    case "Sprout Tower":
+      return "/SproutTower.png";
+    case "Union Cave":
+      return "/UnionCave.png";
   }
 };
 

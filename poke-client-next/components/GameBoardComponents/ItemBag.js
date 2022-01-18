@@ -2,7 +2,7 @@ import { Box, Typography } from "@mui/material";
 import React from "react";
 import Item from "./Item";
 
-const ItemBag = ({ items }) => {
+const ItemBag = ({ items, team, setTeam, setItems, setMoney }) => {
   return (
     <Box textAlign={"center"} sx={{ mt: "2vh" }}>
       <Typography>Items</Typography>
@@ -17,7 +17,15 @@ const ItemBag = ({ items }) => {
         }}
       >
         {items.map((item) => {
-          return <Item name={item} />;
+          return (
+            <Item
+              name={item}
+              team={team}
+              setTeam={setTeam}
+              setItems={setItems}
+              setMoney={setMoney}
+            />
+          );
         })}
       </Box>
     </Box>

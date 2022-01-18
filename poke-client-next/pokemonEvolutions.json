@@ -1,0 +1,197 @@
+{
+	"ivysaur":{
+		"species": "Ivysaur",
+		"evolveCandies": 12,
+		"newMoves":["Sludge","Synthesis","Take Down","Seed Bomb"]
+	},
+	"charmeleon":{
+		"species": "Charmeleon",
+		"evolveCandies": 12,
+		"newMoves":["Fire Fang","Slash","Metal Claw","Bite"]
+	},
+	"charizard":{
+		"species": "Charizard",
+		"evolveCandies": "MAX",
+		"newMoves":["Flamethrower","Slash","Air Slash","Dragon Dance"]	
+	},
+	"wartortle":{
+		"species": "Wartortle",
+		"evolveCandies": 12,
+		"newMoves":["Rain Dance","Rapid Spin","Protect","Aqua Tail"]
+	},
+	"blastoise":{
+		"species": "Blastoise",
+		"evolveCandies": "MAX",
+		"newMoves":["Flash Cannon","Iron Defense","Skull Bash","Aqua Ring"]
+	},
+	"metapod":{
+		"species": "Metapod",
+		"evolveCandies": 4,
+		"newMoves":["Harden"]
+	},
+	"butterfree":{
+		"species": "Butterfree",
+		"evolveCandies": "MAX",
+		"newMoves":["Psybeam","Air Slash","Sleep Powder","Poison Powder", "Bug Buzz"]
+	},
+	"kakuna":{
+		"species": "Kakuna",
+		"evolveCandies": 4,
+		"newMoves":["Harden"]
+	},
+	"beedrill":{
+		"species": "Beedrill",
+		"evolveCandies": "MAX",
+		"newMoves":["Fell Stinger", "Venoshock","Toxic Spikes","Assurance"]
+	},
+	"pidgeotto":{
+		"species": "Pidgeotto",
+		"evolveCandies": 10,
+		"newMoves":["Twister","Feather Dance","Wing Attack"]
+	},
+	"pidgeot":{
+		"species": "Pidgeot",
+		"evolveCandies": "MAX",
+		"newMoves":["Roost","Air Slash","Brave Bird"]
+	},
+	"raticate":{
+		"species": "Raticate",
+		"evolveCandies": 10,
+		"newMoves":["Crunch","Swords Dance","Last Resort","Sucker Punch"]
+	},
+	"raichu":{
+		"species": "Raichu",
+		"evolveCandies": 12,
+		"newMoves":["Discharge","Thunder Punch","Light Screen","Slam"]
+	},
+	"raichu-alola":{
+		"species": "Raichu-Alola",
+		"evolveCandies": 12,
+		"newMoves":["Discharge","Psychic","Light Screen","Nasty Plot"]
+	},
+	"sandslash":{
+		"species": "Sandslash",
+		"evolveCandies": 12,
+		"newMoves":["Slash","Dig","Sand Tomb","Fury Cutter"]
+	},
+	"clefable":{
+		"species": "Clefable",
+		"evolveCandies": 10,
+		"newMoves":["Moonblast","Meteor Mash","Life Dew","Cosmic Power"]
+	},
+	"wigglytuff":{
+		"species": "Wigglytuff",
+		"evolveCandies": 10,
+		"newMoves":["Play Rough","Wish","Hyper Voice","Gyro Ball"]
+	},
+	"golbat":{
+		"species": "Golbat",
+		"evolveCandies": 12,
+		"newMoves":["Air Cutter","Bite","Haze","Whirlwind"]
+	},
+	"crobat":{
+		"species": "Crobat",
+		"evolveCandies": "MAX",
+		"newMoves":["Cross Poison","Air Slash","Leech Life","Brave Bird"]
+	},
+	"gloom":{
+		"species": "gloom",
+		"evolveCandies": "12",
+		"newMoves":["Toxic","Ingrain","Flail","Razor Leaf"]	
+	},
+	"parasect":{
+		"species": "Parasect",
+		"evolveCandies": "10",
+		"newMoves":["Slash","Giga Drain","Bug Bite","Leech Seed"]	
+	},
+	"arcanine":{
+		"species": "Arcanine",
+		"evolveCandies": "15",
+		"newMoves":["Extreme Speed","Crunch","Fire Fang","Morning Sun"]	
+	},
+	"weepinbell":{
+		"species": "Weepinbell",
+		"evolveCandies": "12",
+		"newMoves":["Acid","Razor Leaf","Sleep Powder","Ingrain"]	
+	},
+	"gravler":{
+		"species": "Gravler",
+		"evolveCandies": "13",
+		"newMoves":["Smack Down","Stealth Rock","Mega Punch","Harden"]	
+	},
+	"rapidash":{
+		"species": "Rapidash",
+		"evolveCandies": "13",
+		"newMoves":["Flame Wheel","Smart Strike","Poison Jab","Stomp"]	
+	},
+	"haunter":{
+		"species": "Haunter",
+		"evolveCandies": "14",
+		"newMoves":["Shadow Punch","Hex","Fire Punch","Thunder Punch"]	
+	},
+	"kingler":{
+		"species": "Kingler",
+		"evolveCandies": "12",
+		"newMoves":["Hammer Arm","Mud Shot","Stomp","Razor Shell"]	
+	},
+	"starmie":{
+		"species": "Starmie",
+		"evolveCandies": "13",
+		"newMoves":["Brine","Psychic","Recover","Swift"]	
+	},
+	"gyrados":{
+		"species": "Gyrados",
+		"evolveCandies": "15",
+		"newMoves":["Twister","Ice Fang","Waterfall","Crunch","Rain Dance","Dragon Dance"]	
+	},
+	"lapras":{
+		"species": "Lapras",
+		"evolveCandies": "15",
+		"newMoves":["Confuse Ray","Water Pulse","Rain Dance","Tickle"]	
+	},
+	"furret":{
+		"species": "Furret",
+		"evolveCandies": "10",
+		"newMoves":["Slam","Rest","Sucker Punch","Reversal"]	
+	},
+	"noctowl":{
+		"species": "Noctowl",
+		"evolveCandies": "10",
+		"newMoves":["Air Slash","Extrasensory","Hypnosis","Take Down"]	
+	},
+	"ariados":{
+		"species": "Ariados",
+		"evolveCandies": "11",
+		"newMoves":["Swords Dance","Bug Bite","Poison Jab","Toxic Spikes"]	
+	},
+	"quagsire":{
+		"species": "Quagsire",
+		"evolveCandies": "10",
+		"newMoves":["Haze","Slam","Muddy Water","Curse"]	
+	},
+	"steelix":{
+		"species": "Steelix",
+		"evolveCandies": "15",
+		"newMoves":["Crunch","Dragon Breath","Iron Tail","Stealth Rock"]
+	},
+	"ursaring":{
+		"species": "Ursaring",
+		"evolveCandies": "12",
+		"newMoves":["Slash","Play Rough","Rest","Snore"]
+	},
+	"breloom":{
+		"species": "Breloom",
+		"evolveCandies": "11",
+		"newMoves":["Mach Punch","Giga Drain","Drain Punch","Spore"]
+	},
+	"hariyama":{
+		"species": "Hariyama",
+		"evolveCandies": "11",
+		"newMoves":["Vital Throw","Belly Drum","Bullet Punch","Detect"]
+	},
+	"medicham":{
+		"species": "Medicham",
+		"evolveCandies": "11",
+		"newMoves":["Zen Headbutt","Force Plam","Fire Punch","Calm Mind"]
+	}
+}

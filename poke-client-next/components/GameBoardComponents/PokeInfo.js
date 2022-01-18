@@ -1,4 +1,4 @@
-import { Grid, Typography, Box } from "@mui/material";
+import { Grid, Typography, Box, Button } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
 import { styled } from "@mui/material/styles";
@@ -57,12 +57,12 @@ const typeColor = (type) => {
   }
 };
 
-const PokeInfo = ({ poke }) => {
+const PokeInfo = ({ poke, setEditing, takeItem }) => {
   const [pokeData, setPokeData] = useState(null);
 
   const getMonInfo = async () => {
     const aRes = await fetch(
-      "http://localhost:3000/api/abilities/" + poke.ability
+      process.env.NEXT_PUBLIC_ROOT_URL + "/api/abilities/" + poke.ability
     );
     const abilityData = await aRes.json();
 
@@ -90,7 +90,7 @@ const PokeInfo = ({ poke }) => {
     );
     return (
       <Grid container spacing={1}>
-        <Grid item xs={12}>
+        <Grid item xs={4}>
           <Typography>
             Type:{" "}
             {poke.types.map((type) => (
@@ -100,14 +100,32 @@ const PokeInfo = ({ poke }) => {
             ))}
           </Typography>
         </Grid>
-        <Grid item xs={12}>
-          <Typography>Item: {poke.item}</Typography>
+        <Grid item xs={4}>
+          <Typography>
+            Item: {poke.item.split("|")[0]}{" "}
+            {poke.item ? (
+              <Button onClick={() => takeItem()} color="error">
+                Take
+              </Button>
+            ) : (
+              <div></div>
+            )}
+          </Typography>
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={4}>
           <Typography>Ability: {ability}</Typography>
         </Grid>
         <Grid item xs={12} sx={{ mt: "1vh" }}>
-          <Typography variant="h6">Moves</Typography>
+          <Typography variant="h6">
+            Moves{" "}
+            <Button
+              onClick={() => setEditing(true)}
+              variant="contained"
+              disabled={!poke.newMoves}
+            >
+              Edit
+            </Button>
+          </Typography>{" "}
         </Grid>
         {poke.moves.map((move) => {
           return (

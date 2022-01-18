@@ -1,0 +1,52 @@
+.uncommon {
+  border-radius: 5px;
+  animation: glowuncommon 1s infinite alternate;
+}
+
+.rare {
+  border-radius: 5px;
+  animation: glowrare 1s infinite alternate;
+}
+
+.epic {
+  border-radius: 5px;
+  animation: glowepic 1s infinite alternate;
+}
+
+.legendary {
+  border-radius: 5px;
+  animation: glowlegendary 1s infinite alternate;
+}
+
+@keyframes glowuncommon {
+  from {
+    box-shadow: 0 0 5px 2px #38761d;
+  }
+  to {
+    box-shadow: 0 0 5px 5px #38761d;
+  }
+}
+@keyframes glowrare {
+  from {
+    box-shadow: 0 0 5px 2px #1155cc;
+  }
+  to {
+    box-shadow: 0 0 5px 5px #1155cc;
+  }
+}
+@keyframes glowepic {
+  from {
+    box-shadow: 0 0 5px 2px #674ea7;
+  }
+  to {
+    box-shadow: 0 0 5px 5px #674ea7;
+  }
+}
+@keyframes glowlegendary {
+  from {
+    box-shadow: 0 0 5px 2px #f1c232;
+  }
+  to {
+    box-shadow: 0 0 5px 5px #f1c232;
+  }
+}

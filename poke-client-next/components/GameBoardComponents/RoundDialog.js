@@ -43,6 +43,7 @@ const RoundDialog = ({
             id={id}
             balls={balls}
             setBalls={setBalls}
+            setCandies={setCandies}
             setBox={setBox}
             handleClose={handleClose}
           />

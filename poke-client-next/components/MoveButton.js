@@ -20,7 +20,8 @@ const MoveButton = ({ move, index, sendMoveChoice }) => {
 
   const getMoveInfo = async () => {
     const res = await fetch(
-      "http://localhost:3000/api/moves/" +
+      process.env.NEXT_PUBLIC_ROOT_URL +
+        "/api/moves/" +
         move.move.toLowerCase().replace(/\s/g, "")
     );
     const data = await res.json();

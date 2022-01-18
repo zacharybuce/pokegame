@@ -6,15 +6,25 @@ import {
   DialogTitle,
   Typography,
   Button,
+  Tooltip,
 } from "@mui/material";
 import WildArea from "./WildArea";
 import { useSocket } from "../../contexts/SocketProvider";
 import CatchingPokemonIcon from "@mui/icons-material/CatchingPokemon";
+import { useSnackbar } from "notistack";
 
-const WildBattle = ({ id, balls, setBalls, setBox, handleClose }) => {
+const WildBattle = ({
+  id,
+  balls,
+  setBalls,
+  setCandies,
+  setBox,
+  handleClose,
+}) => {
   const [wildAreas, setWildAreas] = useState(null);
   const [areaChoice, setAreaChoice] = useState(null);
   const [wildMon, setWildMon] = useState(null);
+  const { enqueueSnackbar } = useSnackbar();
   const socket = useSocket();
 
   useEffect(() => {
@@ -40,14 +50,29 @@ const WildBattle = ({ id, balls, setBalls, setBox, handleClose }) => {
 
   const chooseArea = (name) => {
     setAreaChoice(name);
-    setWildMon("Pikachu");
+    setWildMon("mon");
+  };
+
+  const fightMon = () => {
+    enqueueSnackbar(
+      `The wild ${wildMon.species} was defeated! Gain ${
+        ((wildMon.level - 20) / 5 + 1) * 2
+      } candies`,
+      {
+        variant: "success",
+      }
+    );
+    setCandies((prevState) => prevState + ((wildMon.level - 20) / 5 + 1) * 2);
+    handleClose();
   };
 
   const getWildMon = async () => {
-    const res = await fetch("http://localhost:3000/api/wildMon/" + areaChoice);
+    const res = await fetch(
+      process.env.NEXT_PUBLIC_ROOT_URL + "/api/wildMon/" + areaChoice
+    );
     const data = await res.json();
     const pokeRes = await fetch(
-      "http://localhost:3000/api/genmon/" + data.data
+      process.env.NEXT_PUBLIC_ROOT_URL + "/api/genmon/" + data.data
     );
     const pokeData = await pokeRes.json();
     console.log(pokeData.data);
@@ -55,7 +80,7 @@ const WildBattle = ({ id, balls, setBalls, setBox, handleClose }) => {
   };
 
   const throwBall = async () => {
-    const res = await fetch("http://localhost:3000/api/catch", {
+    const res = await fetch(process.env.NEXT_PUBLIC_ROOT_URL + "/api/catch", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -71,7 +96,15 @@ const WildBattle = ({ id, balls, setBalls, setBox, handleClose }) => {
     if (data.data) {
       console.log("caught");
       setBox((prevState) => [...prevState, wildMon]);
+      enqueueSnackbar(`The wild ${wildMon.species} was caught!`, {
+        variant: "success",
+      });
+      setCandies((prevState) => prevState + ((wildMon.level - 20) / 5 + 1));
       handleClose();
+    } else {
+      enqueueSnackbar(`The wild ${wildMon.species} was not caught...`, {
+        variant: "error",
+      });
     }
   };
 
@@ -80,7 +113,13 @@ const WildBattle = ({ id, balls, setBalls, setBox, handleClose }) => {
       <Box sx={{ backgroundColor: "#fafafa" }}>
         <DialogTitle>Choose a Wild Area to go to</DialogTitle>
         <DialogContent>
-          <Grid container spacing={1} sx={{ textAlign: "center" }}>
+          <Grid
+            container
+            alignItems="center"
+            justifyContent="center"
+            spacing={1}
+            sx={{ textAlign: "center" }}
+          >
             {wildAreas ? (
               wildAreas.map((wildArea) => {
                 return <WildArea name={wildArea} chooseArea={chooseArea} />;
@@ -115,6 +154,13 @@ const WildBattle = ({ id, balls, setBalls, setBox, handleClose }) => {
             }
           />
         </Grid>
+        <Grid item xs={12}>
+          <Tooltip title="Balls in your bag" placement="top-start">
+            <Box sx={{ alignItems: "center", display: "flex", ml: "2vw" }}>
+              <CatchingPokemonIcon /> : {balls}
+            </Box>
+          </Tooltip>
+        </Grid>
         <Grid item xs={6}>
           <Button
             onClick={() => throwBall()}
@@ -123,9 +169,6 @@ const WildBattle = ({ id, balls, setBalls, setBox, handleClose }) => {
             disabled={balls == 0 ? true : false}
           >
             Throw Ball{" "}
-            <Box sx={{ alignItems: "center", display: "flex", ml: "2vw" }}>
-              <CatchingPokemonIcon /> : {balls}
-            </Box>
           </Button>
         </Grid>
         <Grid item xs={6}>
@@ -136,6 +179,16 @@ const WildBattle = ({ id, balls, setBalls, setBox, handleClose }) => {
             color="error"
           >
             Run
+          </Button>
+        </Grid>
+        <Grid item xs={12}>
+          <Button
+            onClick={() => fightMon()}
+            fullWidth
+            variant="contained"
+            color="warning"
+          >
+            Fight
           </Button>
         </Grid>
       </Grid>

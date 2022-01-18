@@ -38,7 +38,7 @@ export const BattleDisplay = ({
       snackDisplay(token);
 
       //Set the images and health on switches
-      if (token.startsWith("|switch|p1a:")) {
+      if (token.startsWith("|switch|p1a:") || token.startsWith("|drag|p1a:")) {
         setP1PokeStatus([]);
 
         var splitToken = token.split("|");
@@ -51,7 +51,7 @@ export const BattleDisplay = ({
             "status " + splitToken[4].split(" ")[1],
           ]);
       }
-      if (token.startsWith("|switch|p2a:")) {
+      if (token.startsWith("|switch|p2a:") || token.startsWith("|drag|p2a:")) {
         setP2PokeStatus([]);
 
         var splitToken = token.split("|");
@@ -66,7 +66,10 @@ export const BattleDisplay = ({
       }
 
       //set the health display on damage and heal
-      if (token.startsWith("|-damage|") && token.split("|")[3] != "0 fnt") {
+      if (
+        (token.startsWith("|-damage|") || token.startsWith("|-heal|")) &&
+        token.split("|")[3] != "0 fnt"
+      ) {
         if (
           (token.startsWith("|-damage|p1a:") &&
             token.split("|")[3].split("/")[1] == "100") ||
@@ -113,6 +116,22 @@ export const BattleDisplay = ({
         ]);
       }
 
+      //cure status
+      if (token.startsWith("|-curestatus|p1a:")) {
+        var splitToken = token.split("|");
+        const newStatuses = p1PokeStatus.filter(
+          (status) => status != "status " + splitToken[3]
+        );
+        setP1PokeStatus(newStatuses);
+      }
+      if (token.startsWith("|-curestatus|p2a:")) {
+        var splitToken = token.split("|");
+        const newStatuses = p1PokeStatus.filter(
+          (status) => status != "status " + splitToken[3]
+        );
+        setP2PokeStatus(newStatuses);
+      }
+
       //set boost and unboost
       if (token.startsWith("|-unboost|p1a:")) {
         var splitToken = token.split("|");
@@ -151,8 +170,8 @@ export const BattleDisplay = ({
         var splitToken = token.split("|");
         var winner = splitToken[2];
         setBattleEnd(true);
-        if (id == winner.replace(/['"]+/g, "")) setRewards(1000, 2);
-        else setRewards(-500, 1);
+        if (id == winner.replace(/['"]+/g, "")) setRewards(1000, 2, true);
+        else setRewards(0, 1, false);
       }
     } //end tok
 
