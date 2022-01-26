@@ -5,6 +5,7 @@ import {
   DialogContent,
   DialogTitle,
   Grid,
+  speedDialIconClasses,
   Tooltip,
   Typography,
 } from "@mui/material";
@@ -18,26 +19,44 @@ const Shop = ({ money, setMoney, setBalls, setBag, shopItems }) => {
   const { enqueueSnackbar } = useSnackbar();
   const [open, setOpen] = useState(false);
   const [items, setItems] = useState(shopItems);
-  const [boughtItem, setBoughtItem] = useState();
+  // const [boughtItem, setBoughtItem] = useState();
 
   useEffect(() => {
     setItems(shopItems);
   }, [shopItems]);
 
-  useEffect(() => {
-    if (!boughtItem) return;
+  // useEffect(() => {
+  //   if (!boughtItem) return;
 
-    setItems(
-      items.filter(function (item) {
-        //if (item == boughtItem) return "none";
-        return item !== boughtItem;
-      })
-    );
+  //   setItems(
+  //     items.filter(function (item) {
+  //       //if (item == boughtItem) return "none";
+  //       return item !== boughtItem;
+  //     })
+  //   );
+
+  //   setBag((prevState) => [...prevState, boughtItem]);
+  //   enqueueSnackbar(`You bought a ${boughtItem.split("|")[0]}`, {
+  //     variant: "success",
+  //   });
+  // }, [boughtItem]);
+
+  const buyItem = (boughtItem) => {
+    var newItems = items;
+
+    for (let i = 0; i < shopItems.length; i++) {
+      if (newItems[i] == boughtItem) {
+        newItems.splice(i, 1);
+        break;
+      }
+    }
+
+    setItems(newItems);
     setBag((prevState) => [...prevState, boughtItem]);
     enqueueSnackbar(`You bought a ${boughtItem.split("|")[0]}`, {
       variant: "success",
     });
-  }, [boughtItem]);
+  };
 
   const buyPokeBall = () => {
     if (money >= 150) {
@@ -80,7 +99,7 @@ const Shop = ({ money, setMoney, setBalls, setBag, shopItems }) => {
                   return (
                     <ShopItem
                       name={item}
-                      setBoughtItem={setBoughtItem}
+                      setBoughtItem={buyItem}
                       money={money}
                       setMoney={setMoney}
                     />

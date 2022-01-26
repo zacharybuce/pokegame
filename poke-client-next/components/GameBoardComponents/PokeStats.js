@@ -2,7 +2,7 @@ import { Button, Grid, Typography } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import CookieIcon from "@mui/icons-material/Cookie";
 
-const PokeStats = ({ poke, statInc, candies }) => {
+const PokeStats = ({ poke, statInc, candies, candiesUsed }) => {
   const [stats, setStats] = useState();
   const getStats = async () => {
     const res = await fetch(
@@ -31,6 +31,9 @@ const PokeStats = ({ poke, statInc, candies }) => {
         <Grid item container xs={12}>
           <Grid item xs={12}>
             <Typography variant="h6">Stats</Typography>
+          </Grid>
+          <Grid item xs={12} sx={{ mt: "1vh", mb: "1vh" }}>
+            <Typography>Candies used: {candiesUsed}</Typography>
           </Grid>
           <Grid item xs={6}>
             <Typography>

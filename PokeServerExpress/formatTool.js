@@ -1,64 +1,41 @@
 import Poke from "pokemon-showdown";
 import Sim from "pokemon-showdown";
+import RandomPlayerAI from "../PokeServerExpress/node_modules/pokemon-showdown/.sim-dist/tools/random-player-ai.js";
+import { readFile, writeFile } from "fs/promises";
+
 const Teams = Poke.Teams;
 const Dex = Poke.Dex;
 const battle = new Poke.Battle("gen8ou");
 
-var upTeam = [
-  {
-    name: "",
-    species: "Articuno",
-    gender: "",
-    item: "Leftovers",
-    level: "50",
-    ability: "Pressure",
-    evs: { hp: 252, atk: 0, def: 0, spa: 252, spd: 4, spe: 0 },
-    nature: "Modest",
-    ivs: { hp: 31, atk: 31, def: 31, spa: 30, spd: 30, spe: 31 },
-    moves: ["Ice Beam", "Hurricane", "Substitute", "Roost"],
-  },
-];
+var allMon = {};
+const showdownMon = Dex.species.all();
+// const monList = JSON.parse(await readFile("./all.json"));
 
-const mon = {
-  name: "",
-  species: "Articuno",
-  gender: "",
-  item: "Leftovers",
-  level: "50",
-  ability: "Pressure",
-  evs: { hp: 252, atk: 0, def: 0, spa: 252, spd: 4, spe: 0 },
-  nature: "Modest",
-  ivs: { hp: 31, atk: 31, def: 31, spa: 30, spd: 30, spe: 31 },
-  moves: ["Ice Beam", "Hurricane", "Substitute", "Roost"],
-};
+//console.log(Dex.species.get("Raichu-Alola"));
+var total = 649;
+for (let i = 0; i < total; i++) {
+  if (
+    showdownMon[i].forme == "" ||
+    showdownMon[i].forme == "Alola" ||
+    showdownMon[i].forme == "Galar"
+  ) {
+    let mon = showdownMon[i].name.toLowerCase();
+    if (monList[mon]) {
+      allMon[mon] = monList[mon];
+    } else {
+      allMon[mon] = {
+        species: showdownMon[i].name,
+        moves: [],
+        evolveCandy: "",
+      };
+    }
+    if (showdownMon[i].forme == "Alola" || showdownMon[i].forme == "Galar") {
+      total++;
+    }
+  } else {
+    total++;
+  }
+}
 
-console.log(Dex.items.get("Aguav Berry"));
-
-// const baseStats = Dex.species.get("Articuno").baseStats;
-// const poke = battle.spreadModify(baseStats, mon);
-// console.log(Dex.species.get("raichu"));
-
-// console.log(Teams.pack(upTeam));
-
-// const p1spec = {
-//   name: "alice",
-//   team: Teams.pack(upTeam),
-// };
-// const p2spec = {
-//   name: "bob",
-//   team: Teams.pack(upTeam),
-// };
-
-// var stream = new Sim.BattleStream();
-
-// (async () => {
-//   for await (const output of stream) {
-//     console.log(output);
-//   }
-// })();
-
-// stream.write(`>start {"formatid":"gen8ou"}`);
-// stream.write(`>player p1 ${JSON.stringify(p1spec)}`);
-// stream.write(`>player p2 ${JSON.stringify(p2spec)}`);
-// stream.write(`>p1 team 123`);
-// stream.write(`>p2 team 123`);
+console.log(allMon);
+writeFile("pokemon.json", JSON.stringify(allMon), "utf8");

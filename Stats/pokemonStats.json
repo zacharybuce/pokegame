@@ -1,0 +1,372 @@
+{
+  "bulbasaur": {
+    "species": "Bulbasaur",
+    "moves": ["Tackle", "Razor Leaf", "Leech Seed", "Sleep Powder"],
+	"evolveCandies": 5 
+  },
+  "squirtle": {
+    "species": "Squirtle",
+    "moves": ["Tackle", "Bite", "Water Pulse", "Withdraw"],
+	"evolveCandies": 5 
+  },
+  "charmander": {
+    "species": "Charmander",
+    "moves": ["Scratch", "Ember", "Smokescreen", "Dragon Breath"],
+	"evolveCandies": 5 
+  },
+  "pikachu": {
+    "species": "Pikachu",
+    "moves": ["Quick Attack", "Thunder Shock", "Nuzzle", "Sweet Kiss"],
+	"evolveCandies": 6 
+  },
+  "caterpie": {
+    "species": "Caterpie",
+    "moves": ["Tackle", "String Shot", "Bug Bite", "Electroweb"],
+	"evolveCandies": 2 
+  },
+  "weedle": {
+    "species": "Weedle",
+    "moves": ["Poison Sting", "String Shot", "Bug Bite", "Tackle"],
+	"evolveCandies": 2 
+  },
+  "spinarak": {
+    "species": "Spinarak",
+    "moves": ["Poison Sting", "Absorb", "Infestation", "Shadow Sneak"],
+	"evolveCandies": 6 
+  },
+  "shroomish": {
+    "species": "Shroomish",
+    "moves": ["Headbutt", "Mega Drain", "Leech Seed", "Poison Powder"],
+	"evolveCandies": 6 
+  },
+  "pidgey": {
+    "species": "Pidgey",
+    "moves": ["Quick Attack", "Gust", "Sand Attack", "Whirlwind"],
+	"evolveCandies": 5 
+  },
+  "sentret": {
+    "species": "Sentret",
+    "moves": ["Quick Attack", "Covet", "Reversal", "Defense Curl"],
+	"evolveCandies": 5 
+  },
+  "oddish": {
+    "species": "Oddish",
+    "moves": ["Absorb", "Acid", "Growth", "Sleep Powder"],
+	"evolveCandies": 5 
+  },
+  "growlithe": {
+    "species": "Growlithe",
+    "moves": ["Bite", "Flame Wheel", "Double Kick", "Howl"],
+	"evolveCandies": 10 
+  },
+  "jigglypuff": {
+    "species": "Jigglypuff",
+    "moves": ["Disarming Voice", "Sing", "Covet", "Rest"],
+	"evolveCandies": 8 
+  },
+  "magikarp": {
+    "species": "Magikarp",
+    "moves": ["Tackle", "Splash", "Flail", "Bounce"],
+	"evolveCandies": 10 
+  },
+  "teddiursa": {
+    "species": "Teddiursa",
+    "moves": ["Lick", "Scratch", "Payback", "Belly Drum"],
+	"evolveCandies": 7 
+  },
+  "ponyta": {
+    "species": "Ponyta",
+    "moves": ["Flame Charge", "Charm", "Double Kick", "Hypnosis"],
+	"evolveCandies": 7 
+  },
+  "krabby": {
+    "species": "Krabby",
+    "moves": ["Bubble Beam", "Metal Claw", "Protect", "Scratch"],
+	"evolveCandies": 7 
+  },
+  "shuckle": {
+    "species": "Shuckle",
+    "moves": ["Acid", "Withdraw", "Rest", "Rock Throw"],
+	"evolveCandies": 5 
+  },
+  "dunsparce": {
+    "species": "Dunsparce",
+    "moves": ["Flail", "Mud-Slap", "Ancient Power", "Glare"],
+	"evolveCandies": 8 
+  },
+  "sandshrew": {
+    "species": "Sandshrew",
+    "moves": ["Rollout", "Rapid Spin", "Bulldoze", "Sand Attack"],
+	"evolveCandies": 6 
+  },
+  "wooper": {
+    "species": "Wooper",
+    "moves": ["Water Gun", "Rain Dance", "Mud Shot", "Yawn"],
+	"evolveCandies": 5 
+  },
+  "onix": {
+    "species": "Onix",
+    "moves": ["Bind", "Rock Throw", "Sand Tomb", "Curse"],
+	"evolveCandies": 10 
+  },
+  "corsola": {
+    "species": "Corsola",
+    "moves": ["Water Gun", "Aqua Ring", "Ancient Power", "Icicle Spear"],
+	"evolveCandies": 5 
+  },
+  "staryu": {
+    "species": "Staryu",
+    "moves": ["Water Gun", "Confuse Ray", "Rapid Spin", "Psybeam"],
+	"evolveCandies": 8 
+  },
+  "lapras": {
+    "species": "Lapras",
+    "moves": ["Water Gun", "Sing", "Ice Shard", "Life Dew"],
+	"evolveCandies": 15 
+  },
+  "rattata": {
+    "species": "Rattata",
+    "moves": ["Quick Attack", "Bite", "Endeavor", "Super Fang"],
+	"evolveCandies": 6 
+  },
+  "bellsprout": {
+    "species": "Bellsprout",
+    "moves": ["Vine Whip", "Growth", "Acid Spray", "Stun Spore"],
+	"evolveCandies": 6 
+  },
+  "hoothoot": {
+    "species": "Hoothoot",
+    "moves": ["Peck", "Confusion", "Reflect", "Psycho Shift"],
+	"evolveCandies": 6 
+  },
+  "gastly": {
+    "species": "Gastly",
+    "moves": ["Astonish", "Payback", "Hypnosis", "Smog"],
+	"evolveCandies": 6 
+  },
+  "meditite": {
+    "species": "Meditite",
+    "moves": ["Low Kick", "Confusion", "Detect", "Bullet Punch"],
+	"evolveCandies": 7 
+  },
+  "zubat": {
+    "species": "Zubat",
+    "moves": ["Astonish", "Supersonic", "Poison Fang", "Gust"],
+	"evolveCandies": 6 
+  },
+  "geodude": {
+    "species": "Geodude",
+    "moves": ["Rollout", "Sandstorm", "Self-Destruct", "Bulldoze"],
+	"evolveCandies": 7 
+  },
+  "paras": {
+    "species": "Paras",
+    "moves": ["Scratch", "Absorb", "Fury Cutter", "Spore"],
+	"evolveCandies": 6 
+  },
+  "makuhita": {
+    "species": "Makuhita",
+    "moves": ["Force Palm", "Fake Out", "Whirlwind", "Knock Off"],
+	"evolveCandies": 7 
+  },
+  "clefairy": {
+    "species": "Clefairy",
+    "moves": ["Metronome", "Disarming Voice", "Minimize", "Pound"],
+	"evolveCandies": 6 
+  },
+  "slowpoke": {
+    "species": "Slowpoke",
+    "moves": ["Curse", "Water Gun", "Confusion", "Yawn"],
+	"evolveCandies": 9 
+  },
+  "goldeen": {
+    "species": "Goldeen",
+    "moves": ["Peck", "Supersonic", "Water Pulse", "Horn Attack"],
+	"evolveCandies": 6 
+  },
+  "poliwag": {
+    "species": "Poliwag",
+    "moves": ["Rain Dance", "Bubblebeam", "Hypnosis", "Pound"],
+	"evolveCandies": 5 
+  },
+  "psyduck": {
+    "species": "Psyduck",
+    "moves": ["Confusion", "Fury Swipes", "Water Pulse", "Disable"],
+	"evolveCandies": 6 
+  },
+  "bronzor": {
+    "species": "Bronzor",
+    "moves": ["Confusion", "Confuse Ray", "Payback", "Gyro Ball"],
+	"evolveCandies": 7 
+  },
+  "pineco": {
+    "species": "Pineco",
+    "moves": ["Protect", "Self-Destruct", "Bug Bite", "Rapid Spin"],
+	"evolveCandies": 8 
+  },
+  "tangela": {
+    "species": "Tangela",
+    "moves": ["Growth", "Mega Drain", "Ancient Power", "Bind"],
+	"evolveCandies": 8 
+  },
+  "numel": {
+    "species": "Numel",
+    "moves": ["Flame Wheel", "Bulldoze", "Amnesia", "Stomp"],
+	"evolveCandies": 6 
+  },
+  "heracross": {
+    "species": "Heracross",
+    "moves": ["Aerial Ace", "Horn Attack", "Counter", "Pin Missle"],
+	"evolveCandies": 8 
+  },
+  "diglett": {
+    "species": "Diglett",
+    "moves": ["Mud-Slap", "Bulldoze", "Astonish", "Hone Claws"],
+	"evolveCandies": 6 
+  },
+  "chingling": {
+    "species": "Chingling",
+    "moves": ["Astonish", "Confusion", "Yawn", "Future Sight"],
+	"evolveCandies": 5 
+  },
+  "rhyhorn": {
+    "species": "Rhyhorn",
+    "moves": ["Smack Down", "Bulldoze", "Horn Attack", "Scary Face"],
+	"evolveCandies": 7 
+  },
+  "magmar": {
+    "species": "Magmar",
+    "moves": ["Smog", "Smokescreen", "Flame Wheel", "Low Kick"],
+	"evolveCandies": 10 
+  },
+  "absol": {
+    "species": "Absol",
+    "moves": ["Quick Attack", "Knock Off", "Curse", "Double Team"],
+	"evolveCandies": 6 
+  },
+  "cubone": {
+    "species": "Cubone",
+    "moves": ["Bone Rush", "Headbutt", "Mud-Slap", "Ancient Power"],
+	"evolveCandies": 5 
+  },
+  "machop": {
+    "species": "Machop",
+    "moves": ["Low Kick", "Low Sweep", "Knock Off", "Bulk Up"],
+	"evolveCandies": 6 
+  },
+  "venonat": {
+    "species": "Venonat",
+    "moves": ["Struggle Bug", "Supersonic", "Confusion", "Poison Powder"],
+	"evolveCandies": 6 
+  },
+  "ledyba": {
+    "species": "Ledyba",
+    "moves": ["Swift", "Mach Punch", "Struggle Bug", "Reflect"],
+	"evolveCandies": 6 
+  },
+  "exeggcute": {
+    "species": "Exeggcute",
+    "moves": ["Leech Seed", "Confusion", "Hypnosis", "Absorb"],
+	"evolveCandies": 7 
+  },
+  "nincada": {
+    "species": "Nincada",
+    "moves": ["Mud-Slap", "Metal Claw", "Bug Bite", "Gust"],
+	"evolveCandies": 6 
+  },
+  "pinsir": {
+    "species": "Pinsir",
+    "moves": ["Vise Grip", "Bug Bite", "Knock Off", "Bind"],
+	"evolveCandies": 8 
+  },
+  "doduo": {
+    "species": "Doduo",
+    "moves": ["Pluck", "Quick Attack", "Supersonic", "Double Team"],
+	"evolveCandies": 7 
+  },
+  "nidoran-m": {
+    "species": "Nidoran-M",
+    "moves": ["Poison Sting", "Peck", "Double Kick", "Toxic Spikes"],
+	"evolveCandies": 5 
+  },
+  "nidoran-f": {
+    "species": "Nidoran-F",
+    "moves": ["Poison Sting", "Fury Swipes", "Double Kick", "Toxic Spikes"],
+	"evolveCandies": 5 
+  },
+  "tauros": {
+    "species": "Tauros",
+    "moves": ["Work Up", "Payback", "Horn Attack", "Rest"],
+	"evolveCandies": 10 
+  },
+  "kangaskhan": {
+    "species": "Kangaskhan",
+    "moves": ["Fake Out", "Bite", "Stomp", "Circle Throw"],
+	"evolveCandies": 10 
+  },
+  "chansey": {
+    "species": "Chansey",
+    "moves": ["Covet", "Disarming Voice", "Soft-Boiled", "Light Screen"],
+	"evolveCandies": 7 
+  },
+  "scyther": {
+    "species": "Scyther",
+    "moves": ["Wing Attack", "Fury Cutter", "Slash", "Quick Attack"],
+	"evolveCandies": 8 
+  },
+  "swinub": {
+    "species": "Swinub",
+    "moves": ["Mud-Slap", "Ice Shard", "Flail", "Ancient Power"],
+	"evolveCandies": 5 
+  },
+  "delibird": {
+    "species": "Delibird",
+    "moves": ["Present", "Peck", "Aurora Beam", "Spikes"],
+	"evolveCandies": 8 
+  },
+  "jynx": {
+    "species": "Jynx",
+    "moves": ["Lick", "Powder Snow", "Sweet Kiss", "Confusion"],
+	"evolveCandies": 7 
+  },
+  "sneasel": {
+    "species": "Sneasel",
+    "moves": ["Ice Shard", "Metal Claw", "Bite", "Hone Claws"],
+	"evolveCandies": 7 
+  },
+  "magnemite": {
+    "species": "Magnemite",
+    "moves": ["Thunder Shock", "Supersonic", "Gyro Ball", "Protect"],
+	"evolveCandies": 6 
+  },
+  "voltorb": {
+    "species": "Voltorb",
+    "moves": ["Spark", "Rollout", "Self-Destruct", "Swift"],
+	"evolveCandies": 6 
+  },
+  "electabuzz": {
+    "species": "Electabuzz",
+    "moves": ["Shock Wave", "Quick Attack", "Screech", "Swift"],
+	"evolveCandies": 7 
+  },
+  "shinx": {
+    "species": "Shinx",
+    "moves": ["Volt Switch", "Bite", "Thunder Shock", "Double Kick"],
+	"evolveCandies": 7 
+  },
+  "abra": {
+    "species": "Abra",
+    "moves": ["Confusion", "Knock Off", "Magic Coat", "Teleport"],
+	"evolveCandies": 6 
+  },
+  "porygon": {
+    "species": "Porygon",
+    "moves": ["Thunder Shock", "Psybeam", "Recover", "Conversion"],
+	"evolveCandies": 6 
+  },
+  "dratini": {
+    "species": "Dratini",
+    "moves": ["Dragon Tail", "Thunder Wave", "Wrap", "Aqua Tail"],
+	"evolveCandies": 10 
+  }
+}

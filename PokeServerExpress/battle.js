@@ -1,7 +1,6 @@
 import Sim from "pokemon-showdown";
 import Poke from "pokemon-showdown";
 const Teams = Poke.Teams;
-const stream = new Sim.BattleStream();
 
 var upTeam = [
   {
@@ -30,6 +29,7 @@ export default class Battle {
     this.team1 = team1;
     this.team2 = team2;
     this.endBattle = endBattle;
+    this.stream = new Sim.BattleStream();
   }
   startBattle() {
     const p1spec = {
@@ -41,11 +41,11 @@ export default class Battle {
       team: Teams.pack(this.team2),
     };
 
-    stream.write(`>start {"formatid":"gen8ou"}`);
-    stream.write(`>player p1 ${JSON.stringify(p1spec)}`);
-    stream.write(`>player p2 ${JSON.stringify(p2spec)}`);
-    stream.write(`>p1 team 123`);
-    stream.write(`>p2 team 123`);
+    this.stream.write(`>start {"formatid":"gen8ou"}`);
+    this.stream.write(`>player p1 ${JSON.stringify(p1spec)}`);
+    this.stream.write(`>player p2 ${JSON.stringify(p2spec)}`);
+    this.stream.write(`>p1 team 123`);
+    this.stream.write(`>p2 team 123`);
 
     return new Promise((resolve, reject) => {
       setTimeout(() => {
@@ -60,20 +60,20 @@ export default class Battle {
     this.socket1.on("send-move", (message, id) => {
       console.log("Move from " + id + ": " + message);
       if (this.playerArr[0] == JSON.stringify(id)) {
-        stream.write(`>p1 move ${message}`);
+        this.stream.write(`>p1 move ${message}`);
         console.log("wrote to sream p1");
       } else {
-        stream.write(`>p2 move ${message}`);
+        this.stream.write(`>p2 move ${message}`);
         console.log("wrote to sream p2");
       }
     });
     this.socket2.on("send-move", (message, id) => {
       console.log("Move from " + id + ": " + message);
       if (this.playerArr[0] == JSON.stringify(id)) {
-        stream.write(`>p1 move ${message}`);
+        this.stream.write(`>p1 move ${message}`);
         console.log("wrote to sream p1");
       } else {
-        stream.write(`>p2 move ${message}`);
+        this.stream.write(`>p2 move ${message}`);
         console.log("wrote to sream p2");
       }
     });
@@ -82,10 +82,10 @@ export default class Battle {
       console.log("Switch from " + id + ": " + message);
       console.log(this.playerArr);
       if (this.playerArr[0] == JSON.stringify(id)) {
-        stream.write(`>p1 switch ${message}`);
+        this.stream.write(`>p1 switch ${message}`);
         console.log("wrote to sream p1");
       } else {
-        stream.write(`>p2 switch ${message}`);
+        this.stream.write(`>p2 switch ${message}`);
         console.log("wrote to sream p2");
       }
     });
@@ -94,17 +94,17 @@ export default class Battle {
       console.log("Switch from " + id + ": " + message);
       console.log(this.playerArr);
       if (this.playerArr[0] == JSON.stringify(id)) {
-        stream.write(`>p1 switch ${message}`);
+        this.stream.write(`>p1 switch ${message}`);
         console.log("wrote to sream p1");
       } else {
-        stream.write(`>p2 switch ${message}`);
+        this.stream.write(`>p2 switch ${message}`);
         console.log("wrote to sream p2");
       }
     });
 
     //Battle Stream
     (async () => {
-      for await (const output of stream) {
+      for await (const output of this.stream) {
         var tokens = output.split("|");
 
         if (this.teamprev) {

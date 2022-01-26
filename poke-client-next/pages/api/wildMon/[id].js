@@ -1,3 +1,5 @@
+const encounters = require("../../../../Stats/encounters-kanto-johto.json");
+
 const ViridianForest = () => {
   let rand = Math.floor(Math.random() * 100);
   if (rand < 30) return "Caterpie";
@@ -55,6 +57,103 @@ const MtMoon = () => {
   if (rand >= 99) return "Clefairy";
 };
 
+const SlowpokeWell = () => {
+  let rand = Math.floor(Math.random() * 100);
+  if (rand < 30) return "Slowpoke";
+  if (30 <= rand && rand < 60) return "Goldeen";
+  if (60 <= rand && rand < 80) return "Poliwag";
+  if (80 <= rand && rand < 95) return "Psyduck";
+  if (rand >= 95) return "Bronzor";
+};
+
+const IlexForest = () => {
+  let rand = Math.floor(Math.random() * 100);
+  if (rand < 35) return "Oddish";
+  if (35 <= rand && rand < 70) return "Pineco";
+  if (70 <= rand && rand < 90) return "Tangela";
+  if (90 <= rand && rand < 99) return "Numel";
+  if (rand >= 99) return "Heracross";
+};
+
+const DiglettsCave = () => {
+  let rand = Math.floor(Math.random() * 100);
+  if (rand < 60) return "Diglett";
+  if (60 <= rand && rand < 75) return "Chingling";
+  if (75 <= rand && rand < 90) return "Rhyhorn";
+  if (90 <= rand && rand < 99) return "Magmar";
+  if (rand >= 99) return "Absol";
+};
+
+const RockTunnel = () => {
+  let rand = Math.floor(Math.random() * 100);
+  if (rand < 30) return "Cubone";
+  if (30 <= rand && rand < 60) return "Machop";
+  if (60 <= rand && rand < 80) return "Onix";
+  if (80 <= rand && rand < 90) return "Makuhita";
+  if (rand >= 90) return "Charmander";
+};
+
+const NationalPark = () => {
+  let rand = Math.floor(Math.random() * 100);
+  if (rand < 27) return "Venonat";
+  if (27 <= rand && rand < 55) return "Ledyba";
+  if (55 <= rand && rand < 90) return "Exeggcute";
+  if (90 <= rand && rand < 99) return "Nincada";
+  if (rand >= 99) return "Pinsir";
+};
+
+const SafariZone = () => {
+  let rand = Math.floor(Math.random() * 100);
+  if (rand < 24) return "Doduo";
+  if (24 <= rand && rand < 47) return "Nidoran-M";
+  if (47 <= rand && rand < 70) return "Nidoran-F";
+  if (70 <= rand && rand < 90) return "Tauros";
+  if (90 <= rand && rand < 98) return "Kangaskhan";
+  if (98 <= rand && rand < 99) return "Chansey";
+  if (rand >= 99) return "Scyther";
+};
+
+const IcePath = () => {
+  let rand = Math.floor(Math.random() * 100);
+  if (rand < 50) return "Swinub";
+  if (50 <= rand && rand < 80) return "Delibird";
+  if (80 <= rand && rand < 95) return "Jynx";
+  if (rand >= 95) return "Sneasel";
+};
+
+const PowerPlant = () => {
+  let rand = Math.floor(Math.random() * 100);
+  if (rand < 27) return "Pikachu";
+  if (27 <= rand && rand < 53) return "Magnemite";
+  if (53 <= rand && rand < 79) return "Voltorb";
+  if (79 <= rand && rand < 94) return "Electabuzz";
+  if (rand >= 94) return "Shinx";
+};
+
+const RocketHideout = () => {
+  let rand = Math.floor(Math.random() * 100);
+  if (rand < 25) return "Abra";
+  if (25 <= rand && rand < 50) return "Porygon";
+  if (50 <= rand && rand < 74) return "Scyther";
+  if (74 <= rand && rand < 99) return "Pinsir";
+  if (rand >= 99) return "Dratini";
+};
+
+const getWild = (location) => {
+  let rand = Math.floor(Math.random() * 100);
+  const data = encounters[location];
+  var total = 0;
+  var mon = "";
+  for (let i = 0; i < data.rates.length; i++) {
+    total += data.rates[i];
+    if (rand < total) {
+      mon = data.pokemon[i];
+      break;
+    }
+  }
+  return mon;
+};
+
 const getPoke = (wildArea) => {
   switch (wildArea) {
     case "Viridian Forest":
@@ -69,6 +168,24 @@ const getPoke = (wildArea) => {
       return SproutTower();
     case "Union Cave":
       return UnionCave();
+    case "Slowpoke Well":
+      return SlowpokeWell();
+    case "Ilex Forest":
+      return IlexForest();
+    case "Diglett's Cave":
+      return DiglettsCave();
+    case "Rock Tunnel":
+      return RockTunnel();
+    case "National Park":
+      return NationalPark();
+    case "Safari Zone":
+      return SafariZone();
+    case "Ice Path":
+      return IcePath();
+    case "Power Plant":
+      return PowerPlant();
+    case "Rocket Hideout":
+      return RocketHideout();
   }
 };
 
@@ -80,7 +197,7 @@ export default async function handler(req, res) {
 
   switch (method) {
     case "GET":
-      const pokemon = getPoke(id);
+      const pokemon = getWild(id);
       res.status(200).json({ data: pokemon });
       break;
   }

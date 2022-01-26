@@ -10,6 +10,7 @@ export const BattleDisplay = ({
   id,
   setBattleEnd,
   setRewards,
+  setAnimsDone,
 }) => {
   const { enqueueSnackbar } = useSnackbar();
   const [p1Poke, setP1Poke] = useState(null);
@@ -19,6 +20,7 @@ export const BattleDisplay = ({
   const [p1PokeStatus, setP1PokeStatus] = useState([]);
   const [p2PokeStatus, setP2PokeStatus] = useState([]);
 
+  var initialSwitch = true;
   var delay = 300;
   var p1Heal = false;
   var p2Heal = false;
@@ -31,6 +33,7 @@ export const BattleDisplay = ({
   const fieldParser = () => {
     var p1Set = false;
     var p2Set = false;
+    setAnimsDone(false);
 
     var stream = field.split(/\r?\n/);
 
@@ -39,6 +42,9 @@ export const BattleDisplay = ({
 
       //Set the images and health on switches
       if (token.startsWith("|switch|p1a:") || token.startsWith("|drag|p1a:")) {
+        // if (initialSwitch) delay = 0;
+
+        // setTimeout(() => {
         setP1PokeStatus([]);
 
         var splitToken = token.split("|");
@@ -50,8 +56,13 @@ export const BattleDisplay = ({
             ...prevState,
             "status " + splitToken[4].split(" ")[1],
           ]);
+        // }, delay);
+        // delay += addDelay;
       }
       if (token.startsWith("|switch|p2a:") || token.startsWith("|drag|p2a:")) {
+        // if (initialSwitch) delay = 0;
+
+        // setTimeout(() => {
         setP2PokeStatus([]);
 
         var splitToken = token.split("|");
@@ -63,6 +74,9 @@ export const BattleDisplay = ({
             ...prevState,
             "status " + splitToken[4].split(" ")[1],
           ]);
+        // }, delay);
+        // delay += addDelay;
+        initialSwitch = false;
       }
 
       //set the health display on damage and heal
@@ -73,108 +87,220 @@ export const BattleDisplay = ({
         if (
           (token.startsWith("|-damage|p1a:") &&
             token.split("|")[3].split("/")[1] == "100") ||
-          token.startsWith("|-heal|p1a:") ||
+          (token.startsWith("|-heal|p1a:") &&
+            token.split("|")[3].split("/")[1] == "100") ||
           (token.startsWith("|-damage|p1a:") &&
+            token.split("|")[3].split("/")[1].split(" ")[0] == "100") ||
+          (token.startsWith("|-heal|p1a:") &&
             token.split("|")[3].split("/")[1].split(" ")[0] == "100")
         ) {
           var splitToken = token.split("|");
-          setP1PokeHealth(splitToken[3].split("/")[0]);
+          setTimeout(() => setP1PokeHealth(splitToken[3].split("/")[0]), delay);
+          delay += addDelay;
         }
         if (
           (token.startsWith("|-damage|p2a:") &&
             token.split("|")[3].split("/")[1] == "100") ||
-          token.startsWith("|-heal|p2a:") ||
+          (token.startsWith("|-heal|p2a:") &&
+            token.split("|")[3].split("/")[1] == "100") ||
           (token.startsWith("|-damage|p2a:") &&
+            token.split("|")[3].split("/")[1].split(" ")[0] == "100") ||
+          (token.startsWith("|-heal|p2a:") &&
             token.split("|")[3].split("/")[1].split(" ")[0] == "100")
         ) {
           var splitToken = token.split("|");
-          setP2PokeHealth(splitToken[3].split("/")[0]);
+          setTimeout(() => setP2PokeHealth(splitToken[3].split("/")[0]), delay);
+          delay += addDelay;
         }
       }
       //set health to 0 on faint
       if (token.startsWith("|faint|p1a:")) {
-        setP1PokeHealth(0);
+        setTimeout(() => setP1PokeHealth(0), delay);
+        delay += addDelay;
       }
       if (token.startsWith("|faint|p2a:")) {
-        setP2PokeHealth(0);
+        setTimeout(() => setP2PokeHealth(0), delay);
+        delay += addDelay;
       }
 
       //set status
       if (token.startsWith("|-status|p1a:")) {
         var splitToken = token.split("|");
         console.log("in stat");
-        setP1PokeStatus((prevState) => [
-          ...prevState,
-          "status " + splitToken[3],
-        ]);
+        setTimeout(
+          () =>
+            setP1PokeStatus((prevState) => [
+              ...prevState,
+              "status|" + splitToken[3],
+            ]),
+          delay
+        );
+        delay += addDelay;
       }
       if (token.startsWith("|-status|p2a:")) {
         var splitToken = token.split("|");
-        setP2PokeStatus((prevState) => [
-          ...prevState,
-          "status " + splitToken[3],
-        ]);
+        setTimeout(
+          () =>
+            setP2PokeStatus((prevState) => [
+              ...prevState,
+              "status|" + splitToken[3],
+            ]),
+          delay
+        );
+        delay += addDelay;
       }
 
       //cure status
       if (token.startsWith("|-curestatus|p1a:")) {
         var splitToken = token.split("|");
         const newStatuses = p1PokeStatus.filter(
-          (status) => status != "status " + splitToken[3]
+          (status) => status != "status|" + splitToken[3]
         );
-        setP1PokeStatus(newStatuses);
+        setTimeout(() => setP1PokeStatus(newStatuses), delay);
+        delay += addDelay;
       }
       if (token.startsWith("|-curestatus|p2a:")) {
         var splitToken = token.split("|");
         const newStatuses = p1PokeStatus.filter(
-          (status) => status != "status " + splitToken[3]
+          (status) => status != "status|" + splitToken[3]
         );
-        setP2PokeStatus(newStatuses);
+        setTimeout(() => setP2PokeStatus(newStatuses), delay);
+        delay += addDelay;
       }
 
+      if (token.startsWith("|-end|p1a:")) {
+        var splitToken = token.split("|");
+        const newStatuses = p1PokeStatus.filter(
+          (status) => status != "effect|" + splitToken[3]
+        );
+        setTimeout(() => setP1PokeStatus(newStatuses), delay);
+        delay += addDelay;
+      }
+      if (token.startsWith("|-end|p2a:")) {
+        var splitToken = token.split("|");
+        const newStatuses = p1PokeStatus.filter(
+          (status) => status != "effect|" + splitToken[3]
+        );
+        setTimeout(() => setP1PokeStatus(newStatuses), delay);
+        delay += addDelay;
+      }
       //set boost and unboost
       if (token.startsWith("|-unboost|p1a:")) {
         var splitToken = token.split("|");
 
-        setP1PokeStatus((prevState) => [
-          ...prevState,
-          "unboost " + splitToken[3],
-        ]);
+        setTimeout(
+          () =>
+            setP1PokeStatus((prevState) => [
+              ...prevState,
+              "unboost|" + splitToken[3],
+            ]),
+          delay
+        );
+        delay += addDelay;
       }
       if (token.startsWith("|-unboost|p2a:")) {
         var splitToken = token.split("|");
 
-        setP2PokeStatus((prevState) => [
-          ...prevState,
-          "unboost " + splitToken[3],
-        ]);
+        setTimeout(
+          () =>
+            setP2PokeStatus((prevState) => [
+              ...prevState,
+              "unboost|" + splitToken[3],
+            ]),
+          delay
+        );
+        delay += addDelay;
       }
       if (token.startsWith("|-boost|p1a:")) {
         var splitToken = token.split("|");
 
-        setP1PokeStatus((prevState) => [
-          ...prevState,
-          "boost " + splitToken[3],
-        ]);
+        setTimeout(
+          () =>
+            setP1PokeStatus((prevState) => [
+              ...prevState,
+              "boost|" + splitToken[3],
+            ]),
+          delay
+        );
+        delay += addDelay;
       }
       if (token.startsWith("|-boost|p2a:")) {
         var splitToken = token.split("|");
 
-        setP2PokeStatus((prevState) => [
-          ...prevState,
-          "boost " + splitToken[3],
-        ]);
+        setTimeout(
+          () =>
+            setP2PokeStatus((prevState) => [
+              ...prevState,
+              "boost|" + splitToken[3],
+            ]),
+          delay
+        );
+        delay += addDelay;
+      }
+      if (token.startsWith("|-setboost|p1a:")) {
+        var splitToken = token.split("|");
+
+        setTimeout(
+          () =>
+            setP1PokeStatus((prevState) => [
+              ...prevState,
+              "setboost|" + splitToken[3] + "|" + splitToken[4],
+            ]),
+          delay
+        );
+        delay += addDelay;
+      }
+      if (token.startsWith("|-setboost|p2a:")) {
+        var splitToken = token.split("|");
+
+        setTimeout(
+          () =>
+            setP2PokeStatus((prevState) => [
+              ...prevState,
+              "setboost|" + splitToken[3] + "|" + splitToken[4],
+            ]),
+          delay
+        );
+        delay += addDelay;
+      }
+
+      if (token.startsWith("|-start|p1a:")) {
+        var splitToken = token.split("|");
+
+        setTimeout(
+          () =>
+            setP1PokeStatus((prevState) => [
+              ...prevState,
+              "effect|" + splitToken[3],
+            ]),
+          delay
+        );
+        delay += addDelay;
+      }
+      if (token.startsWith("|-start|p2a:")) {
+        var splitToken = token.split("|");
+
+        setTimeout(
+          () =>
+            setP2PokeStatus((prevState) => [
+              ...prevState,
+              "effect|" + splitToken[3],
+            ]),
+          delay
+        );
+        delay += addDelay;
       }
 
       if (token.startsWith("|win")) {
         var splitToken = token.split("|");
         var winner = splitToken[2];
-        setBattleEnd(true);
-        if (id == winner.replace(/['"]+/g, "")) setRewards(1000, 2, true);
+        setTimeout(() => setBattleEnd(true), delay);
+        if (id == winner.replace(/['"]+/g, "")) setRewards(1000, 1, true);
         else setRewards(0, 1, false);
       }
     } //end tok
 
+    setTimeout(() => setAnimsDone(true), delay);
     delay = 300;
   };
 
@@ -204,7 +330,18 @@ export const BattleDisplay = ({
           }),
         delay
       );
-      delay += addDelay;
+      //delay += addDelay;
+    }
+
+    if (token.startsWith("|-crit")) {
+      setTimeout(
+        () =>
+          enqueueSnackbar(`It was a Critical Hit!`, {
+            variant: "success",
+          }),
+        delay
+      );
+      //delay += addDelay;
     }
 
     if (token.startsWith("|-resisted")) {
@@ -215,7 +352,7 @@ export const BattleDisplay = ({
           }),
         delay
       );
-      delay += addDelay;
+      //delay += addDelay;
     }
 
     if (token.startsWith("|-immune")) {
@@ -229,14 +366,14 @@ export const BattleDisplay = ({
           }),
         delay
       );
-      delay += addDelay;
+      //delay += addDelay;
     }
 
     if (token.startsWith("|-heal")) {
       var splitToken = token.split("|");
       if (
-        (splitToken[2].split(" ")[0] == "p1a:" && !p1Heal) ||
-        (splitToken[2].split(" ")[0] == "p2a:" && !p2Heal)
+        (splitToken[2].split(" ")[0] == "p1a:" && p1Heal != splitToken[4]) ||
+        (splitToken[2].split(" ")[0] == "p2a:" && p2Heal != splitToken[4])
       ) {
         var user = splitToken[2].split(" ")[1];
         if (splitToken.length > 4) var item = splitToken[4].split(" ").at(-1);
@@ -249,8 +386,8 @@ export const BattleDisplay = ({
           delay
         );
         delay += addDelay;
-        if (splitToken[2].split(" ")[0] == "p1a:") p1Heal = true;
-        else p2Heal = true;
+        if (splitToken[2].split(" ")[0] == "p1a:") p1Heal = splitToken[4];
+        else p2Heal = splitToken[4];
       }
     }
 
@@ -522,21 +659,21 @@ export const BattleDisplay = ({
       delay += addDelay;
     }
 
-    if (token.startsWith("|win")) {
-      var splitToken = token.split("|");
-      var winner = splitToken[2];
-      setTimeout(
-        () =>
-          enqueueSnackbar(`${winner} won the battle!`, {
-            variant: "info",
-          }),
-        delay
-      );
-      delay += addDelay;
-    }
+    // if (token.startsWith("|win")) {
+    //   var splitToken = token.split("|");
+    //   var winner = splitToken[2];
+    //   setTimeout(
+    //     () =>
+    //       enqueueSnackbar(`${winner} won the battle!`, {
+    //         variant: "info",
+    //       }),
+    //     delay
+    //   );
+    //   delay += addDelay;
+    // }
   };
 
-  useEffect(() => {
+  useEffect(async () => {
     fieldParser();
   }, [field]);
 
@@ -547,7 +684,7 @@ export const BattleDisplay = ({
           <img
             src={
               "http://play.pokemonshowdown.com/sprites/ani-back/" +
-              p1Poke.toLowerCase() +
+              p1Poke.replace("-", "").toLowerCase() +
               ".gif"
             }
             alt={p1Poke}
@@ -558,7 +695,7 @@ export const BattleDisplay = ({
           <img
             src={
               "http://play.pokemonshowdown.com/sprites/ani-back/" +
-              p2Poke.toLowerCase() +
+              p2Poke.replace("-", "").toLowerCase() +
               ".gif"
             }
             alt={p2Poke}
@@ -575,7 +712,7 @@ export const BattleDisplay = ({
           <img
             src={
               "http://play.pokemonshowdown.com/sprites/ani/" +
-              p1Poke.toLowerCase() +
+              p1Poke.replace("-", "").toLowerCase() +
               ".gif"
             }
             alt={p1Poke}
@@ -586,7 +723,7 @@ export const BattleDisplay = ({
           <img
             src={
               "http://play.pokemonshowdown.com/sprites/ani/" +
-              p2Poke.toLowerCase() +
+              p2Poke.replace("-", "").toLowerCase() +
               ".gif"
             }
             alt={p2Poke}

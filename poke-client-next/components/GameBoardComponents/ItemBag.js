@@ -14,16 +14,20 @@ const ItemBag = ({ items, team, setTeam, setItems, setMoney }) => {
           border: "solid",
           borderWidth: "1px",
           minHeight: "15vh",
+          maxHeight: "15vh",
+          overflowY: "scroll",
         }}
       >
-        {items.map((item) => {
+        {items.map((item, index) => {
           return (
             <Item
               name={item}
               team={team}
+              items={items}
               setTeam={setTeam}
               setItems={setItems}
               setMoney={setMoney}
+              key={index}
             />
           );
         })}

@@ -15,6 +15,7 @@ const RoundDialog = ({
   setBalls,
   setCandies,
   balls,
+  activeStep,
   id,
 }) => {
   const handleClose = () => {
@@ -34,6 +35,7 @@ const RoundDialog = ({
               handleClose={handleClose}
               setMoney={setMoney}
               setCandies={setCandies}
+              rarity={"player"}
             />
           </Box>
         );
@@ -44,8 +46,10 @@ const RoundDialog = ({
             balls={balls}
             setBalls={setBalls}
             setCandies={setCandies}
+            setMoney={setMoney}
             setBox={setBox}
             handleClose={handleClose}
+            round={activeStep}
           />
         );
     }

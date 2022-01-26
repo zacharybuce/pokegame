@@ -12,12 +12,23 @@ import PokeIcon from "../PokeIcon";
 import PokeInfo from "./PokeInfo";
 import PokeStats from "./PokeStats";
 import StarIcon from "@mui/icons-material/Star";
+import CookieIcon from "@mui/icons-material/Cookie";
 import EditMovesDialog from "./EditMovesDialog";
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 
-const PokemonPiece = ({ poke, candies, setCandies, team, setTeam, setBag }) => {
+const PokemonPiece = ({
+  poke,
+  candies,
+  setCandies,
+  team,
+  setTeam,
+  setBag,
+  setMoney,
+}) => {
   const [open, setOpen] = useState(false);
   const [canEvolve, setCanEvolve] = useState(false);
   const [editing, setEditing] = useState(false);
+  const [candiesUsed, setCandiesUsed] = useState(0);
 
   const handleClickOpen = () => {
     console.log(poke);
@@ -106,8 +117,15 @@ const PokemonPiece = ({ poke, candies, setCandies, team, setTeam, setBag }) => {
       let n = poke.evs[key] / 28;
       candiesUsed += (n / 2) * (1 + n);
     });
-    if (candiesUsed >= poke.evolveCandies) setCanEvolve(true);
-    console.log(candiesUsed);
+    if (candiesUsed >= poke.evolveCandies) {
+      console.log("candies used: " + candiesUsed);
+      console.log("evolve candies " + poke.evolveCandies);
+      setCanEvolve(true);
+    } else {
+      setCanEvolve(false);
+    }
+    if (poke.evolveCandies == "MAX") setCanEvolve(false);
+    setCandiesUsed(candiesUsed);
   };
 
   const handleEvolve = async () => {
@@ -118,11 +136,13 @@ const PokemonPiece = ({ poke, candies, setCandies, team, setTeam, setBag }) => {
     const evo = data.data;
 
     var mon = poke;
+    if (!mon.newMoves) mon.newMoves = [];
     mon.species = evo.species;
     mon.level = poke.level + 5;
     mon.evolveCandies = evo.evolveCandies;
-    mon.newMoves = evo.newMoves;
-    mon.types = evo.types;
+    mon.newMoves = mon.newMoves.concat(evo.newMoves);
+    if (evo.types) mon.types = evo.types;
+    if (evo.ability) mon.ability = evo.ability;
     const filteredTeam = team.filter(
       (mem) => JSON.stringify(mem) != JSON.stringify(poke)
     );
@@ -144,6 +164,7 @@ const PokemonPiece = ({ poke, candies, setCandies, team, setTeam, setBag }) => {
   };
 
   const takeItem = () => {
+    console.log("taking item: " + poke.item);
     setBag((prevState) => [...prevState, poke.item]);
     const filteredTeam = team.filter(
       (mem) => JSON.stringify(mem) != JSON.stringify(poke)
@@ -151,6 +172,18 @@ const PokemonPiece = ({ poke, candies, setCandies, team, setTeam, setBag }) => {
     var newMon = poke;
     newMon.item = "";
     setTeam([...filteredTeam, newMon]);
+  };
+
+  const releaseMon = (reward) => {
+    if (reward == "candy") setCandies((prevState) => prevState + 1);
+    if (reward == "money") setMoney((prevState) => prevState + 500);
+
+    const filteredTeam = team.filter(
+      (mem) => JSON.stringify(mem) != JSON.stringify(poke)
+    );
+
+    setTeam(filteredTeam);
+    handleClose();
   };
 
   useEffect(() => {
@@ -203,7 +236,33 @@ const PokemonPiece = ({ poke, candies, setCandies, team, setTeam, setBag }) => {
                     poke={poke}
                     statInc={handleStatIncrease}
                     candies={candies}
+                    candiesUsed={candiesUsed}
                   />
+                </Grid>
+                <Grid item xs={2} sx={{ mt: "1vh" }}>
+                  <Tooltip title="Release this Pokemon for 1 candy">
+                    <Button
+                      onClick={() => releaseMon("candy")}
+                      disabled={team.length == 1}
+                      variant="contained"
+                      color="error"
+                    >
+                      Release <CookieIcon sx={{ ml: ".5vw" }} />
+                    </Button>
+                  </Tooltip>
+                </Grid>
+                <Grid item xs={2} sx={{ mt: "1vh" }}>
+                  <Tooltip title="Release this Pokemon for 500 Money">
+                    <Button
+                      onClick={() => releaseMon("money")}
+                      disabled={team.length == 1}
+                      variant="contained"
+                      color="error"
+                    >
+                      Release
+                      <AttachMoneyIcon sx={{ ml: ".5vw" }} />
+                    </Button>
+                  </Tooltip>
                 </Grid>
               </Grid>
               <EditMovesDialog

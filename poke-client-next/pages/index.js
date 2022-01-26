@@ -6,9 +6,9 @@ import Login from "../components/Login";
 import Board from "../components/Board";
 import Lobby from "../components/Lobby";
 import GameBoard from "../components/GameBoard";
+import { Box } from "@mui/material";
 
 const AppContainer = styled("div")(({ theme }) => ({
-  marginTop: "30vh",
   marginRight: "10vw",
   marginLeft: "10vw",
   marginBottom: "7vh",
@@ -37,7 +37,11 @@ export default function Index() {
     } else if (id && !gameStart) {
       return lobby;
     } else {
-      return <GameBoard id={id} />;
+      return (
+        <Box sx={{ mt: "30vh" }}>
+          <GameBoard id={id} />
+        </Box>
+      );
     }
 
     //return <GameBoard id={id} />;

@@ -23,7 +23,7 @@ const HtmlTooltip = styled(({ className, ...props }) => (
   },
 }));
 
-const Item = ({ name, team, setTeam, setItems, setMoney }) => {
+const Item = ({ name, items, team, setTeam, setItems, setMoney }) => {
   const [itemData, setItemData] = useState(null);
   const [open, setOpen] = useState(false);
 
@@ -83,36 +83,35 @@ const Item = ({ name, team, setTeam, setItems, setMoney }) => {
     const filteredTeam = team.filter(
       (mem) => JSON.stringify(mem) != JSON.stringify(mon)
     );
+    console.log("giving item: " + name);
     mon.item = name;
+    console.log("holding " + mon.item);
     setTeam([...filteredTeam, mon]);
 
-    setItems((prevState) => {
-      var newBag = prevState;
-      for (let i = 0; i < newBag.length; i++) {
-        if (newBag[i].split("|")[0] == name.split("|")[0]) {
-          newBag.splice(i, 1);
-          break;
-        }
+    var newBag = items;
+    let removed = false;
+    for (let i = 0; i < newBag.length; i++) {
+      if (newBag[i] == name && !removed) {
+        newBag.splice(i, 1);
+        removed = true;
       }
-
-      return newBag;
-    });
-
+    }
+    console.log(newBag);
+    setItems(newBag);
     handleClose();
   };
 
   const sellItem = () => {
-    setItems((prevState) => {
-      var newBag = prevState;
-      for (let i = 0; i < newBag.length; i++) {
-        if (newBag[i].split("|")[0] == name.split("|")[0]) {
-          newBag.splice(i, 1);
-          break;
-        }
+    var newBag = items;
+    let removed = false;
+    for (let i = 0; i < newBag.length; i++) {
+      if (newBag[i] == name && !removed) {
+        newBag.splice(i, 1);
+        removed = true;
       }
-
-      return newBag;
-    });
+    }
+    console.log(newBag);
+    setItems(newBag);
 
     setMoney((prevState) => prevState + getCost(name.split("|")[1]));
     handleClose();

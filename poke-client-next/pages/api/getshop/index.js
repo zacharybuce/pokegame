@@ -1,6 +1,6 @@
 const { Dex } = require("pokemon-showdown");
 
-//Legendary - 1
+//Legendary - 5
 const legendary = [
   "Assault Vest",
   "Choice Band",
@@ -11,7 +11,7 @@ const legendary = [
   "Leftovers",
 ];
 
-//Epic - 4
+//Epic - 8
 const epic = [
   "Heavy-Duty Boots",
   "Focus Sash",
@@ -26,7 +26,7 @@ const epic = [
   "Big Root",
 ];
 
-//Rare - 15
+//Rare - 18
 const rare = [
   "Mental Herb",
   "Power Herb",
@@ -49,10 +49,11 @@ const rare = [
   "Silk Scarf",
   "Silver Powder",
   "Soft Sand",
+  "Weakness Policy",
   "Spell Tag",
 ];
 
-//Uncommon - 30
+//Uncommon - 33
 const uncommon = [
   "Salac Berry",
   "Wiki Berry",
@@ -67,11 +68,10 @@ const uncommon = [
   "Safety Goggles",
   "Starf Berry",
   "Utility Umbrella",
-  "Weakness Policy",
   "Zoom Lens",
 ];
 
-//Common - 50
+//Common - 35
 const common = [
   "Blunder Policy",
   "Damp Rock",
@@ -97,31 +97,34 @@ const generateItems = () => {
       rand = Math.floor(Math.random() * common.length);
       item = common[rand];
       console.log(item);
-      if (!shopItems.includes(item)) shopItems.push(item + "|Common");
+      if (!shopItems.includes(item + "|Common"))
+        shopItems.push(item + "|Common");
       else i--;
     }
     if (rand >= 50 && rand < 80) {
       rand = Math.floor(Math.random() * uncommon.length);
       item = uncommon[rand];
-      if (!shopItems.includes(item)) shopItems.push(item + "|Uncommon");
+      if (!shopItems.includes(item + "|Uncommon"))
+        shopItems.push(item + "|Uncommon");
       else i--;
     }
     if (rand >= 80 && rand < 95) {
       rand = Math.floor(Math.random() * rare.length);
       item = rare[rand];
-      if (!shopItems.includes(item)) shopItems.push(item + "|Rare");
+      if (!shopItems.includes(item + "|Rare")) shopItems.push(item + "|Rare");
       else i--;
     }
     if (rand >= 95 && rand < 99) {
       rand = Math.floor(Math.random() * epic.length);
       item = epic[rand];
-      if (!shopItems.includes(item)) shopItems.push(item + "|Epic");
+      if (!shopItems.includes(item + "|Epic")) shopItems.push(item + "|Epic");
       else i--;
     }
     if (rand == 99) {
       rand = Math.floor(Math.random() * legendary.length);
       item = legendary[rand];
-      if (!shopItems.includes(item)) shopItems.push(item + "|Legendary");
+      if (!shopItems.includes(item + "|Legendary"))
+        shopItems.push(item + "|Legendary");
       else i--;
     }
   }

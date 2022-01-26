@@ -6,6 +6,10 @@
 import { Server } from "socket.io";
 import { createServer } from "http";
 import Battle from "./battle.js";
+import WildBattle from "./wildbattle.js";
+import { readFile } from "fs/promises";
+
+const monList = JSON.parse(await readFile("../Stats/pokemonStats.json"));
 
 const httpServer = createServer();
 const io = new Server(httpServer, {
@@ -30,6 +34,9 @@ var readyToBattle = 0;
 var gameStart = false;
 var battleStart = false;
 var battle = null;
+var wildBattles = [];
+var starterRule = "Classic";
+var starters = [];
 
 io.on("connection", (socket) => {
   //put every player in their own room. id= player selected-id
@@ -50,6 +57,26 @@ io.on("connection", (socket) => {
     console.log(id + " joined the lobby");
   }
 
+  //lobby rules updates
+  socket.on("send-rules-update", (starter, journey) => {
+    console.log("rules change - " + starter);
+
+    if (starter == "Random Fair") {
+      console.log("generating mon");
+      const keys = Object.keys(monList);
+      for (let i = 0; i < 3; i++) {
+        let rand = Math.floor(Math.random() * keys.length);
+        if (!starters.includes(keys[rand])) starters.push(keys[rand]);
+        else i--;
+      }
+      console.log(starters);
+    }
+
+    starterRule = starter;
+    const rules = { starter: starter, journey: journey };
+    io.emit("lobby-rules-update", rules);
+  });
+
   //ready to start game
   socket.on("send-ready", () => {
     readyToStart += 1;
@@ -63,7 +90,22 @@ io.on("connection", (socket) => {
 
   //player indicates they want a group of 3 starters to pick from
   socket.on("get-starter", () => {
-    io.to(id).emit("starter-mon", ["Squirtle", "Charmander", "Bulbasaur"]);
+    console.log("sending starter...");
+
+    if (starterRule == "Random") {
+      const keys = Object.keys(monList);
+      var genStarters = [];
+      for (let i = 0; i < 3; i++) {
+        let rand = Math.floor(Math.random() * keys.length);
+        if (!genStarters.includes(keys[rand])) genStarters.push(keys[rand]);
+        else i--;
+      }
+      io.to(id).emit("starter-mon", genStarters);
+    } else if (starterRule == "Random Fair") {
+      io.to(id).emit("starter-mon", starters);
+    } else {
+      io.to(id).emit("starter-mon", ["Charmander", "Squirtle", "Bulbasaur"]);
+    }
   });
 
   //A player indicates that they have finished with their round
@@ -105,6 +147,37 @@ io.on("connection", (socket) => {
     console.log("sending wild areas to " + id);
     console.log(wildAreaOptions);
     io.to(id).emit("wild-area-options", wildAreaOptions);
+  });
+
+  socket.on("start-wild-battle", async (id, opponent, oppTeam) => {
+    let index = 0;
+    for (let i = 0; i < lobby.players.length; i++) {
+      if (id == lobby.players[i].name.replace(/['"]+/g, "")) {
+        console.log(
+          id + "is equal to " + lobby.players[i].name.replace(/['"]+/g, "")
+        );
+        console.log("The index is " + i);
+        index = i;
+      }
+    }
+
+    let firstP1 = [lobby.players[index].team[0]];
+
+    wildBattles[index] = new WildBattle(
+      io,
+      playersInLobby[index],
+      opponent,
+      lobby.players[index].playerSocket,
+      firstP1,
+      oppTeam,
+      endWildBattle,
+      index
+    );
+    console.log("---Starting Battle---");
+    const res = await wildBattles[index].startBattle();
+    //battleStart = true;
+    //console.log("in run");
+    wildBattles[index].runBattle();
   });
 });
 
@@ -177,10 +250,24 @@ const game = (socket, id) => {
 const genWildAreas = (round) => {
   var choices = [];
   for (let i = 0; i < 2; i++) {
-    let rand = Math.floor(Math.random() * 100);
-    let area = wildArea(round, rand);
-    if (!choices.includes(area)) choices.push(area);
-    else i--;
+    if (i == 0) {
+      let rand = Math.floor(Math.random() * 100);
+      let area = wildArea(round, rand);
+      if (!choices.includes(area)) choices.push(area);
+      else i--;
+    } else {
+      let eventType = Math.floor(Math.random() * 100);
+      if (eventType >= 70) {
+        let rand = Math.floor(Math.random() * 100);
+        let area = wildArea(round, rand);
+        if (!choices.includes(area)) choices.push(area);
+        else i--;
+      } else {
+        let trainerRand = Math.floor(Math.random() * 100);
+        const trainer = trainerBattles(trainerRand);
+        choices.push(trainer);
+      }
+    }
   }
   return choices;
 };
@@ -188,23 +275,50 @@ const genWildAreas = (round) => {
 const wildArea = (round, num) => {
   var area = "";
   if (round <= 3) {
-    area = r3Areas(num);
+    area = l1Areas(num);
+  } else if (round > 4 && round <= 7) {
+    area = l2Areas(num);
   }
 
   return area;
 };
 
-const r3Areas = (num) => {
-  if (num < 20) return "Viridian Forest";
-  if (20 <= num && num < 40) return "Grassland Route";
-  if (40 <= num && num < 60) return "Dark Cave";
-  if (60 <= num && num < 75) return "Sprout Tower";
-  if (75 <= num && num < 90) return "Mt.Moon";
-  if (num >= 90) return "Union Cave";
-  else {
-    console.log(num);
-    return "error";
-  }
+const l1Areas = (num) => {
+  if (num < 20) return "Viridian Forest|Common";
+  if (20 <= num && num < 40) return "Grassland Route|Common";
+  if (40 <= num && num < 60) return "Dark Cave|Common";
+  if (60 <= num && num < 75) return "Sprout Tower|Uncommon";
+  if (75 <= num && num < 90) return "Mt.Moon|Uncommon";
+  if (num >= 90) return "Union Cave|Rare";
+
+  console.log(num);
+  return "error";
+};
+
+const l2Areas = (num) => {
+  if (num < 19) return "Slowpoke Well|Common";
+  if (19 <= num && num < 37) return "Ilex Forest|Common";
+  if (37 <= num && num < 55) return "Diglett's Cave|Common";
+  if (55 <= num && num < 70) return "Rock Tunnel|Uncommon";
+  if (70 <= num && num < 85) return "National Park|Uncommon";
+  if (85 <= num && num < 90) return "Safari Zone|Rare";
+  if (90 <= num && num < 95) return "Ice Path|Rare";
+  if (95 <= num && num < 99) return "Power Plant|Epic";
+  if (num >= 99) return "Rocket Hideout|Legendary";
+
+  console.log(num);
+  return "error";
+};
+
+const trainerBattles = (num) => {
+  if (num < 40) return "TrainerEasy|Common";
+  if (40 <= num && num < 60) return "TrainerMedium|Uncommon";
+  if (60 <= num && num < 75) return "TrainerChallenge|Rare";
+  if (75 <= num && num < 90) return "TrainerHard|Epic";
+  if (num >= 90) return "TrainerImpossible|Legendary";
+
+  console.log(num);
+  return "error";
 };
 
 const startGameIfReady = () => {
@@ -225,6 +339,11 @@ const endBattle = () => {
   battleStart = false;
   readyToBattle = 0;
   battle = null;
+};
+
+const endWildBattle = (index) => {
+  console.log("ending the battle");
+  wildBattles[index] = null;
 };
 
 httpServer.listen(3001);

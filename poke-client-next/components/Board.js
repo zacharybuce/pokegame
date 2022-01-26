@@ -2,9 +2,16 @@ import React, { useState, useEffect, useCallback } from "react";
 import { useSocket } from "../contexts/SocketProvider";
 import { BattleOptions } from "./BattleOptions";
 import { BattleDisplay } from "./BattleDisplay";
-import { Button, Dialog, Typography, Divider, Box } from "@mui/material";
+import {
+  Button,
+  Dialog,
+  Typography,
+  Divider,
+  Box,
+  CircularProgress,
+} from "@mui/material";
 
-const Board = ({ id, handleClose, setMoney, setCandies }) => {
+const Board = ({ id, handleClose, setMoney, setCandies, rarity }) => {
   const socket = useSocket();
   const [player1, setPlayer1] = useState();
   const [team, setTeam] = useState();
@@ -12,6 +19,9 @@ const Board = ({ id, handleClose, setMoney, setCandies }) => {
   const [battleEnd, setBattleEnd] = useState(false);
   const [winner, setWinner] = useState(null);
   const [candyReward, setCandyReward] = useState(0);
+  const [moneyReward, setMoneyReward] = useState(0);
+  const [hasSelected, setHasSelected] = useState();
+  const [animsDone, setAnimsDone] = useState(true);
 
   const fieldUpdate = () => {
     if (socket === undefined) return;
@@ -48,7 +58,7 @@ const Board = ({ id, handleClose, setMoney, setCandies }) => {
       setTeam(team);
       setPlayer1(player1);
     });
-
+    setHasSelected(false);
     return () => socket.off("side-update");
   }, [socket, team]);
 
@@ -58,24 +68,66 @@ const Board = ({ id, handleClose, setMoney, setCandies }) => {
 
     socket.on("update", (fieldUpdate) => setField(fieldUpdate));
     console.log(field);
+    setHasSelected(false);
     return () => socket.off("update");
   }, [socket, field]);
 
   const sendMoveChoice = (moveIndex) => {
     console.log("sending choice...");
     socket.emit("send-move", moveIndex, id);
+    setHasSelected(true);
   };
 
   const sendSwitchChoice = (pokeid) => {
     socket.emit("send-switch", pokeid, id);
+    setHasSelected(true);
   };
 
   const setRewards = (money, candies, winner) => {
-    const len = JSON.parse(team).side.pokemon.length;
-    setCandyReward(candies * len);
+    if (rarity == "player") {
+      const len = JSON.parse(team).side.pokemon.length;
+      setCandyReward(candies * len);
+      setMoneyReward(money);
+      setMoney((prevState) => prevState + money);
+      setCandies((prevState) => prevState + candies * len);
+    } else if (winner) {
+      let battleCandies = 0;
+      let battleMoney = 0;
+      switch (rarity) {
+        case "Common":
+          battleCandies = 2;
+          battleMoney = 500;
+          break;
+        case "Uncommon":
+          battleCandies = 2;
+          battleMoney = 850;
+          break;
+        case "Rare":
+          battleCandies = 2;
+          battleMoney = 1000;
+          break;
+        case "Epic":
+          battleCandies = 3;
+          battleMoney = 1000;
+          break;
+        case "Legendary":
+          battleCandies = 4;
+          battleMoney = 1000;
+          break;
+      }
+
+      setMoney((prevState) => prevState + battleMoney);
+      setCandies((prevState) => prevState + battleCandies);
+      setCandyReward(battleCandies);
+      setMoneyReward(battleMoney);
+    } else {
+      setCandyReward(1);
+      setMoneyReward(0);
+      setMoney((prevState) => prevState + 0);
+      setCandies((prevState) => prevState + 1);
+    }
+
     setWinner(winner);
-    setMoney((prevState) => prevState + money);
-    setCandies((prevState) => prevState + candies * len);
   };
 
   return (
@@ -88,9 +140,15 @@ const Board = ({ id, handleClose, setMoney, setCandies }) => {
           id={id}
           setBattleEnd={setBattleEnd}
           setRewards={setRewards}
+          setAnimsDone={setAnimsDone}
         />
       ) : (
-        <div></div>
+        <Box sx={{ textAlign: "center", mt: "10vh", mb: "10vh" }}>
+          <Typography sx={{ mb: "1vh" }}>
+            Waiting for the Opponent...
+          </Typography>
+          <CircularProgress />
+        </Box>
       )}
 
       {team ? (
@@ -98,9 +156,22 @@ const Board = ({ id, handleClose, setMoney, setCandies }) => {
           team={team}
           sendMoveChoice={sendMoveChoice}
           sendSwitchChoice={sendSwitchChoice}
+          animsDone={animsDone}
+          hasSelected={hasSelected}
         />
       ) : (
-        <div></div>
+        <div>
+          {team ? (
+            <Box sx={{ minHeight: "22vh", textAlign: "center" }}>
+              <Typography sx={{ mt: "10vh", mb: "1vh" }}>
+                Waiting for the Opponent...
+              </Typography>
+              <CircularProgress />
+            </Box>
+          ) : (
+            <div></div>
+          )}
+        </div>
       )}
       <Dialog maxWidth={"sm"} open={battleEnd}>
         <Box sx={{ p: 5, textAlign: "center" }}>
@@ -112,7 +183,7 @@ const Board = ({ id, handleClose, setMoney, setCandies }) => {
             <Typography variant="h4" sx={{ mt: "2vh", mb: "2vh" }}>
               Rewards
             </Typography>
-            <Typography variant="h6">Money: {winner ? "1000" : "0"}</Typography>
+            <Typography variant="h6">Money: {moneyReward}</Typography>
             <Typography variant="h6">Candies: {candyReward}</Typography>
           </Box>
           <Button variant="contained" onClick={() => handleClose()}>

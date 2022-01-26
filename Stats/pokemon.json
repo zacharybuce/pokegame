@@ -1,0 +1,1738 @@
+{
+  "bulbasaur": {
+    "species": "Bulbasaur",
+    "moves": ["Tackle", "Razor Leaf", "Leech Seed", "Sleep Powder"],
+    "evolveCandies": 5
+  },
+  "ivysaur": {
+    "species": "Ivysaur",
+    "evolveCandies": 12,
+    "newMoves": ["Sludge", "Synthesis", "Take Down", "Seed Bomb"]
+  },
+  "venusaur": {
+    "species": "Venusaur",
+    "newMoves": ["Growth", "Giga Drain", "Weather Ball", "Sludge Bomb"],
+    "evolveCandies": "MAX"
+  },
+  "charmander": {
+    "species": "Charmander",
+    "moves": ["Scratch", "Ember", "Smokescreen", "Dragon Breath"],
+    "evolveCandies": 5
+  },
+  "charmeleon": {
+    "species": "Charmeleon",
+    "evolveCandies": 12,
+    "newMoves": ["Fire Fang", "Slash", "Metal Claw", "Bite"]
+  },
+  "charizard": {
+    "species": "Charizard",
+    "evolveCandies": "MAX",
+    "newMoves": ["Flamethrower", "Slash", "Air Slash", "Dragon Dance"]
+  },
+  "squirtle": {
+    "species": "Squirtle",
+    "moves": ["Tackle", "Bite", "Water Pulse", "Withdraw"],
+    "evolveCandies": 5
+  },
+  "wartortle": {
+    "species": "Wartortle",
+    "evolveCandies": 12,
+    "newMoves": ["Rain Dance", "Rapid Spin", "Protect", "Aqua Tail"]
+  },
+  "blastoise": {
+    "species": "Blastoise",
+    "evolveCandies": "MAX",
+    "newMoves": ["Flash Cannon", "Iron Defense", "Skull Bash", "Aqua Ring"]
+  },
+  "caterpie": {
+    "species": "Caterpie",
+    "moves": ["Tackle", "String Shot", "Bug Bite", "Electroweb"],
+    "evolveCandies": 2
+  },
+  "metapod": {
+    "species": "Metapod",
+    "evolveCandies": 9,
+    "newMoves": ["Harden"]
+  },
+  "butterfree": {
+    "species": "Butterfree",
+    "evolveCandies": "MAX",
+    "newMoves": [
+      "Psybeam",
+      "Air Slash",
+      "Sleep Powder",
+      "Poison Powder",
+      "Bug Buzz"
+    ]
+  },
+  "weedle": {
+    "species": "Weedle",
+    "moves": ["Poison Sting", "String Shot", "Bug Bite", "Tackle"],
+    "evolveCandies": 2
+  },
+  "kakuna": { "species": "Kakuna", "evolveCandies": 9, "newMoves": ["Harden"] },
+  "beedrill": {
+    "species": "Beedrill",
+    "evolveCandies": "MAX",
+    "newMoves": ["Fell Stinger", "Venoshock", "Toxic Spikes", "Assurance"]
+  },
+  "pidgey": {
+    "species": "Pidgey",
+    "moves": ["Quick Attack", "Gust", "Sand Attack", "Whirlwind"],
+    "evolveCandies": 5
+  },
+  "pidgeotto": {
+    "species": "Pidgeotto",
+    "evolveCandies": 10,
+    "newMoves": ["Twister", "Feather Dance", "Wing Attack"]
+  },
+  "pidgeot": {
+    "species": "Pidgeot",
+    "evolveCandies": "MAX",
+    "newMoves": ["Roost", "Air Slash", "Brave Bird"]
+  },
+  "rattata": {
+    "species": "Rattata",
+    "moves": ["Quick Attack", "Bite", "Endeavor", "Super Fang"],
+    "evolveCandies": 6
+  },
+  "rattata-alola": {
+    "species": "Rattata-Alola",
+    "moves": [],
+    "evolveCandy": ""
+  },
+  "raticate": {
+    "species": "Raticate",
+    "evolveCandies": 10,
+    "newMoves": ["Crunch", "Swords Dance", "Last Resort", "Sucker Punch"]
+  },
+  "raticate2": {
+    "species": "Raticate",
+    "evolveCandies": "MAX",
+    "newMoves": ["Double-Edge", "Flame Wheel", "Dig", "Final Gambit"]
+  },
+  "raticate-alola": {
+    "species": "Raticate-Alola",
+    "moves": [],
+    "evolveCandy": ""
+  },
+  "spearow": { "species": "Spearow", "moves": [], "evolveCandy": "" },
+  "fearow": { "species": "Fearow", "moves": [], "evolveCandy": "" },
+  "ekans": { "species": "Ekans", "moves": [], "evolveCandy": "" },
+  "arbok": { "species": "Arbok", "moves": [], "evolveCandy": "" },
+  "pikachu": {
+    "species": "Pikachu",
+    "moves": ["Quick Attack", "Thunder Shock", "Nuzzle", "Sweet Kiss"],
+    "evolveCandies": 6
+  },
+  "pikachu-alola": {
+    "species": "Pikachu-Alola",
+    "moves": [],
+    "evolveCandy": ""
+  },
+  "raichu": {
+    "species": "Raichu",
+    "evolveCandies": 12,
+    "newMoves": ["Discharge", "Thunder Punch", "Light Screen", "Slam"]
+  },
+  "raichu2": {
+    "species": "Raichu",
+    "evolveCandies": "MAX",
+    "newMoves": ["Thunderbolt", "Thunder", "Fake Out", "Wish"]
+  },
+  "raichu-alola": {
+    "species": "Raichu-Alola",
+    "evolveCandies": 12,
+    "newMoves": ["Discharge", "Psychic", "Light Screen", "Nasty Plot"]
+  },
+  "raichu-alola2": {
+    "species": "Raichu-Alola",
+    "evolveCandies": "MAX",
+    "newMoves": ["Thunderbolt", "Thunder", "Surf", "Wish"]
+  },
+  "sandshrew": {
+    "species": "Sandshrew",
+    "moves": ["Rollout", "Rapid Spin", "Bulldoze", "Sand Attack"],
+    "evolveCandies": 6
+  },
+  "sandshrew-alola": {
+    "species": "Sandshrew-Alola",
+    "moves": [],
+    "evolveCandy": ""
+  },
+  "sandslash": {
+    "species": "Sandslash",
+    "evolveCandies": 12,
+    "newMoves": ["Slash", "Dig", "Sand Tomb", "Fury Cutter"]
+  },
+  "sandslash2": {
+    "species": "Sandslash",
+    "evolveCandies": "MAX",
+    "newMoves": ["Gyro Ball", "Swords Dance", "Sandstorm", "Earthquake"]
+  },
+  "sandslash-alola": {
+    "species": "Sandslash-Alola",
+    "moves": [],
+    "evolveCandy": ""
+  },
+  "nidoran-f": {
+    "species": "Nidoran-F",
+    "moves": ["Poison Sting", "Fury Swipes", "Double Kick", "Toxic Spikes"],
+    "evolveCandies": 5
+  },
+  "nidorina": {
+    "species": "Nidorina",
+    "evolveCandies": "12",
+    "newMoves": ["Bite", "Toxic", "Poison Fang", "Fury Swipes"]
+  },
+  "nidoqueen": {
+    "species": "Nidoqueen",
+    "evolveCandies": "MAX",
+    "newMoves": ["Stealth Rock", "Earth Power", "Sludge Wave", "Super Power"]
+  },
+  "nidoran-m": {
+    "species": "Nidoran-M",
+    "moves": ["Poison Sting", "Peck", "Double Kick", "Toxic Spikes"],
+    "evolveCandies": 5
+  },
+  "nidorino": {
+    "species": "Nidorino",
+    "evolveCandies": "12",
+    "newMoves": ["Bite", "Toxic", "Horn Attack", "Fury Attack"]
+  },
+  "nidoking": {
+    "species": "Nidoking",
+    "evolveCandies": "MAX",
+    "newMoves": ["Mega Horn", "Earth Power", "Sludge Wave", "Substitute"]
+  },
+  "clefairy": {
+    "species": "Clefairy",
+    "moves": ["Metronome", "Disarming Voice", "Minimize", "Pound"],
+    "evolveCandies": 6
+  },
+  "clefable": {
+    "species": "Clefable",
+    "evolveCandies": 10,
+    "newMoves": ["Moonblast", "Meteor Mash", "Life Dew", "Cosmic Power"]
+  },
+  "clefable2": {
+    "species": "Clefable",
+    "evolveCandies": "MAX",
+    "newMoves": ["Soft-Boiled", "Amnesia", "Calm Mind", "Thunder"]
+  },
+  "vulpix": { "species": "Vulpix", "moves": [], "evolveCandy": "" },
+  "vulpix-alola": { "species": "Vulpix-Alola", "moves": [], "evolveCandy": "" },
+  "ninetales": { "species": "Ninetales", "moves": [], "evolveCandy": "" },
+  "ninetales-alola": {
+    "species": "Ninetales-Alola",
+    "moves": [],
+    "evolveCandy": ""
+  },
+  "jigglypuff": {
+    "species": "Jigglypuff",
+    "moves": ["Disarming Voice", "Sing", "Covet", "Rest"],
+    "evolveCandies": 8
+  },
+  "wigglytuff": {
+    "species": "Wigglytuff",
+    "evolveCandies": 10,
+    "newMoves": ["Play Rough", "Wish", "Hyper Voice", "Gyro Ball"]
+  },
+  "wigglytuff2": {
+    "species": "Wigglytuff",
+    "evolveCandies": "MAX",
+    "newMoves": ["Dazzling Gleam", "Wish", "Protect", "Stealth Rock"]
+  },
+  "zubat": {
+    "species": "Zubat",
+    "moves": ["Astonish", "Supersonic", "Poison Fang", "Gust"],
+    "evolveCandies": 6
+  },
+  "golbat": {
+    "species": "Golbat",
+    "evolveCandies": 12,
+    "newMoves": ["Air Cutter", "Bite", "Haze", "Whirlwind"]
+  },
+  "oddish": {
+    "species": "Oddish",
+    "moves": ["Absorb", "Acid", "Growth", "Sleep Powder"],
+    "evolveCandies": 5
+  },
+  "gloom": {
+    "species": "gloom",
+    "evolveCandies": "12",
+    "newMoves": ["Toxic", "Ingrain", "Flail", "Razor Leaf"]
+  },
+  "vileplume": {
+    "species": "Vileplume",
+    "evolveCandies": "MAX",
+    "newMoves": ["Strength Sap", "Petal Blizzard", "Petal Dance", "Giga Drain"]
+  },
+  "paras": {
+    "species": "Paras",
+    "moves": ["Scratch", "Absorb", "Fury Cutter", "Spore"],
+    "evolveCandies": 6
+  },
+  "parasect": {
+    "species": "Parasect",
+    "evolveCandies": "10",
+    "newMoves": ["Slash", "Giga Drain", "Bug Bite", "Leech Seed"]
+  },
+  "parasect2": {
+    "species": "Parasect",
+    "evolveCandies": "MAX",
+    "newMoves": ["X-Scissor", "Aromatherapy", "Cross Poison", "Fell Stinger"]
+  },
+  "venonat": {
+    "species": "Venonat",
+    "moves": ["Struggle Bug", "Supersonic", "Confusion", "Poison Powder"],
+    "evolveCandies": 6
+  },
+  "venomoth": {
+    "species": "Venomoth",
+    "evolveCandies": "12",
+    "newMoves": ["Gust", "Mega Drain", "Psybeam", "Quiver Dance"]
+  },
+  "venomoth2": {
+    "species": "Venomoth",
+    "evolveCandies": "MAX",
+    "newMoves": ["Bug Buzz", "Psychic", "Leech Life", "Zen Headbutt"]
+  },
+  "diglett": {
+    "species": "Diglett",
+    "moves": ["Mud-Slap", "Bulldoze", "Astonish", "Hone Claws"],
+    "evolveCandies": 6
+  },
+  "diglett-alola": {
+    "species": "Diglett-Alola",
+    "moves": [],
+    "evolveCandy": ""
+  },
+  "dugtrio": {
+    "species": "Dugtrio",
+    "evolveCandies": "12",
+    "newMoves": ["Sucker Punch", "Slash", "Dig", "Tri Attack"]
+  },
+  "dugtrio2": {
+    "species": "Dugtrio2",
+    "evolveCandies": "MAX",
+    "newMoves": ["Earthquake", "Stone Edge", "Stealth Rock", "Memento"]
+  },
+  "dugtrio-alola": {
+    "species": "Dugtrio-Alola",
+    "moves": [],
+    "evolveCandy": ""
+  },
+  "meowth": { "species": "Meowth", "moves": [], "evolveCandy": "" },
+  "meowth-alola": { "species": "Meowth-Alola", "moves": [], "evolveCandy": "" },
+  "meowth-galar": { "species": "Meowth-Galar", "moves": [], "evolveCandy": "" },
+  "persian": { "species": "Persian", "moves": [], "evolveCandy": "" },
+  "persian-alola": {
+    "species": "Persian-Alola",
+    "moves": [],
+    "evolveCandy": ""
+  },
+  "psyduck": {
+    "species": "Psyduck",
+    "moves": ["Confusion", "Fury Swipes", "Water Pulse", "Disable"],
+    "evolveCandies": 6
+  },
+  "golduck": {
+    "species": "Golduck",
+    "evolveCandies": "12",
+    "newMoves": ["Aqua Jet", "Zen Headbutt", "Rain Dance", "Psybeam"]
+  },
+  "golduck2": {
+    "species": "Golduck",
+    "evolveCandies": "MAX",
+    "newMoves": ["Hydro Pump", "Ice Beam", "Psychic", "Flip Turn"]
+  },
+  "mankey": { "species": "Mankey", "moves": [], "evolveCandy": "" },
+  "primeape": { "species": "Primeape", "moves": [], "evolveCandy": "" },
+  "growlithe": {
+    "species": "Growlithe",
+    "moves": ["Bite", "Flame Wheel", "Double Kick", "Howl"],
+    "evolveCandies": 10
+  },
+  "arcanine": {
+    "species": "Arcanine",
+    "evolveCandies": "15",
+    "newMoves": ["Extreme Speed", "Crunch", "Fire Fang", "Morning Sun"]
+  },
+  "arcanine2": {
+    "species": "Arcanine",
+    "evolveCandies": "MAX",
+    "newMoves": ["Flamethrower", "Flare Blitz", "Close Combat", "Outrage"]
+  },
+  "poliwag": {
+    "species": "Poliwag",
+    "moves": ["Rain Dance", "Bubblebeam", "Hypnosis", "Pound"],
+    "evolveCandies": 5
+  },
+  "poliwhirl": {
+    "species": "Poliwhirl",
+    "evolveCandies": "13",
+    "newMoves": ["Mud Shot", "Body Slam", "Belly Drum", "Haze"]
+  },
+  "poliwrath": {
+    "species": "Poliwrath",
+    "evolveCandies": "MAX",
+    "newMoves": [
+      "Circle Throw",
+      "Liquidation",
+      "Close Combat",
+      "Darkest Lariat"
+    ]
+  },
+  "abra": {
+    "species": "Abra",
+    "moves": ["Confusion", "Knock Off", "Magic Coat", "Teleport"],
+    "evolveCandies": 6
+  },
+  "kadabra": {
+    "species": "Kadabra",
+    "evolveCandies": "15",
+    "newMoves": ["Kinesis", "Psybeam", "Reflect", "Calm Mind"]
+  },
+  "alakazam": {
+    "species": "Alakazam",
+    "evolveCandies": "MAX",
+    "newMoves": ["Nasty Plot", "Psychic", "Focus Blast", "Shadow Ball"]
+  },
+  "machop": {
+    "species": "Machop",
+    "moves": ["Low Kick", "Low Sweep", "Knock Off", "Bulk Up"],
+    "evolveCandies": 6
+  },
+  "machoke": {
+    "species": "Machoke",
+    "evolveCandies": "14",
+    "newMoves": ["Vital Throw", "Strength", "Dual Chop", "Bullet Punch"]
+  },
+  "machamp": {
+    "species": "Machamp",
+    "evolveCandies": "MAX",
+    "newMoves": ["Close Combat", "Facade", "Heavy Slam", "Cross Chop"]
+  },
+  "bellsprout": {
+    "species": "Bellsprout",
+    "moves": ["Vine Whip", "Growth", "Acid Spray", "Stun Spore"],
+    "evolveCandies": 6
+  },
+  "weepinbell": {
+    "species": "Weepinbell",
+    "evolveCandies": "12",
+    "newMoves": ["Acid", "Razor Leaf", "Sleep Powder", "Ingrain"]
+  },
+  "victreebel": {
+    "species": "Victreebel",
+    "evolveCandies": "MAX",
+    "newMoves": ["Leaf Storm", "Power Whip", "Strength Sap", "Leech Life"]
+  },
+  "tentacool": { "species": "Tentacool", "moves": [], "evolveCandy": "" },
+  "tentacruel": { "species": "Tentacruel", "moves": [], "evolveCandy": "" },
+  "geodude": {
+    "species": "Geodude",
+    "moves": ["Rollout", "Sandstorm", "Self-Destruct", "Bulldoze"],
+    "evolveCandies": 7
+  },
+  "geodude-alola": {
+    "species": "Geodude-Alola",
+    "moves": [],
+    "evolveCandy": ""
+  },
+  "graveler": { "species": "Graveler", "moves": [], "evolveCandy": "" },
+  "graveler-alola": {
+    "species": "Graveler-Alola",
+    "moves": [],
+    "evolveCandy": ""
+  },
+  "golem": {
+    "species": "Golem",
+    "evolveCandies": "MAX",
+    "newMoves": ["Rock Blast", "Earthquake", "Heavy Slam", "Stone Edge"]
+  },
+  "golem-alola": { "species": "Golem-Alola", "moves": [], "evolveCandy": "" },
+  "ponyta": {
+    "species": "Ponyta",
+    "moves": ["Flame Charge", "Charm", "Double Kick", "Hypnosis"],
+    "evolveCandies": 7
+  },
+  "ponyta-galar": { "species": "Ponyta-Galar", "moves": [], "evolveCandy": "" },
+  "rapidash": {
+    "species": "Rapidash",
+    "evolveCandies": "13",
+    "newMoves": ["Flame Wheel", "Smart Strike", "Poison Jab", "Stomp"]
+  },
+  "rapidash2": {
+    "species": "Rapidash",
+    "evolveCandies": "MAX",
+    "newMoves": ["Megahorn", "High Horsepower", "Fire Blast", "Thrash"]
+  },
+  "rapidash-galar": {
+    "species": "Rapidash-Galar",
+    "moves": [],
+    "evolveCandy": ""
+  },
+  "slowpoke": {
+    "species": "Slowpoke",
+    "moves": ["Curse", "Water Gun", "Confusion", "Yawn"],
+    "evolveCandies": 9
+  },
+  "slowpoke-galar": {
+    "species": "Slowpoke-Galar",
+    "moves": [],
+    "evolveCandy": ""
+  },
+  "slowbro": {
+    "species": "Slowbro",
+    "evolveCandies": "13",
+    "newMoves": ["Water Pulse", "Headbutt", "Zen Headbutt", "Slack Off"]
+  },
+  "slowbro2": {
+    "species": "Slowbro",
+    "evolveCandies": "MAX",
+    "newMoves": ["Psychic", "Future Sight", "Teleport", "Scald"]
+  },
+  "slowbro-galar": {
+    "species": "Slowbro-Galar",
+    "moves": [],
+    "evolveCandy": ""
+  },
+  "magnemite": {
+    "species": "Magnemite",
+    "moves": ["Thunder Shock", "Supersonic", "Gyro Ball", "Protect"],
+    "evolveCandies": 6
+  },
+  "magneton": {
+    "species": "Magneton",
+    "evolveCandies": "14",
+    "newMoves": ["Tri Attack", "Electro Ball", "Iron Defense", "Body Press"]
+  },
+  "farfetch’d": { "species": "Farfetch’d", "moves": [], "evolveCandy": "" },
+  "farfetch’d-galar": {
+    "species": "Farfetch’d-Galar",
+    "moves": [],
+    "evolveCandy": ""
+  },
+  "doduo": {
+    "species": "Doduo",
+    "moves": ["Pluck", "Quick Attack", "Supersonic", "Double Team"],
+    "evolveCandies": 7
+  },
+  "dodrio": {
+    "species": "Dodrio",
+    "evolveCandies": "12",
+    "newMoves": ["Tri Attack", "Fury Attack", "Swords Dance", "Assurance"]
+  },
+  "dodrio2": {
+    "species": "Dodrio",
+    "evolveCandies": "MAX",
+    "newMoves": ["Lunge", "Drill Peck", "Brave Bird", "Thrash"]
+  },
+  "seel": { "species": "Seel", "moves": [], "evolveCandy": "" },
+  "dewgong": { "species": "Dewgong", "moves": [], "evolveCandy": "" },
+  "grimer": { "species": "Grimer", "moves": [], "evolveCandy": "" },
+  "grimer-alola": { "species": "Grimer-Alola", "moves": [], "evolveCandy": "" },
+  "muk": { "species": "Muk", "moves": [], "evolveCandy": "" },
+  "muk-alola": { "species": "Muk-Alola", "moves": [], "evolveCandy": "" },
+  "shellder": { "species": "Shellder", "moves": [], "evolveCandy": "" },
+  "cloyster": { "species": "Cloyster", "moves": [], "evolveCandy": "" },
+  "gastly": {
+    "species": "Gastly",
+    "moves": ["Astonish", "Payback", "Hypnosis", "Smog"],
+    "evolveCandies": 6
+  },
+  "haunter": {
+    "species": "Haunter",
+    "evolveCandies": "14",
+    "newMoves": ["Shadow Punch", "Hex", "Fire Punch", "Thunder Punch"]
+  },
+  "gengar": {
+    "species": "Gengar",
+    "evolveCandies": "MAX",
+    "newMoves": ["Shadow Ball", "Dark Pulse", "Substitute", "Nasty Plot"]
+  },
+  "onix": {
+    "species": "Onix",
+    "moves": ["Bind", "Rock Throw", "Sand Tomb", "Curse"],
+    "evolveCandies": 10
+  },
+  "drowzee": { "species": "Drowzee", "moves": [], "evolveCandy": "" },
+  "hypno": { "species": "Hypno", "moves": [], "evolveCandy": "" },
+  "krabby": {
+    "species": "Krabby",
+    "moves": ["Bubble Beam", "Metal Claw", "Protect", "Scratch"],
+    "evolveCandies": 7
+  },
+  "kingler": {
+    "species": "Kingler",
+    "evolveCandies": "12",
+    "newMoves": ["Hammer Arm", "Mud Shot", "Stomp", "Razor Shell"]
+  },
+  "kingler2": {
+    "species": "Kingler",
+    "evolveCandies": "MAX",
+    "newMoves": ["Crabhammer", "Swords Dance", "X-Scissor", "Hammer Arm"]
+  },
+  "voltorb": {
+    "species": "Voltorb",
+    "moves": ["Spark", "Rollout", "Self-Destruct", "Swift"],
+    "evolveCandies": 6
+  },
+  "electrode": {
+    "species": "Electrode",
+    "evolveCandies": "12",
+    "newMoves": ["Charge Beam", "Light Screen", "Electro Ball", "Gyro Ball"]
+  },
+  "electrode2": {
+    "species": "Electrode",
+    "evolveCandies": "MAX",
+    "newMoves": ["Discharge", "Thunder", "Explosion", "Magnet Rise"]
+  },
+  "exeggcute": {
+    "species": "Exeggcute",
+    "moves": ["Leech Seed", "Confusion", "Hypnosis", "Absorb"],
+    "evolveCandies": 7
+  },
+  "exeggutor": {
+    "species": "Exeggutor",
+    "evolveCandies": "14",
+    "newMoves": ["Sunny Day", "Seed Bomb", "Future Sight", "Stomp"]
+  },
+  "exeggutor2": {
+    "species": "Exeggutor",
+    "evolveCandies": "MAX",
+    "newMoves": ["Solar Beam", "Psychic", "Leaf Storm", "Giga Drain"]
+  },
+  "exeggutor-alola": {
+    "species": "Exeggutor",
+    "evolveCandies": "14",
+    "newMoves": ["Sunny Day", "Seed Bomb", "Dragon Hammer", "Stomp"]
+  },
+  "exeggutor-alola2": {
+    "species": "Exeggutor",
+    "evolveCandies": "MAX",
+    "newMoves": ["Solar Beam", "Wood Hammer", "Leaf Storm", "Giga Drain"]
+  },
+  "cubone": {
+    "species": "Cubone",
+    "moves": ["Bone Rush", "Headbutt", "Mud-Slap", "Ancient Power"],
+    "evolveCandies": 5
+  },
+  "marowak": {
+    "species": "Marowak",
+    "evolveCandies": "12",
+    "newMoves": ["Stomping Tantrum", "Endeavor", "Iron Head", "Curse"]
+  },
+  "marowak2": {
+    "species": "Marowak",
+    "evolveCandies": "MAX",
+    "newMoves": ["Substitute", "Boomerang", "Stealth Rock", "Knock Off"]
+  },
+  "marowak-alola": {
+    "species": "Marowak-Alola",
+    "moves": [],
+    "evolveCandy": ""
+  },
+  "hitmonlee": { "species": "Hitmonlee", "moves": [], "evolveCandy": "" },
+  "hitmonchan": { "species": "Hitmonchan", "moves": [], "evolveCandy": "" },
+  "lickitung": { "species": "Lickitung", "moves": [], "evolveCandy": "" },
+  "koffing": { "species": "Koffing", "moves": [], "evolveCandy": "" },
+  "weezing": { "species": "Weezing", "moves": [], "evolveCandy": "" },
+  "weezing-galar": {
+    "species": "Weezing-Galar",
+    "moves": [],
+    "evolveCandy": ""
+  },
+  "rhyhorn": {
+    "species": "Rhyhorn",
+    "moves": ["Smack Down", "Bulldoze", "Horn Attack", "Scary Face"],
+    "evolveCandies": 7
+  },
+  "rhydon": {
+    "species": "Rhydon",
+    "evolveCandies": "14",
+    "newMoves": ["Hammer Arm", "Stomp", "Rock Blast", "Fire Fang"]
+  },
+  "chansey": {
+    "species": "Chansey",
+    "moves": ["Covet", "Disarming Voice", "Soft-Boiled", "Light Screen"],
+    "evolveCandies": 7
+  },
+  "tangela": {
+    "species": "Tangela",
+    "moves": ["Growth", "Mega Drain", "Ancient Power", "Bind"],
+    "evolveCandies": 8
+  },
+  "kangaskhan": {
+    "species": "Kangaskhan",
+    "moves": ["Fake Out", "Bite", "Stomp", "Circle Throw"],
+    "evolveCandies": 10
+  },
+  "kangaskhan2": {
+    "species": "Kangaskhan",
+    "evolveCandies": "MAX",
+    "newMoves": ["Double-Edge", "Earthquake", "Sucker Punch", "Outrage"]
+  },
+  "horsea": { "species": "Horsea", "moves": [], "evolveCandy": "" },
+  "seadra": { "species": "Seadra", "moves": [], "evolveCandy": "" },
+  "goldeen": {
+    "species": "Goldeen",
+    "moves": ["Peck", "Supersonic", "Water Pulse", "Horn Attack"],
+    "evolveCandies": 6
+  },
+  "seaking": {
+    "species": "Seaking",
+    "evolveCandies": "12",
+    "newMoves": ["Aqua Ring", "Flail", "Waterfall", "Mud-Slap"]
+  },
+  "seaking2": {
+    "species": "Seaking",
+    "evolveCandies": "MAX",
+    "newMoves": ["Megahorn", "Aqua Tail", "Psybeam", "Hydro Pump"]
+  },
+  "staryu": {
+    "species": "Staryu",
+    "moves": ["Water Gun", "Confuse Ray", "Rapid Spin", "Psybeam"],
+    "evolveCandies": 8
+  },
+  "starmie": {
+    "species": "Starmie",
+    "evolveCandies": "13",
+    "newMoves": ["Brine", "Psychic", "Recover", "Swift"]
+  },
+  "starmie2": {
+    "species": "Starmie",
+    "evolveCandies": "MAX",
+    "newMoves": ["Hydro Pump", "Thunderbolt", "Ice Beam", "Psyshock"]
+  },
+  "mr. mime": { "species": "Mr. Mime", "moves": [], "evolveCandy": "" },
+  "mr. mime-galar": {
+    "species": "Mr. Mime-Galar",
+    "moves": [],
+    "evolveCandy": ""
+  },
+  "scyther": {
+    "species": "Scyther",
+    "moves": ["Wing Attack", "Fury Cutter", "Slash", "Quick Attack"],
+    "evolveCandies": 8
+  },
+  "jynx": {
+    "species": "Jynx",
+    "moves": ["Lick", "Powder Snow", "Sweet Kiss", "Confusion"],
+    "evolveCandies": 7
+  },
+  "jynx2": {
+    "species": "Jynx",
+    "evolveCandies": "MAX",
+    "newMoves": ["Nasty Plot", "Ice Beam", "Psychic", "Lovely Kiss"]
+  },
+  "electabuzz": {
+    "species": "Electabuzz",
+    "moves": ["Shock Wave", "Quick Attack", "Screech", "Swift"],
+    "evolveCandies": 7
+  },
+  "magmar": {
+    "species": "Magmar",
+    "moves": ["Smog", "Smokescreen", "Flame Wheel", "Low Kick"],
+    "evolveCandies": 10
+  },
+  "pinsir": {
+    "species": "Pinsir",
+    "moves": ["Vise Grip", "Bug Bite", "Knock Off", "Bind"],
+    "evolveCandies": 8
+  },
+  "pinsir2": {
+    "species": "Pinsir",
+    "evolveCandies": "MAX",
+    "newMoves": ["Swords Dance", "Return", "Close Combat", "X-Scissor"]
+  },
+  "tauros": {
+    "species": "Tauros",
+    "moves": ["Work Up", "Payback", "Horn Attack", "Rest"],
+    "evolveCandies": 10
+  },
+  "tauros2": {
+    "species": "Tauros",
+    "evolveCandies": "MAX",
+    "newMoves": ["Zen Headbutt", "Thrash", "Double-Edge", "Giga Impact"]
+  },
+  "magikarp": {
+    "species": "Magikarp",
+    "moves": ["Tackle", "Splash", "Flail", "Bounce"],
+    "evolveCandies": 10
+  },
+  "gyarados": {
+    "species": "Gyarados",
+    "evolveCandies": "15",
+    "newMoves": ["Twister", "Ice Fang", "Waterfall", "Crunch", "Rain Dance"]
+  },
+  "gyarados2": {
+    "species": "Gyarados",
+    "evolveCandies": "MAX",
+    "newMoves": ["Power Whip", "Dragon Dance", "Hyper Beam", "Earthquake"]
+  },
+  "lapras": {
+    "species": "Lapras",
+    "moves": ["Water Gun", "Sing", "Ice Shard", "Life Dew"],
+    "evolveCandies": 15
+  },
+  "lapras2": {
+    "species": "Lapras",
+    "evolveCandies": "MAX",
+    "newMoves": [
+      "Water Pulse",
+      "Rain Dance",
+      "Sheer Cold",
+      "Rest",
+      "Freeze-Dry",
+      "Toxic"
+    ]
+  },
+  "ditto": { "species": "Ditto", "moves": [], "evolveCandy": "" },
+  "eevee": { "species": "Eevee", "moves": [], "evolveCandy": "" },
+  "vaporeon": { "species": "Vaporeon", "moves": [], "evolveCandy": "" },
+  "jolteon": { "species": "Jolteon", "moves": [], "evolveCandy": "" },
+  "flareon": { "species": "Flareon", "moves": [], "evolveCandy": "" },
+  "porygon": {
+    "species": "Porygon",
+    "moves": ["Thunder Shock", "Psybeam", "Recover", "Conversion"],
+    "evolveCandies": 6
+  },
+  "omanyte": { "species": "Omanyte", "moves": [], "evolveCandy": "" },
+  "omastar": { "species": "Omastar", "moves": [], "evolveCandy": "" },
+  "kabuto": { "species": "Kabuto", "moves": [], "evolveCandy": "" },
+  "kabutops": { "species": "Kabutops", "moves": [], "evolveCandy": "" },
+  "aerodactyl": { "species": "Aerodactyl", "moves": [], "evolveCandy": "" },
+  "snorlax": { "species": "Snorlax", "moves": [], "evolveCandy": "" },
+  "articuno": { "species": "Articuno", "moves": [], "evolveCandy": "" },
+  "articuno-galar": {
+    "species": "Articuno-Galar",
+    "moves": [],
+    "evolveCandy": ""
+  },
+  "zapdos": { "species": "Zapdos", "moves": [], "evolveCandy": "" },
+  "zapdos-galar": { "species": "Zapdos-Galar", "moves": [], "evolveCandy": "" },
+  "moltres": { "species": "Moltres", "moves": [], "evolveCandy": "" },
+  "moltres-galar": {
+    "species": "Moltres-Galar",
+    "moves": [],
+    "evolveCandy": ""
+  },
+  "dratini": {
+    "species": "Dratini",
+    "moves": ["Dragon Tail", "Thunder Wave", "Wrap", "Aqua Tail"],
+    "evolveCandies": 10
+  },
+  "dragonair": {
+    "species": "Dragonair",
+    "evolveCandies": "20",
+    "newMoves": ["Extreme Speed", "Ice Beam", "Dragon Dance", "Dragon Rush"]
+  },
+  "dragonite": {
+    "species": "Dragonite",
+    "evolveCandies": "MAX",
+    "newMoves": ["Dual Wingbeat", "Roost", "Earthquake", "Outrage"]
+  },
+  "mewtwo": { "species": "Mewtwo", "moves": [], "evolveCandy": "" },
+  "mew": { "species": "Mew", "moves": [], "evolveCandy": "" },
+  "chikorita": { "species": "Chikorita", "moves": [], "evolveCandy": "" },
+  "bayleef": { "species": "Bayleef", "moves": [], "evolveCandy": "" },
+  "meganium": { "species": "Meganium", "moves": [], "evolveCandy": "" },
+  "cyndaquil": { "species": "Cyndaquil", "moves": [], "evolveCandy": "" },
+  "quilava": { "species": "Quilava", "moves": [], "evolveCandy": "" },
+  "typhlosion": { "species": "Typhlosion", "moves": [], "evolveCandy": "" },
+  "totodile": { "species": "Totodile", "moves": [], "evolveCandy": "" },
+  "croconaw": { "species": "Croconaw", "moves": [], "evolveCandy": "" },
+  "feraligatr": { "species": "Feraligatr", "moves": [], "evolveCandy": "" },
+  "sentret": {
+    "species": "Sentret",
+    "moves": ["Quick Attack", "Covet", "Reversal", "Defense Curl"],
+    "evolveCandies": 5
+  },
+  "furret": {
+    "species": "Furret",
+    "evolveCandies": "10",
+    "newMoves": ["Slam", "Rest", "Sucker Punch", "Reversal"]
+  },
+  "furret2": {
+    "species": "Furret",
+    "evolveCandies": "MAX",
+    "newMoves": ["Substitute", "Last Resort", "Trick", "Amnesia"]
+  },
+  "hoothoot": {
+    "species": "Hoothoot",
+    "moves": ["Peck", "Confusion", "Reflect", "Psycho Shift"],
+    "evolveCandies": 6
+  },
+  "noctowl": {
+    "species": "Noctowl",
+    "evolveCandies": "10",
+    "newMoves": ["Air Slash", "Extrasensory", "Hypnosis", "Take Down"]
+  },
+  "noctowl2": {
+    "species": "Noctowl",
+    "evolveCandies": "MAX",
+    "newMoves": ["Moonblast", "Roost", "Sky Attack", "Feather Dance"]
+  },
+  "ledyba": {
+    "species": "Ledyba",
+    "moves": ["Swift", "Mach Punch", "Struggle Bug", "Reflect"],
+    "evolveCandies": 6
+  },
+  "ledian": {
+    "species": "Ledian",
+    "evolveCandies": "12",
+    "newMoves": ["Light Screen", "Roost", "Bug Bite", "Knock Off"]
+  },
+  "ledian2": {
+    "species": "Ledian",
+    "evolveCandies": "MAX",
+    "newMoves": ["Bug Buzz", "Air Slash", "Double-Edge", "U-turn"]
+  },
+  "spinarak": {
+    "species": "Spinarak",
+    "moves": ["Poison Sting", "Absorb", "Infestation", "Shadow Sneak"],
+    "evolveCandies": 6
+  },
+  "ariados": {
+    "species": "Ariados",
+    "evolveCandies": "11",
+    "newMoves": ["Swords Dance", "Bug Bite", "Poison Jab", "Toxic Spikes"]
+  },
+  "ariados2": {
+    "species": "Ariados",
+    "evolveCandies": "MAX",
+    "newMoves": ["Sucker Punch", "Leech Life", "Sticky Web", "Psychic"]
+  },
+  "crobat": {
+    "species": "Crobat",
+    "evolveCandies": "MAX",
+    "newMoves": ["Cross Poison", "Air Slash", "Leech Life", "Brave Bird"]
+  },
+  "chinchou": { "species": "Chinchou", "moves": [], "evolveCandy": "" },
+  "lanturn": { "species": "Lanturn", "moves": [], "evolveCandy": "" },
+  "pichu": { "species": "Pichu", "moves": [], "evolveCandy": "" },
+  "cleffa": { "species": "Cleffa", "moves": [], "evolveCandy": "" },
+  "igglybuff": { "species": "Igglybuff", "moves": [], "evolveCandy": "" },
+  "togepi": { "species": "Togepi", "moves": [], "evolveCandy": "" },
+  "togetic": { "species": "Togetic", "moves": [], "evolveCandy": "" },
+  "natu": { "species": "Natu", "moves": [], "evolveCandy": "" },
+  "xatu": { "species": "Xatu", "moves": [], "evolveCandy": "" },
+  "mareep": { "species": "Mareep", "moves": [], "evolveCandy": "" },
+  "flaaffy": { "species": "Flaaffy", "moves": [], "evolveCandy": "" },
+  "ampharos": { "species": "Ampharos", "moves": [], "evolveCandy": "" },
+  "bellossom": {
+    "species": "Bellossom",
+    "evolveCandies": "MAX",
+    "newMoves": ["Quiver Dance", "Strength Sap", "Moonblast", "Giga Drain"]
+  },
+  "marill": { "species": "Marill", "moves": [], "evolveCandy": "" },
+  "azumarill": { "species": "Azumarill", "moves": [], "evolveCandy": "" },
+  "sudowoodo": { "species": "Sudowoodo", "moves": [], "evolveCandy": "" },
+  "politoed": { "species": "Politoed", "moves": [], "evolveCandy": "" },
+  "hoppip": { "species": "Hoppip", "moves": [], "evolveCandy": "" },
+  "skiploom": { "species": "Skiploom", "moves": [], "evolveCandy": "" },
+  "jumpluff": { "species": "Jumpluff", "moves": [], "evolveCandy": "" },
+  "aipom": { "species": "Aipom", "moves": [], "evolveCandy": "" },
+  "sunkern": { "species": "Sunkern", "moves": [], "evolveCandy": "" },
+  "sunflora": { "species": "Sunflora", "moves": [], "evolveCandy": "" },
+  "yanma": { "species": "Yanma", "moves": [], "evolveCandy": "" },
+  "wooper": {
+    "species": "Wooper",
+    "moves": ["Water Gun", "Rain Dance", "Mud Shot", "Yawn"],
+    "evolveCandies": 5
+  },
+  "quagsire": {
+    "species": "Quagsire",
+    "evolveCandies": "10",
+    "newMoves": ["Haze", "Slam", "Muddy Water", "Curse"]
+  },
+  "quagsire2": {
+    "species": "Quagsire",
+    "evolveCandies": "MAX",
+    "newMoves": ["Scald", "Earthquake", "Recover", "Toxic"]
+  },
+  "espeon": { "species": "Espeon", "moves": [], "evolveCandy": "" },
+  "umbreon": { "species": "Umbreon", "moves": [], "evolveCandy": "" },
+  "murkrow": { "species": "Murkrow", "moves": [], "evolveCandy": "" },
+  "slowking": {
+    "species": "Slowking",
+    "evolveCandies": "13",
+    "newMoves": ["Water Pulse", "Headbutt", "Zen Headbutt", "Slack Off"]
+  },
+  "slowking2": {
+    "species": "Slowking",
+    "evolveCandies": "MAX",
+    "newMoves": ["Psychic", "Future Sight", "Teleport", "Scald"]
+  },
+  "slowking-galar": {
+    "species": "Slowking-Galar",
+    "moves": [],
+    "evolveCandy": ""
+  },
+  "misdreavus": { "species": "Misdreavus", "moves": [], "evolveCandy": "" },
+  "unown": { "species": "Unown", "moves": [], "evolveCandy": "" },
+  "wobbuffet": { "species": "Wobbuffet", "moves": [], "evolveCandy": "" },
+  "girafarig": { "species": "Girafarig", "moves": [], "evolveCandy": "" },
+  "pineco": {
+    "species": "Pineco",
+    "moves": ["Protect", "Self-Destruct", "Bug Bite", "Rapid Spin"],
+    "evolveCandies": 8
+  },
+  "forretress": {
+    "species": "Forretress",
+    "evolveCandies": "12",
+    "newMoves": ["Toxic Spikes", "Zap Cannon", "Rollout", "Payback"]
+  },
+  "forretress2": {
+    "species": "Forretress",
+    "evolveCandies": "MAX",
+    "newMoves": ["Spikes", "Heavy Slam", "Iron Defense", "Gyro Ball"]
+  },
+  "dunsparce": {
+    "species": "Dunsparce",
+    "moves": ["Flail", "Mud-Slap", "Ancient Power", "Glare"],
+    "evolveCandies": 8
+  },
+  "dunsparce2": {
+    "species": "Dunsparce",
+    "evolveCandies": "MAX",
+    "newMoves": ["Coil", "Dragon Rush", "Body Slam", "Drill Run"]
+  },
+  "gligar": { "species": "Gligar", "moves": [], "evolveCandy": "" },
+  "steelix": {
+    "species": "Steelix",
+    "evolveCandies": "15",
+    "newMoves": ["Crunch", "Dragon Breath", "Iron Tail", "Stealth Rock"]
+  },
+  "steelix2": {
+    "species": "Steelix",
+    "evolveCandies": "15",
+    "newMoves": ["Earthquake", "Heavy Slam", "Toxic", "Stone Edge"]
+  },
+  "snubbull": { "species": "Snubbull", "moves": [], "evolveCandy": "" },
+  "granbull": { "species": "Granbull", "moves": [], "evolveCandy": "" },
+  "qwilfish": { "species": "Qwilfish", "moves": [], "evolveCandy": "" },
+  "scizor": {
+    "species": "Scizor",
+    "evolveCandies": "14",
+    "newMoves": ["Swords Dance", "Bullet Punch", "Knock Off", "Roost"]
+  },
+  "scizor2": {
+    "species": "Scizor",
+    "evolveCandies": "MAX",
+    "newMoves": ["Superpower", "Psycho Cut", "U-turn", "Sand Tomb"]
+  },
+  "shuckle": {
+    "species": "Shuckle",
+    "moves": ["Acid", "Withdraw", "Rest", "Rock Throw"],
+    "evolveCandies": 5
+  },
+  "shuckle2": {
+    "species": "Shuckle",
+    "evolveCandies": "MAX",
+    "newMoves": ["Sticky Web", "Stealth Rock", "Encore", "Toxic"]
+  },
+  "heracross": {
+    "species": "Heracross",
+    "moves": ["Aerial Ace", "Horn Attack", "Counter", "Pin Missle"],
+    "evolveCandies": 8
+  },
+  "heracross2": {
+    "species": "Heracross",
+    "evolveCandies": "MAX",
+    "newMoves": ["Close Combat", "Megahorn", "Knock Off", "Stone Edge"]
+  },
+  "sneasel": {
+    "species": "Sneasel",
+    "moves": ["Ice Shard", "Metal Claw", "Bite", "Hone Claws"],
+    "evolveCandies": 7
+  },
+  "teddiursa": {
+    "species": "Teddiursa",
+    "moves": ["Lick", "Scratch", "Payback", "Belly Drum"],
+    "evolveCandies": 7
+  },
+  "ursaring": {
+    "species": "Ursaring",
+    "evolveCandies": "12",
+    "newMoves": ["Slash", "Play Rough", "Rest", "Snore"]
+  },
+  "ursaring2": {
+    "species": "Ursaring",
+    "evolveCandies": "MAX",
+    "newMoves": ["Hammer Arm", "Thrash", "Cross Chop", "Night Slash"]
+  },
+  "slugma": { "species": "Slugma", "moves": [], "evolveCandy": "" },
+  "magcargo": { "species": "Magcargo", "moves": [], "evolveCandy": "" },
+  "swinub": {
+    "species": "Swinub",
+    "moves": ["Mud-Slap", "Ice Shard", "Flail", "Ancient Power"],
+    "evolveCandies": 5
+  },
+  "piloswine": {
+    "species": "Piloswine",
+    "evolveCandies": "14",
+    "newMoves": ["Icy Wind", "Take Down", "Ice Fang", "Mud Shot"]
+  },
+  "corsola": {
+    "species": "Corsola",
+    "moves": ["Water Gun", "Aqua Ring", "Ancient Power", "Icicle Spear"],
+    "evolveCandies": 10
+  },
+  "corsola2": {
+    "species": "Corsola",
+    "moves": ["Bubblebeam", "Power Gem", "Ice Beam", "Hail"],
+    "evolveCandies": "MAX"
+  },
+  "corsola-galar": {
+    "species": "Corsola-Galar",
+    "moves": [],
+    "evolveCandy": ""
+  },
+  "remoraid": { "species": "Remoraid", "moves": [], "evolveCandy": "" },
+  "octillery": { "species": "Octillery", "moves": [], "evolveCandy": "" },
+  "delibird": {
+    "species": "Delibird",
+    "moves": ["Present", "Peck", "Aurora Beam", "Spikes"],
+    "evolveCandies": 8
+  },
+  "delibird2": {
+    "species": "Delibird",
+    "evolveCandies": "MAX",
+    "newMoves": ["Freeze-Dry", "Drill Peck", "Ice Beam", "Destiny Bond"]
+  },
+  "mantine": { "species": "Mantine", "moves": [], "evolveCandy": "" },
+  "skarmory": { "species": "Skarmory", "moves": [], "evolveCandy": "" },
+  "houndour": { "species": "Houndour", "moves": [], "evolveCandy": "" },
+  "houndoom": { "species": "Houndoom", "moves": [], "evolveCandy": "" },
+  "kingdra": { "species": "Kingdra", "moves": [], "evolveCandy": "" },
+  "phanpy": { "species": "Phanpy", "moves": [], "evolveCandy": "" },
+  "donphan": { "species": "Donphan", "moves": [], "evolveCandy": "" },
+  "porygon2": {
+    "species": "Porygon2",
+    "evolveCandies": "14",
+    "newMoves": ["Conversion 2", "Discharge", "Ice Beam", "Teleport"]
+  },
+  "stantler": { "species": "Stantler", "moves": [], "evolveCandy": "" },
+  "smeargle": { "species": "Smeargle", "moves": [], "evolveCandy": "" },
+  "tyrogue": { "species": "Tyrogue", "moves": [], "evolveCandy": "" },
+  "hitmontop": { "species": "Hitmontop", "moves": [], "evolveCandy": "" },
+  "smoochum": { "species": "Smoochum", "moves": [], "evolveCandy": "" },
+  "elekid": { "species": "Elekid", "moves": [], "evolveCandy": "" },
+  "magby": { "species": "Magby", "moves": [], "evolveCandy": "" },
+  "miltank": { "species": "Miltank", "moves": [], "evolveCandy": "" },
+  "blissey": {
+    "species": "Blissey",
+    "evolveCandies": "16",
+    "newMoves": ["Thunder Wave", "Teleport", "Seismic Toss", "Take Down"]
+  },
+  "blissey2": {
+    "species": "Blissey",
+    "evolveCandies": "MAX",
+    "newMoves": ["Toxic", "Life Dew", "Last Resort", "Metronome"]
+  },
+  "raikou": { "species": "Raikou", "moves": [], "evolveCandy": "" },
+  "entei": { "species": "Entei", "moves": [], "evolveCandy": "" },
+  "suicune": { "species": "Suicune", "moves": [], "evolveCandy": "" },
+  "larvitar": { "species": "Larvitar", "moves": [], "evolveCandy": "" },
+  "pupitar": { "species": "Pupitar", "moves": [], "evolveCandy": "" },
+  "tyranitar": { "species": "Tyranitar", "moves": [], "evolveCandy": "" },
+  "lugia": { "species": "Lugia", "moves": [], "evolveCandy": "" },
+  "ho-oh": { "species": "Ho-Oh", "moves": [], "evolveCandy": "" },
+  "celebi": { "species": "Celebi", "moves": [], "evolveCandy": "" },
+  "treecko": { "species": "Treecko", "moves": [], "evolveCandy": "" },
+  "grovyle": { "species": "Grovyle", "moves": [], "evolveCandy": "" },
+  "sceptile": { "species": "Sceptile", "moves": [], "evolveCandy": "" },
+  "torchic": { "species": "Torchic", "moves": [], "evolveCandy": "" },
+  "combusken": { "species": "Combusken", "moves": [], "evolveCandy": "" },
+  "blaziken": { "species": "Blaziken", "moves": [], "evolveCandy": "" },
+  "mudkip": { "species": "Mudkip", "moves": [], "evolveCandy": "" },
+  "marshtomp": { "species": "Marshtomp", "moves": [], "evolveCandy": "" },
+  "swampert": { "species": "Swampert", "moves": [], "evolveCandy": "" },
+  "poochyena": { "species": "Poochyena", "moves": [], "evolveCandy": "" },
+  "mightyena": { "species": "Mightyena", "moves": [], "evolveCandy": "" },
+  "zigzagoon": { "species": "Zigzagoon", "moves": [], "evolveCandy": "" },
+  "zigzagoon-galar": {
+    "species": "Zigzagoon-Galar",
+    "moves": [],
+    "evolveCandy": ""
+  },
+  "linoone": { "species": "Linoone", "moves": [], "evolveCandy": "" },
+  "linoone-galar": {
+    "species": "Linoone-Galar",
+    "moves": [],
+    "evolveCandy": ""
+  },
+  "wurmple": { "species": "Wurmple", "moves": [], "evolveCandy": "" },
+  "silcoon": { "species": "Silcoon", "moves": [], "evolveCandy": "" },
+  "beautifly": { "species": "Beautifly", "moves": [], "evolveCandy": "" },
+  "cascoon": { "species": "Cascoon", "moves": [], "evolveCandy": "" },
+  "dustox": { "species": "Dustox", "moves": [], "evolveCandy": "" },
+  "lotad": { "species": "Lotad", "moves": [], "evolveCandy": "" },
+  "lombre": { "species": "Lombre", "moves": [], "evolveCandy": "" },
+  "ludicolo": { "species": "Ludicolo", "moves": [], "evolveCandy": "" },
+  "seedot": { "species": "Seedot", "moves": [], "evolveCandy": "" },
+  "nuzleaf": { "species": "Nuzleaf", "moves": [], "evolveCandy": "" },
+  "shiftry": { "species": "Shiftry", "moves": [], "evolveCandy": "" },
+  "taillow": { "species": "Taillow", "moves": [], "evolveCandy": "" },
+  "swellow": { "species": "Swellow", "moves": [], "evolveCandy": "" },
+  "wingull": { "species": "Wingull", "moves": [], "evolveCandy": "" },
+  "pelipper": { "species": "Pelipper", "moves": [], "evolveCandy": "" },
+  "ralts": { "species": "Ralts", "moves": [], "evolveCandy": "" },
+  "kirlia": { "species": "Kirlia", "moves": [], "evolveCandy": "" },
+  "gardevoir": { "species": "Gardevoir", "moves": [], "evolveCandy": "" },
+  "surskit": { "species": "Surskit", "moves": [], "evolveCandy": "" },
+  "masquerain": { "species": "Masquerain", "moves": [], "evolveCandy": "" },
+  "shroomish": {
+    "species": "Shroomish",
+    "moves": ["Headbutt", "Mega Drain", "Leech Seed", "Poison Powder"],
+    "evolveCandies": 6
+  },
+  "breloom": {
+    "species": "Breloom",
+    "evolveCandies": "11",
+    "newMoves": ["Mach Punch", "Giga Drain", "Drain Punch", "Spore"]
+  },
+  "breloom2": {
+    "species": "Breloom",
+    "evolveCandies": "MAX",
+    "newMoves": ["Substitute", "Seed Bomb", "Focus Punch", "Swords Dance"]
+  },
+  "slakoth": { "species": "Slakoth", "moves": [], "evolveCandy": "" },
+  "vigoroth": { "species": "Vigoroth", "moves": [], "evolveCandy": "" },
+  "slaking": { "species": "Slaking", "moves": [], "evolveCandy": "" },
+  "nincada": {
+    "species": "Nincada",
+    "moves": ["Mud-Slap", "Metal Claw", "Bug Bite", "Gust"],
+    "evolveCandies": 6
+  },
+  "ninjask": {
+    "species": "Ninjask",
+    "evolveCandies": "13",
+    "newMoves": ["Protect", "Swords Dance", "Fury Cutter", "Aerial Ace"]
+  },
+  "ninjask2": {
+    "species": "Ninjask",
+    "evolveCandies": "MAX",
+    "newMoves": ["X-Scissor", "U-turn", "Acrobatics", "Night Slash"]
+  },
+  "shedinja": {
+    "species": "Shedinja",
+    "evolveCandies": "13",
+    "newMoves": ["Protect", "Baton Pass", "Shadow Sneak", "Will-O-Wisp"]
+  },
+  "shedinja2": {
+    "species": "Shedinja",
+    "evolveCandies": "MAX",
+    "newMoves": ["Toxic", "Shadow Ball", "Phantom Force", "Night Slash"]
+  },
+  "whismur": { "species": "Whismur", "moves": [], "evolveCandy": "" },
+  "loudred": { "species": "Loudred", "moves": [], "evolveCandy": "" },
+  "exploud": { "species": "Exploud", "moves": [], "evolveCandy": "" },
+  "makuhita": {
+    "species": "Makuhita",
+    "moves": ["Force Palm", "Fake Out", "Whirlwind", "Knock Off"],
+    "evolveCandies": 7
+  },
+  "hariyama": {
+    "species": "Hariyama",
+    "evolveCandies": "11",
+    "newMoves": ["Vital Throw", "Belly Drum", "Bullet Punch", "Detect"]
+  },
+  "hariyama2": {
+    "species": "Hariyama",
+    "evolveCandies": "MAX",
+    "newMoves": ["Close Combat", "Heavy Slam", "Dynamic Punch", "Cross Chop"]
+  },
+  "azurill": { "species": "Azurill", "moves": [], "evolveCandy": "" },
+  "nosepass": { "species": "Nosepass", "moves": [], "evolveCandy": "" },
+  "skitty": { "species": "Skitty", "moves": [], "evolveCandy": "" },
+  "delcatty": { "species": "Delcatty", "moves": [], "evolveCandy": "" },
+  "sableye": { "species": "Sableye", "moves": [], "evolveCandy": "" },
+  "mawile": { "species": "Mawile", "moves": [], "evolveCandy": "" },
+  "aron": { "species": "Aron", "moves": [], "evolveCandy": "" },
+  "lairon": { "species": "Lairon", "moves": [], "evolveCandy": "" },
+  "aggron": { "species": "Aggron", "moves": [], "evolveCandy": "" },
+  "meditite": {
+    "species": "Meditite",
+    "moves": ["Low Kick", "Confusion", "Detect", "Bullet Punch"],
+    "evolveCandies": 7
+  },
+  "medicham": {
+    "species": "Medicham",
+    "evolveCandies": "11",
+    "newMoves": ["Zen Headbutt", "Force Plam", "Fire Punch", "Calm Mind"]
+  },
+  "medicham2": {
+    "species": "Medicham",
+    "evolveCandies": "MAX",
+    "newMoves": ["Fake Out", "High Jump Kick", "Thunder Punch", "Ice Punch"]
+  },
+  "electrike": { "species": "Electrike", "moves": [], "evolveCandy": "" },
+  "manectric": { "species": "Manectric", "moves": [], "evolveCandy": "" },
+  "plusle": { "species": "Plusle", "moves": [], "evolveCandy": "" },
+  "minun": { "species": "Minun", "moves": [], "evolveCandy": "" },
+  "volbeat": { "species": "Volbeat", "moves": [], "evolveCandy": "" },
+  "illumise": { "species": "Illumise", "moves": [], "evolveCandy": "" },
+  "roselia": { "species": "Roselia", "moves": [], "evolveCandy": "" },
+  "gulpin": { "species": "Gulpin", "moves": [], "evolveCandy": "" },
+  "swalot": { "species": "Swalot", "moves": [], "evolveCandy": "" },
+  "carvanha": { "species": "Carvanha", "moves": [], "evolveCandy": "" },
+  "sharpedo": { "species": "Sharpedo", "moves": [], "evolveCandy": "" },
+  "wailmer": { "species": "Wailmer", "moves": [], "evolveCandy": "" },
+  "wailord": { "species": "Wailord", "moves": [], "evolveCandy": "" },
+  "numel": {
+    "species": "Numel",
+    "moves": ["Flame Wheel", "Bulldoze", "Amnesia", "Stomp"],
+    "evolveCandies": 6
+  },
+  "camerupt": {
+    "species": "Camerupt",
+    "evolveCandies": "13",
+    "newMoves": ["Lava Plume", "Earth Power", "Curse", "Yawn"]
+  },
+  "camerupt2": {
+    "species": "Camerupt",
+    "evolveCandies": "MAX",
+    "newMoves": ["Eruption", "earthquake", "Rock Slide", "Iron Head"]
+  },
+  "torkoal": { "species": "Torkoal", "moves": [], "evolveCandy": "" },
+  "spoink": { "species": "Spoink", "moves": [], "evolveCandy": "" },
+  "grumpig": { "species": "Grumpig", "moves": [], "evolveCandy": "" },
+  "spinda": { "species": "Spinda", "moves": [], "evolveCandy": "" },
+  "trapinch": { "species": "Trapinch", "moves": [], "evolveCandy": "" },
+  "vibrava": { "species": "Vibrava", "moves": [], "evolveCandy": "" },
+  "flygon": { "species": "Flygon", "moves": [], "evolveCandy": "" },
+  "cacnea": { "species": "Cacnea", "moves": [], "evolveCandy": "" },
+  "cacturne": { "species": "Cacturne", "moves": [], "evolveCandy": "" },
+  "swablu": { "species": "Swablu", "moves": [], "evolveCandy": "" },
+  "altaria": { "species": "Altaria", "moves": [], "evolveCandy": "" },
+  "zangoose": { "species": "Zangoose", "moves": [], "evolveCandy": "" },
+  "seviper": { "species": "Seviper", "moves": [], "evolveCandy": "" },
+  "lunatone": { "species": "Lunatone", "moves": [], "evolveCandy": "" },
+  "solrock": { "species": "Solrock", "moves": [], "evolveCandy": "" },
+  "barboach": { "species": "Barboach", "moves": [], "evolveCandy": "" },
+  "whiscash": { "species": "Whiscash", "moves": [], "evolveCandy": "" },
+  "corphish": { "species": "Corphish", "moves": [], "evolveCandy": "" },
+  "crawdaunt": { "species": "Crawdaunt", "moves": [], "evolveCandy": "" },
+  "baltoy": { "species": "Baltoy", "moves": [], "evolveCandy": "" },
+  "claydol": { "species": "Claydol", "moves": [], "evolveCandy": "" },
+  "lileep": { "species": "Lileep", "moves": [], "evolveCandy": "" },
+  "cradily": { "species": "Cradily", "moves": [], "evolveCandy": "" },
+  "anorith": { "species": "Anorith", "moves": [], "evolveCandy": "" },
+  "armaldo": { "species": "Armaldo", "moves": [], "evolveCandy": "" },
+  "feebas": { "species": "Feebas", "moves": [], "evolveCandy": "" },
+  "milotic": { "species": "Milotic", "moves": [], "evolveCandy": "" },
+  "castform": { "species": "Castform", "moves": [], "evolveCandy": "" },
+  "kecleon": { "species": "Kecleon", "moves": [], "evolveCandy": "" },
+  "shuppet": { "species": "Shuppet", "moves": [], "evolveCandy": "" },
+  "banette": { "species": "Banette", "moves": [], "evolveCandy": "" },
+  "duskull": { "species": "Duskull", "moves": [], "evolveCandy": "" },
+  "dusclops": { "species": "Dusclops", "moves": [], "evolveCandy": "" },
+  "tropius": { "species": "Tropius", "moves": [], "evolveCandy": "" },
+  "chimecho": {
+    "species": "Chimecho",
+    "evolveCandies": "12",
+    "newMoves": ["Extrasensory", "Heal Bell", "Uproar", "Light Screen"]
+  },
+  "chimecho2": {
+    "species": "Chimecho",
+    "evolveCandies": "MAX",
+    "newMoves": ["Psychic", "Perish Song", "Dazzling Gleam", "Healing Wish"]
+  },
+  "absol": {
+    "species": "Absol",
+    "moves": ["Quick Attack", "Knock Off", "Curse", "Double Team"],
+    "evolveCandies": 6
+  },
+  "wynaut": { "species": "Wynaut", "moves": [], "evolveCandy": "" },
+  "snorunt": { "species": "Snorunt", "moves": [], "evolveCandy": "" },
+  "glalie": { "species": "Glalie", "moves": [], "evolveCandy": "" },
+  "spheal": { "species": "Spheal", "moves": [], "evolveCandy": "" },
+  "sealeo": { "species": "Sealeo", "moves": [], "evolveCandy": "" },
+  "walrein": { "species": "Walrein", "moves": [], "evolveCandy": "" },
+  "clamperl": { "species": "Clamperl", "moves": [], "evolveCandy": "" },
+  "huntail": { "species": "Huntail", "moves": [], "evolveCandy": "" },
+  "gorebyss": { "species": "Gorebyss", "moves": [], "evolveCandy": "" },
+  "relicanth": { "species": "Relicanth", "moves": [], "evolveCandy": "" },
+  "luvdisc": { "species": "Luvdisc", "moves": [], "evolveCandy": "" },
+  "bagon": { "species": "Bagon", "moves": [], "evolveCandy": "" },
+  "shelgon": { "species": "Shelgon", "moves": [], "evolveCandy": "" },
+  "salamence": { "species": "Salamence", "moves": [], "evolveCandy": "" },
+  "beldum": { "species": "Beldum", "moves": [], "evolveCandy": "" },
+  "metang": { "species": "Metang", "moves": [], "evolveCandy": "" },
+  "metagross": { "species": "Metagross", "moves": [], "evolveCandy": "" },
+  "regirock": { "species": "Regirock", "moves": [], "evolveCandy": "" },
+  "regice": { "species": "Regice", "moves": [], "evolveCandy": "" },
+  "registeel": { "species": "Registeel", "moves": [], "evolveCandy": "" },
+  "latias": { "species": "Latias", "moves": [], "evolveCandy": "" },
+  "latios": { "species": "Latios", "moves": [], "evolveCandy": "" },
+  "kyogre": { "species": "Kyogre", "moves": [], "evolveCandy": "" },
+  "groudon": { "species": "Groudon", "moves": [], "evolveCandy": "" },
+  "rayquaza": { "species": "Rayquaza", "moves": [], "evolveCandy": "" },
+  "jirachi": { "species": "Jirachi", "moves": [], "evolveCandy": "" },
+  "deoxys": { "species": "Deoxys", "moves": [], "evolveCandy": "" },
+  "turtwig": { "species": "Turtwig", "moves": [], "evolveCandy": "" },
+  "grotle": { "species": "Grotle", "moves": [], "evolveCandy": "" },
+  "torterra": { "species": "Torterra", "moves": [], "evolveCandy": "" },
+  "chimchar": { "species": "Chimchar", "moves": [], "evolveCandy": "" },
+  "monferno": { "species": "Monferno", "moves": [], "evolveCandy": "" },
+  "infernape": { "species": "Infernape", "moves": [], "evolveCandy": "" },
+  "piplup": { "species": "Piplup", "moves": [], "evolveCandy": "" },
+  "prinplup": { "species": "Prinplup", "moves": [], "evolveCandy": "" },
+  "empoleon": { "species": "Empoleon", "moves": [], "evolveCandy": "" },
+  "starly": { "species": "Starly", "moves": [], "evolveCandy": "" },
+  "staravia": { "species": "Staravia", "moves": [], "evolveCandy": "" },
+  "staraptor": { "species": "Staraptor", "moves": [], "evolveCandy": "" },
+  "bidoof": { "species": "Bidoof", "moves": [], "evolveCandy": "" },
+  "bibarel": { "species": "Bibarel", "moves": [], "evolveCandy": "" },
+  "kricketot": { "species": "Kricketot", "moves": [], "evolveCandy": "" },
+  "kricketune": { "species": "Kricketune", "moves": [], "evolveCandy": "" },
+  "shinx": {
+    "species": "Shinx",
+    "moves": ["Volt Switch", "Bite", "Thunder Shock", "Double Kick"],
+    "evolveCandies": 7
+  },
+  "luxio": {
+    "species": "Luxio",
+    "evolveCandies": "13",
+    "newMoves": ["Thunder Wave", "Fire Fang", "Ice Fang", "Protect"]
+  },
+  "luxray": {
+    "species": "Luxray",
+    "evolveCandies": "MAX",
+    "newMoves": ["Wild Charge", "Crunch", "Superpower", "Toxic"]
+  },
+  "budew": { "species": "Budew", "moves": [], "evolveCandy": "" },
+  "roserade": { "species": "Roserade", "moves": [], "evolveCandy": "" },
+  "cranidos": { "species": "Cranidos", "moves": [], "evolveCandy": "" },
+  "rampardos": { "species": "Rampardos", "moves": [], "evolveCandy": "" },
+  "shieldon": { "species": "Shieldon", "moves": [], "evolveCandy": "" },
+  "bastiodon": { "species": "Bastiodon", "moves": [], "evolveCandy": "" },
+  "burmy": { "species": "Burmy", "moves": [], "evolveCandy": "" },
+  "wormadam": { "species": "Wormadam", "moves": [], "evolveCandy": "" },
+  "mothim": { "species": "Mothim", "moves": [], "evolveCandy": "" },
+  "combee": { "species": "Combee", "moves": [], "evolveCandy": "" },
+  "vespiquen": { "species": "Vespiquen", "moves": [], "evolveCandy": "" },
+  "pachirisu": { "species": "Pachirisu", "moves": [], "evolveCandy": "" },
+  "buizel": { "species": "Buizel", "moves": [], "evolveCandy": "" },
+  "floatzel": { "species": "Floatzel", "moves": [], "evolveCandy": "" },
+  "cherubi": { "species": "Cherubi", "moves": [], "evolveCandy": "" },
+  "cherrim": { "species": "Cherrim", "moves": [], "evolveCandy": "" },
+  "shellos": { "species": "Shellos", "moves": [], "evolveCandy": "" },
+  "gastrodon": { "species": "Gastrodon", "moves": [], "evolveCandy": "" },
+  "ambipom": { "species": "Ambipom", "moves": [], "evolveCandy": "" },
+  "drifloon": { "species": "Drifloon", "moves": [], "evolveCandy": "" },
+  "drifblim": { "species": "Drifblim", "moves": [], "evolveCandy": "" },
+  "buneary": { "species": "Buneary", "moves": [], "evolveCandy": "" },
+  "lopunny": { "species": "Lopunny", "moves": [], "evolveCandy": "" },
+  "mismagius": { "species": "Mismagius", "moves": [], "evolveCandy": "" },
+  "honchkrow": { "species": "Honchkrow", "moves": [], "evolveCandy": "" },
+  "glameow": { "species": "Glameow", "moves": [], "evolveCandy": "" },
+  "purugly": { "species": "Purugly", "moves": [], "evolveCandy": "" },
+  "chingling": {
+    "species": "Chingling",
+    "moves": ["Astonish", "Confusion", "Yawn", "Future Sight"],
+    "evolveCandies": 5
+  },
+  "stunky": { "species": "Stunky", "moves": [], "evolveCandy": "" },
+  "skuntank": { "species": "Skuntank", "moves": [], "evolveCandy": "" },
+  "bronzor": {
+    "species": "Bronzor",
+    "moves": ["Confusion", "Confuse Ray", "Payback", "Gyro Ball"],
+    "evolveCandies": 7
+  },
+  "bronzong": {
+    "species": "Bronzong",
+    "evolveCandies": "14",
+    "newMoves": ["Heavy Slam", "Stealth Rock", "Psychic", "Iron Defense"]
+  },
+  "bronzong2": {
+    "species": "Bronzong",
+    "evolveCandies": "MAX",
+    "newMoves": ["Toxic", "Earthquake", "Future Sight", "Rain Dance"]
+  },
+  "bonsly": { "species": "Bonsly", "moves": [], "evolveCandy": "" },
+  "mime jr.": { "species": "Mime Jr.", "moves": [], "evolveCandy": "" },
+  "happiny": { "species": "Happiny", "moves": [], "evolveCandy": "" },
+  "chatot": { "species": "Chatot", "moves": [], "evolveCandy": "" },
+  "spiritomb": { "species": "Spiritomb", "moves": [], "evolveCandy": "" },
+  "gible": { "species": "Gible", "moves": [], "evolveCandy": "" },
+  "gabite": { "species": "Gabite", "moves": [], "evolveCandy": "" },
+  "garchomp": { "species": "Garchomp", "moves": [], "evolveCandy": "" },
+  "munchlax": { "species": "Munchlax", "moves": [], "evolveCandy": "" },
+  "riolu": { "species": "Riolu", "moves": [], "evolveCandy": "" },
+  "lucario": { "species": "Lucario", "moves": [], "evolveCandy": "" },
+  "hippopotas": { "species": "Hippopotas", "moves": [], "evolveCandy": "" },
+  "hippowdon": { "species": "Hippowdon", "moves": [], "evolveCandy": "" },
+  "skorupi": { "species": "Skorupi", "moves": [], "evolveCandy": "" },
+  "drapion": { "species": "Drapion", "moves": [], "evolveCandy": "" },
+  "croagunk": { "species": "Croagunk", "moves": [], "evolveCandy": "" },
+  "toxicroak": { "species": "Toxicroak", "moves": [], "evolveCandy": "" },
+  "carnivine": { "species": "Carnivine", "moves": [], "evolveCandy": "" },
+  "finneon": { "species": "Finneon", "moves": [], "evolveCandy": "" },
+  "lumineon": { "species": "Lumineon", "moves": [], "evolveCandy": "" },
+  "mantyke": { "species": "Mantyke", "moves": [], "evolveCandy": "" },
+  "snover": { "species": "Snover", "moves": [], "evolveCandy": "" },
+  "abomasnow": { "species": "Abomasnow", "moves": [], "evolveCandy": "" },
+  "weavile": {
+    "species": "Weavile",
+    "evolveCandies": "14",
+    "newMoves": ["Swords Dance", "Knock Off", "Triple Axel", "Low Kick"]
+  },
+  "weavile2": {
+    "species": "Weavile",
+    "evolveCandies": "14",
+    "newMoves": ["Icicle Crash", "Night Slash", "Crush Claw", "Poison Jab"]
+  },
+  "magnezone": {
+    "species": "Magnezone",
+    "evolveCandies": "MAX",
+    "newMoves": ["Thunderbolt", "Flash Cannon", "Volt Switch", "Toxic"]
+  },
+  "lickilicky": { "species": "Lickilicky", "moves": [], "evolveCandy": "" },
+  "rhyperior": {
+    "species": "Rhyperior",
+    "evolveCandies": "MAX",
+    "newMoves": ["Stone Edge", "Earthquake", "Swords Dance", "Stealth Rock"]
+  },
+  "tangrowth": {
+    "species": "Tangrowth",
+    "evolveCandies": "14",
+    "newMoves": ["Knock Off", "Sluge Bomb", "Slam", "Confusion"]
+  },
+  "tangrowth2": {
+    "species": "Tangrowth",
+    "evolveCandies": "MAX",
+    "newMoves": ["Giga Drain", "Synthesis", "Earthquake", "Power Whip"]
+  },
+  "electivire": {
+    "species": "Electivire",
+    "evolveCandies": "14",
+    "newMoves": ["Wild Charge", "Thunder Punch", "Light Screen", "Ice Punch"]
+  },
+  "electivire2": {
+    "species": "Electivire",
+    "evolveCandies": "MAX",
+    "newMoves": ["Thunderbolt", "Thunder", "Giga Impact", "Cross Chop"]
+  },
+  "magmortar": {
+    "species": "Magmortar",
+    "evolveCandies": "14",
+    "newMoves": ["Flamethrower", "Fire Punch", "Sunny Day", "Scorching Sands"]
+  },
+  "magmortar2": {
+    "species": "Magmortar",
+    "evolveCandies": "MAX",
+    "newMoves": ["Thunderbolt", "Focus Blast", "Toxic", "Taunt"]
+  },
+  "togekiss": { "species": "Togekiss", "moves": [], "evolveCandy": "" },
+  "yanmega": { "species": "Yanmega", "moves": [], "evolveCandy": "" },
+  "leafeon": { "species": "Leafeon", "moves": [], "evolveCandy": "" },
+  "glaceon": { "species": "Glaceon", "moves": [], "evolveCandy": "" },
+  "gliscor": { "species": "Gliscor", "moves": [], "evolveCandy": "" },
+  "mamoswine": {
+    "species": "Mamoswine",
+    "evolveCandies": "MAX",
+    "newMoves": ["Icicle Crash", "Earthquake", "Knock Off", "Thrash"]
+  },
+  "porygon-z": {
+    "species": "Porygon-Z",
+    "evolveCandies": "MAX",
+    "newMoves": ["Tri Attack", "Shadow Ball", "Thunderbolt", "Trick"]
+  },
+  "gallade": { "species": "Gallade", "moves": [], "evolveCandy": "" },
+  "probopass": { "species": "Probopass", "moves": [], "evolveCandy": "" },
+  "dusknoir": { "species": "Dusknoir", "moves": [], "evolveCandy": "" },
+  "froslass": { "species": "Froslass", "moves": [], "evolveCandy": "" },
+  "rotom": { "species": "Rotom", "moves": [], "evolveCandy": "" },
+  "uxie": { "species": "Uxie", "moves": [], "evolveCandy": "" },
+  "mesprit": { "species": "Mesprit", "moves": [], "evolveCandy": "" },
+  "azelf": { "species": "Azelf", "moves": [], "evolveCandy": "" },
+  "dialga": { "species": "Dialga", "moves": [], "evolveCandy": "" },
+  "palkia": { "species": "Palkia", "moves": [], "evolveCandy": "" },
+  "heatran": { "species": "Heatran", "moves": [], "evolveCandy": "" },
+  "regigigas": { "species": "Regigigas", "moves": [], "evolveCandy": "" },
+  "giratina": { "species": "Giratina", "moves": [], "evolveCandy": "" },
+  "cresselia": { "species": "Cresselia", "moves": [], "evolveCandy": "" },
+  "phione": { "species": "Phione", "moves": [], "evolveCandy": "" },
+  "manaphy": { "species": "Manaphy", "moves": [], "evolveCandy": "" },
+  "darkrai": { "species": "Darkrai", "moves": [], "evolveCandy": "" },
+  "shaymin": { "species": "Shaymin", "moves": [], "evolveCandy": "" },
+  "arceus": { "species": "Arceus", "moves": [], "evolveCandy": "" },
+  "victini": { "species": "Victini", "moves": [], "evolveCandy": "" },
+  "snivy": { "species": "Snivy", "moves": [], "evolveCandy": "" },
+  "servine": { "species": "Servine", "moves": [], "evolveCandy": "" },
+  "serperior": { "species": "Serperior", "moves": [], "evolveCandy": "" },
+  "tepig": { "species": "Tepig", "moves": [], "evolveCandy": "" },
+  "pignite": { "species": "Pignite", "moves": [], "evolveCandy": "" },
+  "emboar": { "species": "Emboar", "moves": [], "evolveCandy": "" },
+  "oshawott": { "species": "Oshawott", "moves": [], "evolveCandy": "" },
+  "dewott": { "species": "Dewott", "moves": [], "evolveCandy": "" },
+  "samurott": { "species": "Samurott", "moves": [], "evolveCandy": "" },
+  "patrat": { "species": "Patrat", "moves": [], "evolveCandy": "" },
+  "watchog": { "species": "Watchog", "moves": [], "evolveCandy": "" },
+  "lillipup": { "species": "Lillipup", "moves": [], "evolveCandy": "" },
+  "herdier": { "species": "Herdier", "moves": [], "evolveCandy": "" },
+  "stoutland": { "species": "Stoutland", "moves": [], "evolveCandy": "" },
+  "purrloin": { "species": "Purrloin", "moves": [], "evolveCandy": "" },
+  "liepard": { "species": "Liepard", "moves": [], "evolveCandy": "" },
+  "pansage": { "species": "Pansage", "moves": [], "evolveCandy": "" },
+  "simisage": { "species": "Simisage", "moves": [], "evolveCandy": "" },
+  "pansear": { "species": "Pansear", "moves": [], "evolveCandy": "" },
+  "simisear": { "species": "Simisear", "moves": [], "evolveCandy": "" },
+  "panpour": { "species": "Panpour", "moves": [], "evolveCandy": "" },
+  "simipour": { "species": "Simipour", "moves": [], "evolveCandy": "" },
+  "munna": { "species": "Munna", "moves": [], "evolveCandy": "" },
+  "musharna": { "species": "Musharna", "moves": [], "evolveCandy": "" },
+  "pidove": { "species": "Pidove", "moves": [], "evolveCandy": "" },
+  "tranquill": { "species": "Tranquill", "moves": [], "evolveCandy": "" },
+  "unfezant": { "species": "Unfezant", "moves": [], "evolveCandy": "" },
+  "blitzle": { "species": "Blitzle", "moves": [], "evolveCandy": "" },
+  "zebstrika": { "species": "Zebstrika", "moves": [], "evolveCandy": "" },
+  "roggenrola": { "species": "Roggenrola", "moves": [], "evolveCandy": "" },
+  "boldore": { "species": "Boldore", "moves": [], "evolveCandy": "" },
+  "gigalith": { "species": "Gigalith", "moves": [], "evolveCandy": "" },
+  "woobat": { "species": "Woobat", "moves": [], "evolveCandy": "" },
+  "swoobat": { "species": "Swoobat", "moves": [], "evolveCandy": "" },
+  "drilbur": { "species": "Drilbur", "moves": [], "evolveCandy": "" },
+  "excadrill": { "species": "Excadrill", "moves": [], "evolveCandy": "" },
+  "audino": { "species": "Audino", "moves": [], "evolveCandy": "" },
+  "timburr": { "species": "Timburr", "moves": [], "evolveCandy": "" },
+  "gurdurr": { "species": "Gurdurr", "moves": [], "evolveCandy": "" },
+  "conkeldurr": { "species": "Conkeldurr", "moves": [], "evolveCandy": "" },
+  "tympole": { "species": "Tympole", "moves": [], "evolveCandy": "" },
+  "palpitoad": { "species": "Palpitoad", "moves": [], "evolveCandy": "" },
+  "seismitoad": { "species": "Seismitoad", "moves": [], "evolveCandy": "" },
+  "throh": { "species": "Throh", "moves": [], "evolveCandy": "" },
+  "sawk": { "species": "Sawk", "moves": [], "evolveCandy": "" },
+  "sewaddle": { "species": "Sewaddle", "moves": [], "evolveCandy": "" },
+  "swadloon": { "species": "Swadloon", "moves": [], "evolveCandy": "" },
+  "leavanny": { "species": "Leavanny", "moves": [], "evolveCandy": "" },
+  "venipede": { "species": "Venipede", "moves": [], "evolveCandy": "" },
+  "whirlipede": { "species": "Whirlipede", "moves": [], "evolveCandy": "" },
+  "scolipede": { "species": "Scolipede", "moves": [], "evolveCandy": "" },
+  "cottonee": { "species": "Cottonee", "moves": [], "evolveCandy": "" },
+  "whimsicott": { "species": "Whimsicott", "moves": [], "evolveCandy": "" },
+  "petilil": { "species": "Petilil", "moves": [], "evolveCandy": "" },
+  "lilligant": { "species": "Lilligant", "moves": [], "evolveCandy": "" },
+  "basculin": { "species": "Basculin", "moves": [], "evolveCandy": "" },
+  "sandile": { "species": "Sandile", "moves": [], "evolveCandy": "" },
+  "krokorok": { "species": "Krokorok", "moves": [], "evolveCandy": "" },
+  "krookodile": { "species": "Krookodile", "moves": [], "evolveCandy": "" },
+  "darumaka": { "species": "Darumaka", "moves": [], "evolveCandy": "" },
+  "darumaka-galar": {
+    "species": "Darumaka-Galar",
+    "moves": [],
+    "evolveCandy": ""
+  },
+  "darmanitan": { "species": "Darmanitan", "moves": [], "evolveCandy": "" },
+  "darmanitan-galar": {
+    "species": "Darmanitan-Galar",
+    "moves": [],
+    "evolveCandy": ""
+  },
+  "maractus": { "species": "Maractus", "moves": [], "evolveCandy": "" },
+  "dwebble": { "species": "Dwebble", "moves": [], "evolveCandy": "" },
+  "crustle": { "species": "Crustle", "moves": [], "evolveCandy": "" },
+  "scraggy": { "species": "Scraggy", "moves": [], "evolveCandy": "" },
+  "scrafty": { "species": "Scrafty", "moves": [], "evolveCandy": "" },
+  "sigilyph": { "species": "Sigilyph", "moves": [], "evolveCandy": "" },
+  "yamask": { "species": "Yamask", "moves": [], "evolveCandy": "" },
+  "yamask-galar": { "species": "Yamask-Galar", "moves": [], "evolveCandy": "" },
+  "cofagrigus": { "species": "Cofagrigus", "moves": [], "evolveCandy": "" },
+  "tirtouga": { "species": "Tirtouga", "moves": [], "evolveCandy": "" },
+  "carracosta": { "species": "Carracosta", "moves": [], "evolveCandy": "" },
+  "archen": { "species": "Archen", "moves": [], "evolveCandy": "" },
+  "archeops": { "species": "Archeops", "moves": [], "evolveCandy": "" },
+  "trubbish": { "species": "Trubbish", "moves": [], "evolveCandy": "" },
+  "garbodor": { "species": "Garbodor", "moves": [], "evolveCandy": "" },
+  "zorua": { "species": "Zorua", "moves": [], "evolveCandy": "" },
+  "zoroark": { "species": "Zoroark", "moves": [], "evolveCandy": "" },
+  "minccino": { "species": "Minccino", "moves": [], "evolveCandy": "" },
+  "cinccino": { "species": "Cinccino", "moves": [], "evolveCandy": "" },
+  "gothita": { "species": "Gothita", "moves": [], "evolveCandy": "" },
+  "gothorita": { "species": "Gothorita", "moves": [], "evolveCandy": "" },
+  "gothitelle": { "species": "Gothitelle", "moves": [], "evolveCandy": "" },
+  "solosis": { "species": "Solosis", "moves": [], "evolveCandy": "" },
+  "duosion": { "species": "Duosion", "moves": [], "evolveCandy": "" },
+  "reuniclus": { "species": "Reuniclus", "moves": [], "evolveCandy": "" },
+  "ducklett": { "species": "Ducklett", "moves": [], "evolveCandy": "" },
+  "swanna": { "species": "Swanna", "moves": [], "evolveCandy": "" },
+  "vanillite": { "species": "Vanillite", "moves": [], "evolveCandy": "" },
+  "vanillish": { "species": "Vanillish", "moves": [], "evolveCandy": "" },
+  "vanilluxe": { "species": "Vanilluxe", "moves": [], "evolveCandy": "" },
+  "deerling": { "species": "Deerling", "moves": [], "evolveCandy": "" },
+  "sawsbuck": { "species": "Sawsbuck", "moves": [], "evolveCandy": "" },
+  "emolga": { "species": "Emolga", "moves": [], "evolveCandy": "" },
+  "karrablast": { "species": "Karrablast", "moves": [], "evolveCandy": "" },
+  "escavalier": { "species": "Escavalier", "moves": [], "evolveCandy": "" },
+  "foongus": { "species": "Foongus", "moves": [], "evolveCandy": "" },
+  "amoonguss": { "species": "Amoonguss", "moves": [], "evolveCandy": "" },
+  "frillish": { "species": "Frillish", "moves": [], "evolveCandy": "" },
+  "jellicent": { "species": "Jellicent", "moves": [], "evolveCandy": "" },
+  "alomomola": { "species": "Alomomola", "moves": [], "evolveCandy": "" },
+  "joltik": { "species": "Joltik", "moves": [], "evolveCandy": "" },
+  "galvantula": { "species": "Galvantula", "moves": [], "evolveCandy": "" },
+  "ferroseed": { "species": "Ferroseed", "moves": [], "evolveCandy": "" },
+  "ferrothorn": { "species": "Ferrothorn", "moves": [], "evolveCandy": "" },
+  "klink": { "species": "Klink", "moves": [], "evolveCandy": "" },
+  "klang": { "species": "Klang", "moves": [], "evolveCandy": "" },
+  "klinklang": { "species": "Klinklang", "moves": [], "evolveCandy": "" },
+  "tynamo": { "species": "Tynamo", "moves": [], "evolveCandy": "" },
+  "eelektrik": { "species": "Eelektrik", "moves": [], "evolveCandy": "" },
+  "eelektross": { "species": "Eelektross", "moves": [], "evolveCandy": "" },
+  "elgyem": { "species": "Elgyem", "moves": [], "evolveCandy": "" },
+  "beheeyem": { "species": "Beheeyem", "moves": [], "evolveCandy": "" },
+  "litwick": { "species": "Litwick", "moves": [], "evolveCandy": "" },
+  "lampent": { "species": "Lampent", "moves": [], "evolveCandy": "" },
+  "chandelure": { "species": "Chandelure", "moves": [], "evolveCandy": "" },
+  "axew": { "species": "Axew", "moves": [], "evolveCandy": "" },
+  "fraxure": { "species": "Fraxure", "moves": [], "evolveCandy": "" },
+  "haxorus": { "species": "Haxorus", "moves": [], "evolveCandy": "" },
+  "cubchoo": { "species": "Cubchoo", "moves": [], "evolveCandy": "" },
+  "beartic": { "species": "Beartic", "moves": [], "evolveCandy": "" },
+  "cryogonal": { "species": "Cryogonal", "moves": [], "evolveCandy": "" },
+  "shelmet": { "species": "Shelmet", "moves": [], "evolveCandy": "" },
+  "accelgor": { "species": "Accelgor", "moves": [], "evolveCandy": "" },
+  "stunfisk": { "species": "Stunfisk", "moves": [], "evolveCandy": "" },
+  "stunfisk-galar": {
+    "species": "Stunfisk-Galar",
+    "moves": [],
+    "evolveCandy": ""
+  },
+  "mienfoo": { "species": "Mienfoo", "moves": [], "evolveCandy": "" },
+  "mienshao": { "species": "Mienshao", "moves": [], "evolveCandy": "" },
+  "druddigon": { "species": "Druddigon", "moves": [], "evolveCandy": "" },
+  "golett": { "species": "Golett", "moves": [], "evolveCandy": "" },
+  "golurk": { "species": "Golurk", "moves": [], "evolveCandy": "" },
+  "pawniard": { "species": "Pawniard", "moves": [], "evolveCandy": "" },
+  "bisharp": { "species": "Bisharp", "moves": [], "evolveCandy": "" },
+  "bouffalant": { "species": "Bouffalant", "moves": [], "evolveCandy": "" },
+  "rufflet": { "species": "Rufflet", "moves": [], "evolveCandy": "" },
+  "braviary": { "species": "Braviary", "moves": [], "evolveCandy": "" },
+  "vullaby": { "species": "Vullaby", "moves": [], "evolveCandy": "" },
+  "mandibuzz": { "species": "Mandibuzz", "moves": [], "evolveCandy": "" },
+  "heatmor": { "species": "Heatmor", "moves": [], "evolveCandy": "" },
+  "durant": { "species": "Durant", "moves": [], "evolveCandy": "" },
+  "deino": { "species": "Deino", "moves": [], "evolveCandy": "" },
+  "zweilous": { "species": "Zweilous", "moves": [], "evolveCandy": "" },
+  "hydreigon": { "species": "Hydreigon", "moves": [], "evolveCandy": "" },
+  "larvesta": { "species": "Larvesta", "moves": [], "evolveCandy": "" },
+  "volcarona": { "species": "Volcarona", "moves": [], "evolveCandy": "" },
+  "cobalion": { "species": "Cobalion", "moves": [], "evolveCandy": "" },
+  "terrakion": { "species": "Terrakion", "moves": [], "evolveCandy": "" },
+  "virizion": { "species": "Virizion", "moves": [], "evolveCandy": "" },
+  "tornadus": { "species": "Tornadus", "moves": [], "evolveCandy": "" },
+  "thundurus": { "species": "Thundurus", "moves": [], "evolveCandy": "" },
+  "reshiram": { "species": "Reshiram", "moves": [], "evolveCandy": "" },
+  "zekrom": { "species": "Zekrom", "moves": [], "evolveCandy": "" },
+  "landorus": { "species": "Landorus", "moves": [], "evolveCandy": "" },
+  "kyurem": { "species": "Kyurem", "moves": [], "evolveCandy": "" },
+  "keldeo": { "species": "Keldeo", "moves": [], "evolveCandy": "" },
+  "meloetta": { "species": "Meloetta", "moves": [], "evolveCandy": "" },
+  "genesect": { "species": "Genesect", "moves": [], "evolveCandy": "" }
+}

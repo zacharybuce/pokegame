@@ -76,35 +76,36 @@ const EditMoves = ({ currentMoves, learnMoves, setEditing, handleSubmit }) => {
               borderRadius: "5px",
               border: "solid",
               borderWidth: "1px",
+              minHeight: "27vh",
             }}
           >
-            {moves.length ? (
-              <Droppable droppableId="moves">
-                {(provided) => (
-                  <Box {...provided.droppableProps} ref={provided.innerRef}>
-                    {moves.map((move, index) => {
-                      return (
-                        <Draggable key={move} draggableId={move} index={index}>
-                          {(provided) => (
-                            <Box
-                              ref={provided.innerRef}
-                              {...provided.draggableProps}
-                              {...provided.dragHandleProps}
-                              sx={{ mb: "1vh" }}
-                            >
-                              <PokeInfoMove move={move} />
-                            </Box>
-                          )}
-                        </Draggable>
-                      );
-                    })}
-                    {provided.placeholder}
-                  </Box>
-                )}
-              </Droppable>
-            ) : (
-              <div></div>
-            )}
+            <Droppable droppableId="moves">
+              {(provided) => (
+                <Box
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
+                  sx={{ minHeight: "10vh" }}
+                >
+                  {moves.map((move, index) => {
+                    return (
+                      <Draggable key={move} draggableId={move} index={index}>
+                        {(provided) => (
+                          <Box
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            sx={{ mb: "1vh" }}
+                          >
+                            <PokeInfoMove move={move} />
+                          </Box>
+                        )}
+                      </Draggable>
+                    );
+                  })}
+                  {provided.placeholder}
+                </Box>
+              )}
+            </Droppable>
           </Box>
         </Grid>
         <Grid item xs={6}>
@@ -116,6 +117,9 @@ const EditMoves = ({ currentMoves, learnMoves, setEditing, handleSubmit }) => {
               borderRadius: "5px",
               border: "solid",
               borderWidth: "1px",
+              minHeight: "27vh",
+              maxHeight: "27vh",
+              overflowY: "scroll",
             }}
           >
             {newMoves.length ? (

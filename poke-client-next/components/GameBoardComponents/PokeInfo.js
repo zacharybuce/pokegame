@@ -66,8 +66,14 @@ const PokeInfo = ({ poke, setEditing, takeItem }) => {
     );
     const abilityData = await aRes.json();
 
+    const nRes = await fetch(
+      process.env.NEXT_PUBLIC_ROOT_URL + "/api/natures/" + poke.nature
+    );
+    const natureData = await nRes.json();
+
     const data = {
       abilityData: abilityData.data.desc,
+      natureData: natureData.data,
     };
     setPokeData(data);
   };
@@ -88,9 +94,37 @@ const PokeInfo = ({ poke, setEditing, takeItem }) => {
         <span>{poke.ability}</span>
       </HtmlTooltip>
     );
+
+    if (poke && pokeData) {
+      let plus;
+      let minus;
+      if (
+        pokeData.natureData.plus != undefined &&
+        pokeData.natureData.minus != undefined
+      ) {
+        plus = pokeData.natureData.plus;
+        minus = pokeData.natureData.minus;
+      } else {
+        plus = "none";
+        minus = "none";
+      }
+      const nature = (
+        <HtmlTooltip
+          title={
+            <React.Fragment>
+              <Typography color="error">{minus}</Typography>
+              <Typography color="green">{plus}</Typography>
+            </React.Fragment>
+          }
+        >
+          <span>{poke.nature}</span>
+        </HtmlTooltip>
+      );
+    }
+
     return (
       <Grid container spacing={1}>
-        <Grid item xs={4}>
+        <Grid item xs={3}>
           <Typography>
             Type:{" "}
             {poke.types.map((type) => (
@@ -100,7 +134,7 @@ const PokeInfo = ({ poke, setEditing, takeItem }) => {
             ))}
           </Typography>
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={3}>
           <Typography>
             Item: {poke.item.split("|")[0]}{" "}
             {poke.item ? (
@@ -112,8 +146,11 @@ const PokeInfo = ({ poke, setEditing, takeItem }) => {
             )}
           </Typography>
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={3}>
           <Typography>Ability: {ability}</Typography>
+        </Grid>
+        <Grid item xs={3}>
+          <Typography>Nature: {nature}</Typography>
         </Grid>
         <Grid item xs={12} sx={{ mt: "1vh" }}>
           <Typography variant="h6">

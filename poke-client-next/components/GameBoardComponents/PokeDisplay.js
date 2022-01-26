@@ -11,6 +11,7 @@ const TeamDisplay = ({
   candies,
   setCandies,
   setBag,
+  setMoney,
 }) => {
   const handleOnDragEnd = (result) => {
     const { destination, source, draggableId } = result;
@@ -21,6 +22,13 @@ const TeamDisplay = ({
       destination.droppableId == "team" &&
       source.droppableId == "box" &&
       team.length == 3
+    )
+      return;
+
+    if (
+      destination.droppableId == "box" &&
+      source.droppableId == "team" &&
+      team.length == 1
     )
       return;
 
@@ -76,15 +84,19 @@ const TeamDisplay = ({
               minHeight: "15vh",
             }}
           >
-            {team.length ? (
+            {team ? (
               <Droppable droppableId="team">
                 {(provided) => (
-                  <Box {...provided.droppableProps} ref={provided.innerRef}>
+                  <Box
+                    {...provided.droppableProps}
+                    ref={provided.innerRef}
+                    sx={{ minHeight: "10vh", minWidth: "2vw" }}
+                  >
                     {team.map((poke, index) => {
                       return (
                         <Draggable
-                          key={poke.species}
-                          draggableId={poke.species}
+                          key={poke.id}
+                          draggableId={poke.id}
                           index={index}
                         >
                           {(provided) => (
@@ -101,6 +113,7 @@ const TeamDisplay = ({
                                 team={team}
                                 setTeam={setTeam}
                                 setBag={setBag}
+                                setMoney={setMoney}
                               />
                             </Box>
                           )}
@@ -128,19 +141,19 @@ const TeamDisplay = ({
               minHeight: "15vh",
             }}
           >
-            {box.length ? (
+            {box ? (
               <Droppable droppableId="box" direction="horizontal">
                 {(provided) => (
                   <Box
                     {...provided.droppableProps}
                     ref={provided.innerRef}
-                    sx={{ width: "100%", display: "flex" }}
+                    sx={{ width: "100%", display: "flex", minHeight: "5vh" }}
                   >
                     {box.map((poke, index) => {
                       return (
                         <Draggable
-                          key={poke.species}
-                          draggableId={poke.species}
+                          key={poke.id}
+                          draggableId={poke.id}
                           index={index}
                         >
                           {(provided) => (
@@ -157,6 +170,7 @@ const TeamDisplay = ({
                                 team={box}
                                 setTeam={setBox}
                                 setBag={setBag}
+                                setMoney={setMoney}
                               />
                             </Box>
                           )}

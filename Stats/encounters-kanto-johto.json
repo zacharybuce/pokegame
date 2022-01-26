@@ -1,0 +1,117 @@
+{
+  "Viridian Forest": {
+    "pokemon": ["Caterpie", "Weedle", "Spinarak", "Shroomish", "Pikachu"],
+    "rates": [30, 30, 25, 10, 5]
+  },
+  "Grassland Route": {
+    "pokemon": ["Pidgey", "Sentret", "Oddish", "Growlithe", "Jigglypuff"],
+    "rates": [25, 25, 25, 20, 5]
+  },
+  "Dark Cave": {
+    "pokemon": [
+      "Magikarp",
+      "Teddiursa",
+      "Ponyta",
+      "Krabby",
+      "Shuckle",
+      "Dunsparce"
+    ],
+    "rates": [30, 25, 25, 15, 4, 1]
+  },
+  "Union Cave": {
+    "pokemon": [
+      "Sandshrew",
+      "Wooper",
+      "Onix",
+      "Krabby",
+      "Corsola",
+      "Staryu",
+      "Lapras"
+    ],
+    "rates": [26, 25, 17, 17, 10, 4, 1]
+  },
+  "Sprout Tower": {
+    "pokemon": ["Rattata", "Bellsprout", "Hoothoot", "Gastly", "Meditite"],
+    "rates": [30, 30, 25, 14, 1]
+  },
+  "Mt.Moon": {
+    "pokemon": ["Zubat", "Geodude", "Paras", "Makuhita", "Clefairy"],
+    "rates": [35, 34, 25, 5, 1]
+  },
+  "Slowpoke Well": {
+    "pokemon": ["Slowpoke", "Goldeen", "Poliwag", "Psyduck", "Bronzor"],
+    "rates": [30, 30, 20, 15, 5]
+  },
+  "Ilex Forest": {
+    "pokemon": ["Oddish", "Pineco", "Tangela", "Numel", "Heracross"],
+    "rates": [35, 35, 20, 9, 1]
+  },
+  "Digglet's Cave": {
+    "pokemon": ["Diglett", "Chingling", "Rhyhorn", "Magmar", "Absol"],
+    "rates": [30, 25, 25, 15, 4, 1]
+  },
+  "Rock Tunnel": {
+    "pokemon": ["Cubone", "Machop", "Onix", "Makuhita", "Charmander"],
+    "rates": [30, 30, 20, 10, 10]
+  },
+  "National Park": {
+    "pokemon": ["Venonat", "Ledyba", "Exeggcute", "Nincada", "Pinsir"],
+    "rates": [27, 28, 35, 9, 1]
+  },
+  "Safari Zone": {
+    "pokemon": [
+      "Doduo",
+      "Nidoran-M",
+      "Nidoran-F",
+      "Tauros",
+      "Kangaskhan",
+      "Chansey",
+      "Scyther"
+    ],
+    "rates": [24, 23, 23, 20, 8, 1, 1]
+  },
+  "Ice Path": {
+    "pokemon": ["Swinub", "Delibird", "Jynx", "Sneasel"],
+    "rates": [50, 30, 15, 5]
+  },
+  "Power Plant": {
+    "pokemon": ["Pikachu", "Magnemite", "Voltorb", "Electabuzz", "Shinx"],
+    "rates": [27, 26, 26, 15, 5]
+  },
+  "Rocket Hideout": {
+    "pokemon": ["Abra", "Porygon", "Scyther", "Pinsir", "Dratini"],
+    "rates": [25, 25, 24, 24, 1]
+  },
+  "Pokemon Mansion": {
+    "pokemon": ["Grimer", "Koffing", "Vulpix", "Ditto"],
+    "rates": [30, 30, 30, 10]
+  },
+  "Mt.Ember": {
+    "pokemon": ["Slugma", "Houndour", "Torkoal", "Magmar"],
+    "rates": [25, 25, 30, 20]
+  },
+  "Whirl Islands": {
+    "pokemon": ["Seel", "Remoraid", "Horsea", "Shellder", "Mantine"],
+    "rates": [30, 25, 25, 15, 5]
+  },
+  "Victory Road": {
+    "pokemon": ["Mankey", "Phanpy", "Hitmonlee", "Hitmonchan", "Miltank"],
+    "rates": [25, 25, 20, 20, 10]
+  },
+  "Forest Route": {
+    "pokemon": ["Drowzee", "Mareep", "Girafarig", "Aipom", "Sudowoodo"],
+    "rates": [20, 20, 20, 20, 20]
+  },
+  "Cerulean Cave": {
+    "pokemon": ["Omanyte", "Kabuto", "Likitung", "Aerodactyl", "Snorlax"],
+    "rates": [30, 30, 20, 19, 1]
+  },
+  "Mt.Silver": {
+    "pokemon": ["Misdreavus", "Natu", "Skarmory", "Axew", "Larvitar"],
+    "rates": [27, 26, 26, 15, 5]
+  },
+  "Dragons Den": {
+    "pokemon": ["Dratini", "Bagon", "Gible", "Deino"],
+    "rates": [25, 25, 25, 25, 25]
+  }
+}

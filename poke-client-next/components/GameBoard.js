@@ -23,7 +23,7 @@ const GameBoard = ({ id }) => {
   const socket = useSocket();
   const [money, setMoney] = useState(3000);
   const [balls, setBalls] = useState(5);
-  const [candies, setCandies] = useState(0);
+  const [candies, setCandies] = useState(20);
   const [items, setBag] = useState([]);
   const [team, setTeam] = useState([]);
   const [box, setBox] = useState([]);
@@ -66,7 +66,7 @@ const GameBoard = ({ id }) => {
   }, [socket, lobby]);
 
   useEffect(() => {
-    var newTeam = team;
+    var newTeam = JSON.parse(JSON.stringify(team));
 
     for (let i = 0; i < team.length; i++) {
       if (team[i].item) {
@@ -122,7 +122,7 @@ const GameBoard = ({ id }) => {
   };
 
   return (
-    <Grid container>
+    <Grid container sx={{ mt: "10vh" }}>
       <Grid item container xs={10} spacing={1}>
         <Grid item xs={12}>
           <RoundDisplay activeStep={activeStep} />
@@ -140,6 +140,7 @@ const GameBoard = ({ id }) => {
               candies={candies}
               setCandies={setCandies}
               setBag={setBag}
+              setMoney={setMoney}
             />
           ) : (
             <div></div>
@@ -197,6 +198,7 @@ const GameBoard = ({ id }) => {
         setBalls={setBalls}
         setCandies={setCandies}
         balls={balls}
+        activeStep={activeStep}
         id={id}
       />
     </Grid>
