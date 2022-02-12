@@ -4,6 +4,8 @@ import useLocalStorage from "../hooks/useLocalStorage";
 import Login from "./Login";
 import { styled } from "@mui/material/styles";
 import Board from "./Board";
+import { Box } from "@mui/material";
+import style from "../styles/App.module.css";
 
 const AppContainer = styled("div")(({ theme }) => ({
   marginTop: "30vh",
@@ -27,7 +29,11 @@ function App() {
   );
 
   return (
-    <AppContainer>{id ? dashboard : <Login setId={setId} />}</AppContainer>
+    <AppContainer>
+      {" "}
+      <Box className={style.test}>test</Box>
+      {id ? dashboard : <Login setId={setId} />}
+    </AppContainer>
   );
 }
 

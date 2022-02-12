@@ -16,7 +16,7 @@ const Login = ({ setId }) => {
       component="form"
       noValidate
       autoComplete="off"
-      sx={{ textAlign: "center" }}
+      sx={{ textAlign: "center", mt: "20vh" }}
     >
       <Grid container spacing={1}>
         <Grid item xs={12}>

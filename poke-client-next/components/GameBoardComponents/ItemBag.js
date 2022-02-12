@@ -5,17 +5,37 @@ import Item from "./Item";
 const ItemBag = ({ items, team, setTeam, setItems, setMoney }) => {
   return (
     <Box textAlign={"center"} sx={{ mt: "2vh" }}>
-      <Typography>Items</Typography>
       <Box
         sx={{
-          mt: "1vh",
+          height: "58px",
+          backgroundImage: "url(/BAG.png)",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundPositionY: "-5px",
+        }}
+      >
+        <Typography
+          sx={{
+            color: "white",
+            fontSize: "30px",
+            textShadow: "2px 2px  #000000",
+          }}
+        >
+          Items
+        </Typography>
+      </Box>
+      <Box
+        sx={{
           p: 1,
-          borderRadius: "5px",
+          borderRadius: "3px",
           border: "solid",
-          borderWidth: "1px",
+          borderColor: "gray",
+          borderWidth: "3px",
           minHeight: "15vh",
-          maxHeight: "15vh",
-          overflowY: "scroll",
+          maxHeight: "16vh",
+          overflowY: "auto",
+          backgroundColor: "#e0d857",
+          boxShadow: "0px 5px gray",
         }}
       >
         {items.map((item, index) => {

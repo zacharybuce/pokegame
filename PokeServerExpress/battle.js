@@ -18,7 +18,17 @@ var upTeam = [
 ];
 
 export default class Battle {
-  constructor(io, player1, player2, socket1, socket2, team1, team2, endBattle) {
+  constructor(
+    io,
+    player1,
+    player2,
+    socket1,
+    socket2,
+    team1,
+    team2,
+    endBattle,
+    index
+  ) {
     this.playerArr = [];
     this.playerArr.push(player1);
     this.playerArr.push(player2);
@@ -28,6 +38,7 @@ export default class Battle {
     this.teamprev = false;
     this.team1 = team1;
     this.team2 = team2;
+    this.index = index;
     this.endBattle = endBattle;
     this.stream = new Sim.BattleStream();
   }
@@ -40,6 +51,9 @@ export default class Battle {
       name: this.playerArr[1],
       team: Teams.pack(this.team2),
     };
+
+    this.socket1.join("battle" + this.index);
+    this.socket2.join("battle" + this.index);
 
     this.stream.write(`>start {"formatid":"gen8ou"}`);
     this.stream.write(`>player p1 ${JSON.stringify(p1spec)}`);
@@ -122,7 +136,7 @@ export default class Battle {
             }
           } else if (tokens[0].includes("update")) {
             console.log("in update");
-            this.io.emit("update", output);
+            this.io.to("battle" + this.index).emit("update", output);
           }
         }
         if (tokens[tokens.length - 1].includes("teampreview")) {
@@ -131,7 +145,9 @@ export default class Battle {
         }
 
         if (tokens.includes("win")) {
-          this.endBattle();
+          this.socket1.leave("battle" + this.index);
+          this.socket2.leave("battle" + this.index);
+          this.endBattle(this.index);
         }
       }
     })();

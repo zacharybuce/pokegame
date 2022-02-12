@@ -1,4 +1,4 @@
-import { Button, Grid, Typography } from "@mui/material";
+import { Button, Grid, Typography, Box } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import CookieIcon from "@mui/icons-material/Cookie";
 
@@ -30,10 +30,35 @@ const PokeStats = ({ poke, statInc, candies, candiesUsed }) => {
       <Grid container sx={{ mt: "1vh" }}>
         <Grid item container xs={12}>
           <Grid item xs={12}>
-            <Typography variant="h6">Stats</Typography>
+            <Box
+              sx={{
+                p: 0.5,
+                backgroundColor: "#98c8e0",
+                borderRadius: 1,
+                border: "solid",
+                borderLeftWidth: "0px",
+                fontSize: "20px",
+                boxShadow: 2,
+                width: "150px",
+                textAlign: "center",
+                borderColor: "gray",
+              }}
+            >
+              Stats
+            </Box>
           </Grid>
           <Grid item xs={12} sx={{ mt: "1vh", mb: "1vh" }}>
-            <Typography>Candies used: {candiesUsed}</Typography>
+            <Box
+              sx={{
+                backgroundColor: "lightgrey",
+                width: "130px",
+                textAlign: "center",
+                borderRadius: 1,
+                boxShadow: 1,
+              }}
+            >
+              Candies used: {candiesUsed}
+            </Box>
           </Grid>
           <Grid item xs={6}>
             <Typography>
@@ -146,7 +171,23 @@ const PokeStats = ({ poke, statInc, candies, candiesUsed }) => {
 
         <Grid item container xs={6} sx={{ mt: "2vh" }}>
           <Grid item xs={12}>
-            <Typography variant="h6">EVs</Typography>
+            <Box
+              sx={{
+                p: 0.5,
+                backgroundColor: "#98c8e0",
+                borderRadius: 1,
+                border: "solid",
+                borderLeftWidth: "0px",
+                fontSize: "18px",
+                boxShadow: 2,
+                width: "100px",
+                textAlign: "center",
+                borderColor: "gray",
+                mb: "1vh",
+              }}
+            >
+              EVs
+            </Box>
           </Grid>
           <Grid item xs={6}>
             <Typography>HP: {poke.evs.hp}</Typography>
@@ -170,7 +211,23 @@ const PokeStats = ({ poke, statInc, candies, candiesUsed }) => {
 
         <Grid item container xs={6} sx={{ mt: "2vh" }}>
           <Grid item xs={12}>
-            <Typography variant="h6">IVs</Typography>
+            <Box
+              sx={{
+                p: 0.5,
+                backgroundColor: "#98c8e0",
+                borderRadius: 1,
+                border: "solid",
+                borderLeftWidth: "0px",
+                fontSize: "18px",
+                boxShadow: 2,
+                width: "100px",
+                textAlign: "center",
+                borderColor: "gray",
+                mb: "1vh",
+              }}
+            >
+              IVs
+            </Box>
           </Grid>
           <Grid item xs={6}>
             <Typography>HP: {poke.ivs.hp}</Typography>

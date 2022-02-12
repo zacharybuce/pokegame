@@ -93,7 +93,7 @@ const generateItems = () => {
   var item = "";
   for (let i = 0; i < 3; i++) {
     let rand = Math.floor(Math.random() * 100);
-    if (rand < 50) {
+    if (rand < 35) {
       rand = Math.floor(Math.random() * common.length);
       item = common[rand];
       console.log(item);
@@ -101,26 +101,26 @@ const generateItems = () => {
         shopItems.push(item + "|Common");
       else i--;
     }
-    if (rand >= 50 && rand < 80) {
+    if (rand >= 35 && rand < 68) {
       rand = Math.floor(Math.random() * uncommon.length);
       item = uncommon[rand];
       if (!shopItems.includes(item + "|Uncommon"))
         shopItems.push(item + "|Uncommon");
       else i--;
     }
-    if (rand >= 80 && rand < 95) {
+    if (rand >= 68 && rand < 86) {
       rand = Math.floor(Math.random() * rare.length);
       item = rare[rand];
       if (!shopItems.includes(item + "|Rare")) shopItems.push(item + "|Rare");
       else i--;
     }
-    if (rand >= 95 && rand < 99) {
+    if (rand >= 86 && rand < 94) {
       rand = Math.floor(Math.random() * epic.length);
       item = epic[rand];
       if (!shopItems.includes(item + "|Epic")) shopItems.push(item + "|Epic");
       else i--;
     }
-    if (rand == 99) {
+    if (rand >= 94) {
       rand = Math.floor(Math.random() * legendary.length);
       item = legendary[rand];
       if (!shopItems.includes(item + "|Legendary"))

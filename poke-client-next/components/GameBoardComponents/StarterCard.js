@@ -5,62 +5,40 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-import React, { useState, useEffect } from "react";
+import React from "react";
+import PokeIcon from "../PokeIcon";
 
 const StarterCard = ({ name, chooseStarter }) => {
-  const [pokeData, setPokeData] = useState(null);
-
-  const getPokeData = async () => {
-    const bRes = await fetch(
-      process.env.NEXT_PUBLIC_ROOT_URL + "/api/pokemon/" + name
-    );
-    const pokeData = await bRes.json();
-    setPokeData(pokeData.data);
-  };
-
-  useEffect(() => {
-    getPokeData();
-  }, [name]);
-
-  if (pokeData)
-    return (
-      <Grid
-        item
-        xs
+  return (
+    <Grid
+      item
+      xs
+      sx={{
+        m: 1,
+        display: "flex",
+      }}
+    >
+      <Card
         sx={{
-          m: 1,
           display: "flex",
+          justifyContent: "space-between",
+          flexDirection: "column",
+          textAlign: "center",
+          minWidth: 200,
         }}
       >
-        <Card
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            flexDirection: "column",
-            textAlign: "center",
-            minWidth: 200,
-          }}
+        <CardActionArea
+          onClick={() => chooseStarter(name)}
+          sx={{ height: "100%" }}
         >
-          <CardActionArea
-            onClick={() => chooseStarter(name)}
-            sx={{ height: "100%" }}
-          >
-            <CardContent>
-              <img
-                src={
-                  "https://veekun.com/dex/media/pokemon/icons/" +
-                  pokeData.num +
-                  ".png"
-                }
-              />
-              <Typography>{name}</Typography>
-            </CardContent>
-          </CardActionArea>
-        </Card>
-      </Grid>
-    );
-
-  return <div></div>;
+          <CardContent>
+            <PokeIcon name={name} />
+            <Typography>{name}</Typography>
+          </CardContent>
+        </CardActionArea>
+      </Card>
+    </Grid>
+  );
 };
 
 export default StarterCard;

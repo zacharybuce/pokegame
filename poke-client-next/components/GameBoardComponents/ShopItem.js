@@ -5,11 +5,12 @@ import {
   Grid,
   Typography,
   Box,
+  Slide,
 } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { useSnackbar } from "notistack";
 
-const ShopItem = ({ name, setBoughtItem, money, setMoney }) => {
+const ShopItem = ({ name, setBoughtItem, money, setMoney, animTime }) => {
   const [itemData, setItemData] = useState(null);
   const { enqueueSnackbar } = useSnackbar();
 
@@ -97,42 +98,47 @@ const ShopItem = ({ name, setBoughtItem, money, setMoney }) => {
           display: "flex",
         }}
       >
-        <Card
-          className={getAnim(name.split("|")[1])}
-          sx={{
-            zIndex: "1",
-            display: "flex",
-            justifyContent: "space-between",
-            flexDirection: "column",
-          }}
-        >
-          <CardActionArea onClick={() => buyItem(name)} sx={{ height: "100%" }}>
-            <CardContent>
-              {itemData ? (
-                <Grid alignItems="center" justifyContent="center" container>
-                  <Box
-                    sx={{
-                      width: "24px",
-                      height: "24px",
-                      backgroundImage: "url(/itemicons-sheet.png)",
-                      backgroundPosition: getPos(),
-                      mb: "2vh",
-                    }}
-                  ></Box>
-                </Grid>
-              ) : (
-                <div></div>
-              )}
-              <Typography>{name.split("|")[0]}</Typography>
-              <Typography sx={{ mt: "2vh", fontSize: 12 }}>
-                {itemData ? itemData.desc : "loading..."}
-              </Typography>
-              <Typography sx={{ mt: "2vh" }}>
-                Cost: {itemData ? getCost(name.split("|")[1]) : "loading..."}
-              </Typography>
-            </CardContent>
-          </CardActionArea>
-        </Card>
+        <Slide in={true} direction="up" timeout={animTime + 200}>
+          <Card
+            className={getAnim(name.split("|")[1])}
+            sx={{
+              zIndex: "1",
+              display: "flex",
+              justifyContent: "space-between",
+              flexDirection: "column",
+            }}
+          >
+            <CardActionArea
+              onClick={() => buyItem(name)}
+              sx={{ height: "100%" }}
+            >
+              <CardContent>
+                {itemData ? (
+                  <Grid alignItems="center" justifyContent="center" container>
+                    <Box
+                      sx={{
+                        width: "24px",
+                        height: "24px",
+                        backgroundImage: "url(/itemicons-sheet.png)",
+                        backgroundPosition: getPos(),
+                        mb: "2vh",
+                      }}
+                    ></Box>
+                  </Grid>
+                ) : (
+                  <div></div>
+                )}
+                <Typography>{name.split("|")[0]}</Typography>
+                <Typography sx={{ mt: "2vh", fontSize: 12 }}>
+                  {itemData ? itemData.desc : "loading..."}
+                </Typography>
+                <Typography sx={{ mt: "2vh" }}>
+                  Cost: {itemData ? getCost(name.split("|")[1]) : "loading..."}
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+        </Slide>
       </Grid>
     );
 
@@ -147,13 +153,17 @@ const ShopItem = ({ name, setBoughtItem, money, setMoney }) => {
     >
       <Card
         sx={{
+          zIndex: "1",
           display: "flex",
           justifyContent: "space-between",
           flexDirection: "column",
+          width: "100%",
         }}
       >
         <CardContent>
-          <Typography>Bought</Typography>
+          <Typography variant="h5" sx={{ mt: "30%" }}>
+            Bought
+          </Typography>
         </CardContent>
       </Card>
     </Grid>

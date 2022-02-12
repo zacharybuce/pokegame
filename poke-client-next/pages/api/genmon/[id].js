@@ -42,6 +42,17 @@ const generatePokemon = (mon) => {
   //console.log(rand);
 
   pokemon.types = dexData.types;
+  let shinyRand = Math.floor(Math.random() * 100);
+  console.log("shiny roll " + shinyRand);
+  if (shinyRand == 99) {
+    pokemon.shiny = true;
+    pokemon.ivs = { hp: 31, atk: 31, def: 31, spa: 31, spd: 31, spe: 31 };
+  } else {
+    pokemon.shiny = false;
+  }
+
+  // pokemon.shiny = true;
+
   return pokemon;
 };
 

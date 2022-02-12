@@ -18,12 +18,17 @@ import { useSocket } from "../contexts/SocketProvider";
 const GameRulesDialog = ({ open, setOpen }) => {
   const socket = useSocket();
   const [starter, setStarter] = useState();
-  const handleChange = (event) => {
+  const [wildArea, setWildArea] = useState();
+
+  const handleChangeStarter = (event) => {
     setStarter(event.target.value);
+  };
+  const handleChangeArea = (event) => {
+    setWildArea(event.target.value);
   };
 
   const handleSubmit = () => {
-    socket.emit("send-rules-update", starter, "Kanto-Johto");
+    socket.emit("send-rules-update", starter, "Kanto-Johto", wildArea);
     setOpen(false);
   };
 
@@ -45,19 +50,28 @@ const GameRulesDialog = ({ open, setOpen }) => {
             <Grid container sx={{ textAlign: "center" }}>
               <Grid item xs={12}>
                 <FormControl fullWidth sx={{ mt: "1vh" }}>
-                  <InputLabel id="demo-simple-select-label">
-                    Starters
-                  </InputLabel>
+                  <InputLabel id="Starter">Starters</InputLabel>
                   <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
                     value={starter}
                     label="Starters"
-                    onChange={handleChange}
+                    onChange={handleChangeStarter}
                   >
                     <MenuItem value={"Classic"}>Classic</MenuItem>
                     <MenuItem value={"Random"}>Random</MenuItem>
                     <MenuItem value={"Random Fair"}>Random Fair</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid item xs={12}>
+                <FormControl fullWidth sx={{ mt: "1vh" }}>
+                  <InputLabel id="Wild Area">Wild Area</InputLabel>
+                  <Select
+                    value={wildArea}
+                    label="Wild Areas"
+                    onChange={handleChangeArea}
+                  >
+                    <MenuItem value={"Classic"}>Classic</MenuItem>
+                    <MenuItem value={"Random"}>Random</MenuItem>
                   </Select>
                 </FormControl>
               </Grid>

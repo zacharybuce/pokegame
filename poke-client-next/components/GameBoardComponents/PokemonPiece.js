@@ -8,6 +8,7 @@ import {
   Tooltip,
 } from "@mui/material";
 import React, { useState, useEffect } from "react";
+import { useSocket } from "../../contexts/SocketProvider";
 import PokeIcon from "../PokeIcon";
 import PokeInfo from "./PokeInfo";
 import PokeStats from "./PokeStats";
@@ -24,7 +25,9 @@ const PokemonPiece = ({
   setTeam,
   setBag,
   setMoney,
+  id,
 }) => {
+  const socket = useSocket();
   const [open, setOpen] = useState(false);
   const [canEvolve, setCanEvolve] = useState(false);
   const [editing, setEditing] = useState(false);
@@ -80,6 +83,7 @@ const PokemonPiece = ({
         setCandies((prevState) => prevState - cost);
         break;
     }
+    socket.emit("spend-candy", id, cost);
   };
 
   const increaseEVs = (evs) => {
@@ -93,22 +97,7 @@ const PokemonPiece = ({
   };
 
   const stars = () => {
-    if (poke.level - 20 == 0) return <StarIcon />;
-    if (poke.level - 20 == 5)
-      return (
-        <span>
-          <StarIcon />
-          <StarIcon />
-        </span>
-      );
-    if (poke.level - 20 == 10)
-      return (
-        <span>
-          <StarIcon />
-          <StarIcon />
-          <StarIcon />
-        </span>
-      );
+    if (poke.shiny) return <StarIcon />;
   };
 
   const checkCanEvolve = () => {
@@ -138,7 +127,7 @@ const PokemonPiece = ({
     var mon = poke;
     if (!mon.newMoves) mon.newMoves = [];
     mon.species = evo.species;
-    mon.level = poke.level + 5;
+    mon.level = poke.level + evo.levelUp;
     mon.evolveCandies = evo.evolveCandies;
     mon.newMoves = mon.newMoves.concat(evo.newMoves);
     if (evo.types) mon.types = evo.types;
@@ -192,13 +181,23 @@ const PokemonPiece = ({
 
   if (poke)
     return (
-      <Box sx={{ mr: "5px", ml: "5px" }}>
+      <Box sx={{}}>
         <Box sx={{ height: "6px", backgroundColor: "lightgray" }}></Box>
         <Button
+          variant="outlined"
+          color="pokeicon"
           onClick={() => handleClickOpen()}
-          sx={{ backgroundColor: "white" }}
+          sx={{
+            color: "white",
+            backgroundColor: "rgb(154,159,161,.5)",
+            p: 0,
+          }}
         >
-          {poke ? <PokeIcon name={poke.species} /> : <div></div>}
+          {poke ? (
+            <PokeIcon name={poke.species} shiny={poke.shiny} />
+          ) : (
+            <div></div>
+          )}
         </Button>
         <Dialog
           fullWidth={true}
@@ -207,23 +206,36 @@ const PokemonPiece = ({
           onClose={handleClose}
         >
           <Box sx={{ backgroundColor: "#fafafa" }}>
-            <DialogTitle>
-              {poke.species} Lvl: {poke.level} {stars()}{" "}
-              <Tooltip title={"Candies to Evolve: " + poke.evolveCandies}>
-                <span>
-                  <Button
-                    onClick={() => handleEvolve()}
-                    variant="contained"
-                    color="success"
-                    disabled={!canEvolve}
-                  >
-                    Evolve
-                  </Button>
-                </span>
-              </Tooltip>
+            <DialogTitle
+              sx={{
+                backgroundColor: "#f0c870",
+                border: "solid",
+                borderWidth: "3px",
+                borderColor: "gray",
+                borderRadius: 1,
+              }}
+            >
+              {poke.species}
+              {stars()} Lvl: {poke.level + " "}
             </DialogTitle>
-            <DialogContent>
+            <DialogContent sx={{ mt: "1vh" }}>
               <Grid container>
+                <Grid item xs={12} sx={{ mb: "1.5vh", textAlign: "center" }}>
+                  <Tooltip title={"Candies to Evolve: " + poke.evolveCandies}>
+                    <span>
+                      <Button
+                        onClick={() => handleEvolve()}
+                        variant="contained"
+                        color="success"
+                        disabled={!canEvolve}
+                        fullWidth
+                        sx={{ width: "75%" }}
+                      >
+                        Evolve
+                      </Button>
+                    </span>
+                  </Tooltip>
+                </Grid>
                 <Grid item xs={12}>
                   <PokeInfo
                     poke={poke}

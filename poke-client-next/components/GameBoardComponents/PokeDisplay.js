@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import PokemonPiece from "./PokemonPiece";
-import { List, ListItem, Grid, Box, Typography, Divider } from "@mui/material";
+import { Grid, Box, Typography } from "@mui/material";
 
 const TeamDisplay = ({
   team,
@@ -12,6 +12,7 @@ const TeamDisplay = ({
   setCandies,
   setBag,
   setMoney,
+  id,
 }) => {
   const handleOnDragEnd = (result) => {
     const { destination, source, draggableId } = result;
@@ -71,17 +72,27 @@ const TeamDisplay = ({
 
   return (
     <DragDropContext onDragEnd={handleOnDragEnd}>
-      <Grid container sx={{ mt: "1vh" }} spacing={1}>
+      <Grid container justifyContent="center" sx={{ mt: "1vh" }} spacing={1}>
         <Grid textAlign="center" item xs={2}>
-          <Typography>Party</Typography>
-          <Box
+          <Box sx={{ height: "50px" }}>
+            <Typography sx={{ fontSize: "30px" }}>Party</Typography>
+          </Box>
+          <Grid
+            item
+            xs={12}
             sx={{
               mt: "1vh",
               p: 1,
-              borderRadius: "5px",
+              borderRadius: "2px",
               border: "solid",
-              borderWidth: "1px",
-              minHeight: "15vh",
+              borderColor: "gray",
+              borderWidth: "4px",
+              minHeight: "177px",
+              textAlign: "center",
+              justifyContent: "center",
+              backgroundRepeat: "no-repeat",
+              backgroundColor: "#47a79f",
+              boxShadow: "0px 5px gray",
             }}
           >
             {team ? (
@@ -90,7 +101,10 @@ const TeamDisplay = ({
                   <Box
                     {...provided.droppableProps}
                     ref={provided.innerRef}
-                    sx={{ minHeight: "10vh", minWidth: "2vw" }}
+                    sx={{
+                      minHeight: "204px",
+                      width: "100%",
+                    }}
                   >
                     {team.map((poke, index) => {
                       return (
@@ -104,7 +118,11 @@ const TeamDisplay = ({
                               ref={provided.innerRef}
                               {...provided.draggableProps}
                               {...provided.dragHandleProps}
-                              sx={{ width: "68px" }}
+                              sx={{
+                                width: "68px",
+                                m: "auto",
+                                mb: "5px",
+                              }}
                             >
                               <PokemonPiece
                                 poke={poke}
@@ -114,6 +132,7 @@ const TeamDisplay = ({
                                 setTeam={setTeam}
                                 setBag={setBag}
                                 setMoney={setMoney}
+                                id={id}
                               />
                             </Box>
                           )}
@@ -127,18 +146,46 @@ const TeamDisplay = ({
             ) : (
               <div></div>
             )}
-          </Box>
+          </Grid>
         </Grid>
         <Grid item textAlign="center" xs={10}>
-          <Typography>Box</Typography>
+          <Box
+            sx={{
+              borderRadius: "5px",
+              // border: "solid",
+              // borderWidth: "1px",
+              height: "50px",
+              width: "50%",
+              m: "auto",
+              backgroundImage: "url(/BoxTop.png)",
+              backgroundSize: "100% 50px",
+              backgroundRepeat: "no-repeat",
+              alignSelf: "center",
+            }}
+          >
+            <Typography
+              color="white"
+              sx={{
+                fontSize: "30px",
+                textShadow: "2px 2px  #000000",
+              }}
+            >
+              Box
+            </Typography>
+          </Box>
           <Box
             sx={{
               mt: "1vh",
-              p: 1,
+              p: 2,
               borderRadius: "5px",
-              border: "solid",
-              borderWidth: "1px",
-              minHeight: "15vh",
+              // border: "solid",
+              // borderWidth: "1px",
+              height: "347px",
+              width: "100%",
+              backgroundImage: "url(/Box.png)",
+              backgroundSize: "100% 347px",
+              backgroundRepeat: "no-repeat",
+              alignSelf: "center",
             }}
           >
             {box ? (
@@ -147,7 +194,12 @@ const TeamDisplay = ({
                   <Box
                     {...provided.droppableProps}
                     ref={provided.innerRef}
-                    sx={{ width: "100%", display: "flex", minHeight: "5vh" }}
+                    sx={{
+                      width: "100%",
+                      display: "flex",
+                      minHeight: "5vh",
+                      textAlign: "center",
+                    }}
                   >
                     {box.map((poke, index) => {
                       return (
@@ -161,7 +213,7 @@ const TeamDisplay = ({
                               ref={provided.innerRef}
                               {...provided.draggableProps}
                               {...provided.dragHandleProps}
-                              sx={{ width: "68px" }}
+                              sx={{ width: "68px", ml: "7px" }}
                             >
                               <PokemonPiece
                                 poke={poke}
@@ -171,6 +223,7 @@ const TeamDisplay = ({
                                 setTeam={setBox}
                                 setBag={setBag}
                                 setMoney={setMoney}
+                                id={id}
                               />
                             </Box>
                           )}

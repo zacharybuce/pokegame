@@ -1,5 +1,5 @@
 import { createTheme } from "@mui/material/styles";
-import { red } from "@mui/material/colors";
+import { red, gray } from "@mui/material/colors";
 
 // Create a theme instance.
 const theme = createTheme({
@@ -14,7 +14,11 @@ const theme = createTheme({
       main: red.A400,
     },
     background: {
-      default: "#f0f0f0",
+      default: "#fafafa",
+    },
+    pokeicon: {
+      main: "#ffffff",
+      dark: "#fafafa",
     },
   },
 });

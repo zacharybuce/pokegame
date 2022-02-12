@@ -48,8 +48,8 @@ const Item = ({ name, items, team, setTeam, setItems, setMoney }) => {
   };
 
   const getPos = () => {
-    const w = 385;
-    const h = 1152;
+    const w = 385; //width of sheet
+    const h = 1152; //height of sheet
 
     const num = itemData.spritenum;
 
@@ -131,7 +131,7 @@ const Item = ({ name, items, team, setTeam, setItems, setMoney }) => {
       </React.Fragment>
     );
     return (
-      <Box>
+      <Box sx={{ mb: ".5vh" }}>
         <HtmlTooltip title={tooltip}>
           <Button onClick={() => handleClickOpen()}>
             <Box

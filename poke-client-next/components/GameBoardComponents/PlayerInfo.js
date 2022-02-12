@@ -7,7 +7,15 @@ import CookieIcon from "@mui/icons-material/Cookie";
 const PlayerInfo = ({ id, money, balls, candies }) => {
   return (
     <Box
-      sx={{ p: 2, borderRadius: "5px", border: "solid", borderWidth: "1px" }}
+      sx={{
+        p: 2,
+        borderRadius: "5px",
+        border: "solid",
+        borderWidth: "3px",
+        borderColor: "gray",
+        backgroundColor: "#f8f8f8",
+        boxShadow: "0px 3px gray",
+      }}
     >
       <Grid container textAlign={"center"} spacing={1}>
         <Grid item xs={3}>

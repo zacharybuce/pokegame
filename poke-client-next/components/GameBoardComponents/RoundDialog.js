@@ -17,6 +17,10 @@ const RoundDialog = ({
   balls,
   activeStep,
   id,
+  setBattleMusic,
+  team,
+  candies,
+  setBag,
 }) => {
   const handleClose = () => {
     setRoundOpen(false);
@@ -36,6 +40,7 @@ const RoundDialog = ({
               setMoney={setMoney}
               setCandies={setCandies}
               rarity={"player"}
+              setBattleMusic={setBattleMusic}
             />
           </Box>
         );
@@ -50,6 +55,10 @@ const RoundDialog = ({
             setBox={setBox}
             handleClose={handleClose}
             round={activeStep}
+            setTeam={setTeam}
+            team={team}
+            candies={candies}
+            setBag={setBag}
           />
         );
     }

@@ -48,10 +48,6 @@ const SwitchButton = ({ poke, sendSwitchChoice, slot }) => {
       <HtmlTooltip title={toolTipTitle}>
         <Button
           onClick={() => {
-            const name = poke.details
-              .split(",")[0]
-              .toLowerCase()
-              .replace(/\s/g, "");
             sendSwitchChoice(slot + 1);
           }}
         >

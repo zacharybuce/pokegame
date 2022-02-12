@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Grid } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import PokeStatDisplay from "./PokeStatDisplay";
 import { useSnackbar } from "notistack";
 import StatusDisplay from "./StatusDisplay";
+import { WeatherDisplay } from "./WeatherDisplay";
+import { FieldEffectDisplay } from "./FieldEffectDisplay";
 
 export const BattleDisplay = ({
   field,
@@ -11,14 +13,22 @@ export const BattleDisplay = ({
   setBattleEnd,
   setRewards,
   setAnimsDone,
+  setMonKOed,
 }) => {
   const { enqueueSnackbar } = useSnackbar();
   const [p1Poke, setP1Poke] = useState(null);
+  const [p1PokeShiny, setP1PokeShiny] = useState(false);
   const [p2Poke, setP2Poke] = useState(null);
+  const [p2PokeShiny, setP2PokeShiny] = useState(false);
   const [p1PokeHealth, setP1PokeHealth] = useState(100);
   const [p2PokeHealth, setP2PokeHealth] = useState(100);
   const [p1PokeStatus, setP1PokeStatus] = useState([]);
   const [p2PokeStatus, setP2PokeStatus] = useState([]);
+  const [weather, setWeather] = useState("none");
+  const [fieldEffectsP1, setFieldEffectsP1] = useState([]);
+  const [fieldEffectsP2, setFieldEffectsP2] = useState([]);
+  const [p1Sprite, setP1Sprite] = useState();
+  const [p2Sprite, setP2Sprite] = useState();
 
   var initialSwitch = true;
   var delay = 300;
@@ -45,17 +55,25 @@ export const BattleDisplay = ({
         // if (initialSwitch) delay = 0;
 
         // setTimeout(() => {
-        setP1PokeStatus([]);
 
         var splitToken = token.split("|");
         setP1Poke(splitToken[3].split(",")[0]);
         setP1PokeHealth(splitToken[4].split("/")[0]);
+        setSprite("p1", splitToken[3].split(",")[0]);
+        setP1PokeStatus([]);
+
+        //setShiny
+        if (splitToken[3].split(",")[3]) setP1PokeShiny(true);
+        else setP1PokeShiny(false);
+        console.log(splitToken[4].split(" ")[1]);
         //set status on switch in
-        if (splitToken[4].split(" ").length == 2)
+        if (splitToken[4].split(" ").length > 1) {
           setP1PokeStatus((prevState) => [
             ...prevState,
-            "status " + splitToken[4].split(" ")[1],
+            "status|" + splitToken[4].split(" ")[1],
           ]);
+        }
+
         // }, delay);
         // delay += addDelay;
       }
@@ -63,17 +81,23 @@ export const BattleDisplay = ({
         // if (initialSwitch) delay = 0;
 
         // setTimeout(() => {
-        setP2PokeStatus([]);
 
         var splitToken = token.split("|");
         setP2Poke(splitToken[3].split(",")[0]);
         setP2PokeHealth(splitToken[4].split("/")[0]);
+        setSprite("p2", splitToken[3].split(",")[0]);
+        setP2PokeStatus([]);
+
+        //setShiny
+        if (splitToken[3].split(",")[3]) setP2PokeShiny(true);
+        else setP2PokeShiny(false);
+
         //set status on switch in
-        if (splitToken[4].split(" ").length == 2)
-          setP2PokeStatus((prevState) => [
-            ...prevState,
-            "status " + splitToken[4].split(" ")[1],
-          ]);
+        if (splitToken[4].split(" ").length > 1) {
+          console.log(splitToken[4].split(" ")[1]);
+          setP2PokeStatus(["status|" + splitToken[4].split(" ")[1]]);
+        }
+
         // }, delay);
         // delay += addDelay;
         initialSwitch = false;
@@ -115,10 +139,15 @@ export const BattleDisplay = ({
       }
       //set health to 0 on faint
       if (token.startsWith("|faint|p1a:")) {
+        if (!player1) setMonKOed((prevState) => prevState + 1);
         setTimeout(() => setP1PokeHealth(0), delay);
         delay += addDelay;
       }
       if (token.startsWith("|faint|p2a:")) {
+        if (player1) {
+          console.log("p2 faint +1 to p1");
+          setMonKOed((prevState) => prevState + 1);
+        }
         setTimeout(() => setP2PokeHealth(0), delay);
         delay += addDelay;
       }
@@ -154,7 +183,7 @@ export const BattleDisplay = ({
       if (token.startsWith("|-curestatus|p1a:")) {
         var splitToken = token.split("|");
         const newStatuses = p1PokeStatus.filter(
-          (status) => status != "status|" + splitToken[3]
+          (status) => !status.includes(splitToken[3])
         );
         setTimeout(() => setP1PokeStatus(newStatuses), delay);
         delay += addDelay;
@@ -162,7 +191,7 @@ export const BattleDisplay = ({
       if (token.startsWith("|-curestatus|p2a:")) {
         var splitToken = token.split("|");
         const newStatuses = p1PokeStatus.filter(
-          (status) => status != "status|" + splitToken[3]
+          (status) => !status.includes(splitToken[3])
         );
         setTimeout(() => setP2PokeStatus(newStatuses), delay);
         delay += addDelay;
@@ -171,19 +200,72 @@ export const BattleDisplay = ({
       if (token.startsWith("|-end|p1a:")) {
         var splitToken = token.split("|");
         const newStatuses = p1PokeStatus.filter(
-          (status) => status != "effect|" + splitToken[3]
+          (status) => !status.includes(splitToken[3])
         );
         setTimeout(() => setP1PokeStatus(newStatuses), delay);
         delay += addDelay;
       }
       if (token.startsWith("|-end|p2a:")) {
         var splitToken = token.split("|");
-        const newStatuses = p1PokeStatus.filter(
-          (status) => status != "effect|" + splitToken[3]
+        const newStatuses = p2PokeStatus.filter(
+          (status) => !status.includes(splitToken[3])
         );
-        setTimeout(() => setP1PokeStatus(newStatuses), delay);
+        setTimeout(() => setP2PokeStatus(newStatuses), delay);
         delay += addDelay;
       }
+
+      //side effects
+      if (token.startsWith("|-sidestart|p1:")) {
+        var splitToken = token.split("|");
+        const effect = splitToken[3];
+        setTimeout(
+          () => setFieldEffectsP1((prevState) => [...prevState, effect]),
+          delay
+        );
+        delay += addDelay;
+      }
+      if (token.startsWith("|-sidestart|p2:")) {
+        var splitToken = token.split("|");
+        const effect = splitToken[3];
+        setTimeout(
+          () => setFieldEffectsP2((prevState) => [...prevState, effect]),
+          delay
+        );
+        delay += addDelay;
+      }
+
+      //end side effect
+      if (token.startsWith("|-sideend|p1:")) {
+        var splitToken = token.split("|");
+        const effectTok = splitToken[3];
+
+        const newArr = fieldEffectsP1.filter(
+          (effect) => !effect.includes(effectTok)
+        );
+
+        setTimeout(() => setFieldEffectsP1(newArr), delay);
+        delay += addDelay;
+      }
+      if (token.startsWith("|-sideend|p2:")) {
+        var splitToken = token.split("|");
+        const effectTok = splitToken[3];
+
+        const newArr = fieldEffectsP2.filter(
+          (effect) => !effect.includes(effectTok)
+        );
+
+        setTimeout(() => setFieldEffectsP2(newArr), delay);
+        delay += addDelay;
+      }
+
+      //weather
+      if (token.startsWith("|-weather")) {
+        var splitToken = token.split("|");
+        const weather = splitToken[2];
+        setTimeout(() => setWeather(weather), delay);
+        delay += addDelay;
+      }
+
       //set boost and unboost
       if (token.startsWith("|-unboost|p1a:")) {
         var splitToken = token.split("|");
@@ -294,9 +376,11 @@ export const BattleDisplay = ({
       if (token.startsWith("|win")) {
         var splitToken = token.split("|");
         var winner = splitToken[2];
-        setTimeout(() => setBattleEnd(true), delay);
-        if (id == winner.replace(/['"]+/g, "")) setRewards(1000, 1, true);
-        else setRewards(0, 1, false);
+        setTimeout(() => {
+          if (id == winner.replace(/['"]+/g, "")) setRewards(1000, 1, true);
+          else setRewards(0, 1, false);
+          setBattleEnd(true);
+        }, delay);
       }
     } //end tok
 
@@ -565,13 +649,12 @@ export const BattleDisplay = ({
 
       if (splitToken.length == 3) {
         if (splitToken[2] == "none") {
-          setTimeout(
-            () =>
-              enqueueSnackbar(`The weather stopped...`, {
-                variant: "warning",
-              }),
-            delay
-          );
+          setTimeout(() => {
+            enqueueSnackbar(`The weather stopped...`, {
+              variant: "warning",
+            });
+            setWeather("none");
+          }, delay);
           delay += addDelay;
         }
       }
@@ -600,6 +683,17 @@ export const BattleDisplay = ({
         setTimeout(
           () =>
             enqueueSnackbar(`${poke}'s ${ability} was activated!`, {
+              variant: "warning",
+            }),
+          delay
+        );
+        delay += addDelay;
+      }
+      if (splitToken.length == 5) {
+        var ability = splitToken[3].split(" ")[1];
+        setTimeout(
+          () =>
+            enqueueSnackbar(`${ability} was activated!`, {
               variant: "warning",
             }),
           delay
@@ -659,6 +753,21 @@ export const BattleDisplay = ({
       delay += addDelay;
     }
 
+    if (token.startsWith("|-start") && token.includes("ability:")) {
+      var splitToken = token.split("|");
+      var user = splitToken[2].split(" ")[1];
+      var ability = splitToken[3].split(":")[1];
+
+      setTimeout(
+        () =>
+          enqueueSnackbar(`${user}'s ${ability} was activated!`, {
+            variant: "warning",
+          }),
+        delay
+      );
+      delay += addDelay;
+    }
+
     // if (token.startsWith("|win")) {
     //   var splitToken = token.split("|");
     //   var winner = splitToken[2];
@@ -673,29 +782,51 @@ export const BattleDisplay = ({
     // }
   };
 
+  const setSprite = async (player, poke) => {
+    if (player == "p1") {
+      let res = await fetch(
+        process.env.NEXT_PUBLIC_ROOT_URL + "/api/pokemon/" + poke
+      );
+      let spriteId = await res.json();
+
+      setP1Sprite(spriteId.data.spriteid);
+    } else {
+      let res = await fetch(
+        process.env.NEXT_PUBLIC_ROOT_URL + "/api/pokemon/" + poke
+      );
+      let spriteId = await res.json();
+
+      setP2Sprite(spriteId.data.spriteid);
+    }
+  };
+
   useEffect(async () => {
     fieldParser();
   }, [field]);
 
   const displayTrainerPoke = () => {
-    if (p1Poke && p2Poke) {
+    if (p1Sprite && p2Sprite) {
       if (player1 && p1PokeHealth > 0) {
+        let url = p1PokeShiny ? "ani-back-shiny/" : "ani-back/";
         return (
           <img
             src={
-              "http://play.pokemonshowdown.com/sprites/ani-back/" +
-              p1Poke.replace("-", "").toLowerCase() +
+              "http://play.pokemonshowdown.com/sprites/" +
+              url +
+              p1Sprite +
               ".gif"
             }
             alt={p1Poke}
           />
         );
       } else if (!player1 && p2PokeHealth > 0) {
+        let url = p2PokeShiny ? "ani-back-shiny/" : "ani-back/";
         return (
           <img
             src={
-              "http://play.pokemonshowdown.com/sprites/ani-back/" +
-              p2Poke.replace("-", "").toLowerCase() +
+              "http://play.pokemonshowdown.com/sprites/" +
+              url +
+              p2Sprite +
               ".gif"
             }
             alt={p2Poke}
@@ -708,22 +839,26 @@ export const BattleDisplay = ({
   const displayOpponentPoke = () => {
     if (p1Poke && p2Poke) {
       if (!player1 && p1PokeHealth > 0) {
+        let url = p1PokeShiny ? "ani-shiny/" : "ani/";
         return (
           <img
             src={
-              "http://play.pokemonshowdown.com/sprites/ani/" +
-              p1Poke.replace("-", "").toLowerCase() +
+              "http://play.pokemonshowdown.com/sprites/" +
+              url +
+              p1Sprite +
               ".gif"
             }
             alt={p1Poke}
           />
         );
       } else if (player1 && p2PokeHealth > 0) {
+        let url = p2PokeShiny ? "ani-shiny/" : "ani/";
         return (
           <img
             src={
-              "http://play.pokemonshowdown.com/sprites/ani/" +
-              p2Poke.replace("-", "").toLowerCase() +
+              "http://play.pokemonshowdown.com/sprites/" +
+              url +
+              p2Sprite +
               ".gif"
             }
             alt={p2Poke}
@@ -734,9 +869,30 @@ export const BattleDisplay = ({
   };
 
   return (
-    <div>
+    <Box sx={{}}>
       <Grid container spacing={1}>
-        <Grid item container>
+        <Grid
+          item
+          container
+          xs={3}
+          sx={{
+            p: 1,
+            borderRadius: 3,
+            border: "solid",
+            borderColor: "gray",
+            borderWidth: "1px",
+            mb: "1vh",
+            fontSize: "20px",
+          }}
+        >
+          <Grid item xs={9} sx={{ textAlign: "center" }}>
+            Weather:
+          </Grid>
+          <Grid item xs={3} sx={{ pt: "4px" }}>
+            <WeatherDisplay weather={weather} />
+          </Grid>
+        </Grid>
+        <Grid item container sx={{ height: "140px" }}>
           <Grid item xs={6}>
             <PokeStatDisplay
               health={!player1 ? p1PokeHealth : p2PokeHealth}
@@ -744,14 +900,41 @@ export const BattleDisplay = ({
             />
             <StatusDisplay statuses={!player1 ? p1PokeStatus : p2PokeStatus} />
           </Grid>
-          <Grid item xs={6} sx={{ textAlign: "center" }}>
-            {displayOpponentPoke() ? displayOpponentPoke() : <div></div>}
+          <Grid item xs={5} sx={{ textAlign: "center", position: "relative" }}>
+            <Box sx={{}}>
+              {displayOpponentPoke() ? displayOpponentPoke() : <div></div>}
+            </Box>
+          </Grid>
+          <Grid item xs={1}>
+            <FieldEffectDisplay
+              fieldEffects={!player1 ? fieldEffectsP1 : fieldEffectsP2}
+            />
           </Grid>
         </Grid>
 
-        <Grid item container>
-          <Grid item xs={6} sx={{ textAlign: "center" }}>
-            {displayTrainerPoke() ? displayTrainerPoke() : <div></div>}
+        <Grid item container sx={{ height: "140px" }}>
+          <Grid item xs={1}>
+            <FieldEffectDisplay
+              fieldEffects={player1 ? fieldEffectsP1 : fieldEffectsP2}
+            />
+          </Grid>
+          <Grid item xs={5} sx={{ textAlign: "center" }}>
+            <Box
+              sx={{
+                "&::after": {
+                  position: "absolute",
+                  width: "100px",
+                  height: "80px",
+                  // backgroundColor: "pink",
+                  opacity: 0.4,
+                  content: "''",
+                  left: "25%",
+                  // boxShadow: "5px -5px #f095da",
+                },
+              }}
+            >
+              {displayTrainerPoke() ? displayTrainerPoke() : <div></div>}
+            </Box>
           </Grid>
           <Grid item xs={6}>
             <PokeStatDisplay
@@ -762,6 +945,6 @@ export const BattleDisplay = ({
           </Grid>
         </Grid>
       </Grid>
-    </div>
+    </Box>
   );
 };

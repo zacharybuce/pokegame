@@ -1,14 +1,6 @@
 import React, { useState } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import {
-  List,
-  ListItem,
-  Grid,
-  Box,
-  Typography,
-  Divider,
-  Button,
-} from "@mui/material";
+import { Grid, Box, Typography, Button } from "@mui/material";
 import PokeInfoMove from "./PokeInfoMove";
 
 const EditMoves = ({ currentMoves, learnMoves, setEditing, handleSubmit }) => {

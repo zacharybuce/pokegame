@@ -46,7 +46,7 @@
     "pokemon": ["Oddish", "Pineco", "Tangela", "Numel", "Heracross"],
     "rates": [35, 35, 20, 9, 1]
   },
-  "Digglet's Cave": {
+  "Digletts Cave": {
     "pokemon": ["Diglett", "Chingling", "Rhyhorn", "Magmar", "Absol"],
     "rates": [30, 25, 25, 15, 4, 1]
   },
@@ -103,7 +103,7 @@
     "rates": [20, 20, 20, 20, 20]
   },
   "Cerulean Cave": {
-    "pokemon": ["Omanyte", "Kabuto", "Likitung", "Aerodactyl", "Snorlax"],
+    "pokemon": ["Omanyte", "Kabuto", "Lickitung", "Aerodactyl", "Snorlax"],
     "rates": [30, 30, 20, 19, 1]
   },
   "Mt.Silver": {

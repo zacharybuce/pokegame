@@ -2,6 +2,7 @@ import Sim from "pokemon-showdown";
 import Poke from "pokemon-showdown";
 
 const Teams = Poke.Teams;
+const Dex = Poke.Dex;
 
 var upTeam = [
   {
@@ -39,6 +40,7 @@ export default class WildBattle {
     this.endBattle = endBattle;
     this.index = index;
     this.stream = new Sim.BattleStream();
+    this.aiState = [];
   }
   startBattle() {
     const p1spec = {
@@ -55,7 +57,7 @@ export default class WildBattle {
     this.stream.write(`>player p2 ${JSON.stringify(p2spec)}`);
     this.stream.write(`>p1 team 1`);
     this.stream.write(`>p2 team 1`);
-
+    console.log(this.oppTeam);
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         resolve("foo");
@@ -70,8 +72,7 @@ export default class WildBattle {
       console.log("Move from " + id + ": " + message);
       this.stream.write(`>p1 move ${message}`);
       console.log("wrote to sream p1");
-      let rand = Math.floor(Math.random() * 4);
-      this.stream.write(`>p2 move ${rand + 1}`);
+      this.stream.write(`>p2 move ${this.aiChoice()}`);
     });
 
     this.socket.on("send-switch", (message, id) => {
@@ -92,6 +93,10 @@ export default class WildBattle {
             console.log("sending team to p1");
             this.io.to(this.player).emit("side-update", tokens[2], true);
           }
+          if (tokens[0].includes("p2")) {
+            console.log("sending team to p2");
+            this.aiState = tokens[2];
+          }
         } else if (tokens[0].includes("update")) {
           console.log("in update");
           this.io.to(this.player).emit("update", output);
@@ -107,5 +112,45 @@ export default class WildBattle {
         }
       }
     })();
+  }
+
+  aiChoice() {
+    var playerPokeType = Dex.species.get(this.playerTeam[0].species).types;
+    var aiMoves = JSON.parse(this.aiState);
+    aiMoves = aiMoves.active[0].moves;
+    var movePowers = {};
+
+    for (let i = 0; i < aiMoves.length; i++) {
+      let move = Dex.moves.get(aiMoves[i].move);
+      let power = move.basePower;
+      switch (Dex.getEffectiveness(move.type, playerPokeType)) {
+        case 1:
+          power *= 2;
+          break;
+        case 0:
+          break;
+        case -1:
+          power /= 2;
+          break;
+      }
+      if (this.oppTeam[0].types.includes(move.type)) power *= 1.5;
+      if (!Dex.getImmunity(move.type, playerPokeType)) power = 0;
+
+      movePowers[i + 1] = power;
+    }
+
+    var bestMove = 1;
+    for (let i = 1; i <= 4; i++) {
+      if (movePowers[i] > movePowers[bestMove]) bestMove = i;
+    }
+
+    if (movePowers[bestMove] <= 1) {
+      let rand = Math.floor(Math.random() * 100);
+      if (rand < 25) {
+        bestMove = Math.floor(Math.random() * aiMoves.length) + 1;
+      }
+    }
+
+    return bestMove;
   }
 }

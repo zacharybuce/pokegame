@@ -1,12 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  Grid,
-  Typography,
-  Tooltip,
-  Alert,
-  Box,
-  CircularProgress,
-} from "@mui/material";
+import { Grid, Typography, Alert, Box, CircularProgress } from "@mui/material";
 import MoveButton from "./MoveButton";
 import SwitchButton from "./SwitchButton";
 import ActivePokeInfo from "./ActivePokeInfo";
@@ -24,7 +17,7 @@ export const BattleOptions = ({
     if (JSON.parse(team).active) setTrapped(JSON.parse(team).active[0].trapped);
     else setTrapped(false);
   }, [team]);
-  console.log(team);
+  //console.log(team);
 
   if (JSON.parse(team).wait)
     return (

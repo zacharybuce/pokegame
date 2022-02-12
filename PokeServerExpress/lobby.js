@@ -9,7 +9,7 @@ import Battle from "./battle.js";
 import WildBattle from "./wildbattle.js";
 import { readFile } from "fs/promises";
 
-const monList = JSON.parse(await readFile("../Stats/pokemonStats.json"));
+const monList = JSON.parse(await readFile("../Stats/pokemon.json"));
 
 const httpServer = createServer();
 const io = new Server(httpServer, {
@@ -33,47 +33,68 @@ var readyToStart = 0;
 var readyToBattle = 0;
 var gameStart = false;
 var battleStart = false;
-var battle = null;
+var battle = [];
 var wildBattles = [];
 var starterRule = "Classic";
+var wildAreaRule = "Classic";
 var starters = [];
+var overWorldSprites = [
+  "AceTrainerF",
+  "AceTrainerM",
+  "Artist",
+  "BattleGirl",
+  "SnowTrainer",
+];
 
 io.on("connection", (socket) => {
   //put every player in their own room. id= player selected-id
   const id = JSON.stringify(socket.handshake.query.id);
   socket.join(id);
 
+  let randSprite = Math.floor(Math.random() * overWorldSprites.length);
   //add players to lobby
   if (!playersInLobby.includes(id) && JSON.parse(id) != "undefined") {
     lobby.players.push({
       name: id,
       score: 0,
+      candiesSpent: 0,
+      npcBattlesWon: 0,
+      playerBattlesWon: 0,
+      monCaught: 0,
       team: [],
       ready: false,
       playerSocket: socket,
+      sprite: overWorldSprites[randSprite],
     });
+    overWorldSprites.splice(randSprite, 1);
     playersInLobby.push(id);
     io.emit("player-joined", playersInLobby);
     console.log(id + " joined the lobby");
   }
 
   //lobby rules updates
-  socket.on("send-rules-update", (starter, journey) => {
-    console.log("rules change - " + starter);
+  socket.on("send-rules-update", (starter, journey, area) => {
+    console.log("Starter Rule - " + starter);
+    console.log("Wild Area Rule - " + area);
 
     if (starter == "Random Fair") {
       console.log("generating mon");
       const keys = Object.keys(monList);
       for (let i = 0; i < 3; i++) {
         let rand = Math.floor(Math.random() * keys.length);
-        if (!starters.includes(keys[rand])) starters.push(keys[rand]);
-        else i--;
+        if (monList[keys[rand]].moves && monList[keys[rand]].moves.length) {
+          if (!starters.includes(keys[rand])) starters.push(keys[rand]);
+          else i--;
+        } else {
+          i--;
+        }
       }
       console.log(starters);
     }
 
     starterRule = starter;
-    const rules = { starter: starter, journey: journey };
+    wildAreaRule = area;
+    const rules = { starter: starter, journey: journey, area: area };
     io.emit("lobby-rules-update", rules);
   });
 
@@ -97,8 +118,12 @@ io.on("connection", (socket) => {
       var genStarters = [];
       for (let i = 0; i < 3; i++) {
         let rand = Math.floor(Math.random() * keys.length);
-        if (!genStarters.includes(keys[rand])) genStarters.push(keys[rand]);
-        else i--;
+        if (monList[keys[rand]].moves && monList[keys[rand]].moves.length) {
+          if (!genStarters.includes(keys[rand])) genStarters.push(keys[rand]);
+          else i--;
+        } else {
+          i--;
+        }
       }
       io.to(id).emit("starter-mon", genStarters);
     } else if (starterRule == "Random Fair") {
@@ -142,13 +167,31 @@ io.on("connection", (socket) => {
     }
   });
 
-  socket.on("get-wild-areas", (id1) => {
-    var wildAreaOptions = genWildAreas(lobby.round);
+  //A player requests the wild area choices
+  socket.on("get-wild-areas", () => {
+    var wildAreaOptions = [];
+    var comeback = false;
+    var lowest = 0;
+
+    for (let i = 0; i < lobby.players.length; i++) {
+      if (lobby.players[i].score < lobby.players[lowest].score) lowest = i;
+    }
+
+    if (id == lobby.players[lowest].name) {
+      comeback = true;
+      console.log(id + "is in comeback");
+    }
+
+    if (lobby.round % 2 != 0)
+      wildAreaOptions = genWildAreas(lobby.round, comeback);
+    else wildAreaOptions = genTrainerBattles();
+
     console.log("sending wild areas to " + id);
     console.log(wildAreaOptions);
     io.to(id).emit("wild-area-options", wildAreaOptions);
   });
 
+  //A player starts a battle with a npc trainer
   socket.on("start-wild-battle", async (id, opponent, oppTeam) => {
     let index = 0;
     for (let i = 0; i < lobby.players.length; i++) {
@@ -179,25 +222,107 @@ io.on("connection", (socket) => {
     //console.log("in run");
     wildBattles[index].runBattle();
   });
+
+  //a player has a score update
+  socket.on("update-score", (id, score) => {
+    for (let i = 0; i < lobby.players.length; i++) {
+      if (id == lobby.players[i].name.replace(/['"]+/g, "")) {
+        lobby.players[i].score += score;
+        console.log(id + "score increase by " + score);
+      }
+    }
+
+    lobbyUpdate();
+  });
+
+  //a player spends a candy
+  socket.on("spend-candy", (id, amount) => {
+    for (let i = 0; i < lobby.players.length; i++) {
+      if (id == lobby.players[i].name.replace(/['"]+/g, "")) {
+        lobby.players[i].candiesSpent += amount;
+      }
+    }
+    lobbyUpdate();
+    console.log(id + " spend " + amount);
+  });
+
+  //a player has caught a mon
+  socket.on("caught-a-mon", (id, amount) => {
+    for (let i = 0; i < lobby.players.length; i++) {
+      if (id == lobby.players[i].name.replace(/['"]+/g, "")) {
+        lobby.players[i].monCaught += amount;
+        lobby.players[i].score += 1;
+      }
+    }
+    lobbyUpdate();
+  });
+
+  socket.on("won-a-npc-battle", (id, amount) => {
+    for (let i = 0; i < lobby.players.length; i++) {
+      if (id == lobby.players[i].name.replace(/['"]+/g, "")) {
+        lobby.players[i].npcBattlesWon += amount;
+        lobby.players[i].score += 2;
+      }
+    }
+    lobbyUpdate();
+  });
+
+  socket.on("won-a-player-battle", (id, amount) => {
+    for (let i = 0; i < lobby.players.length; i++) {
+      if (id == lobby.players[i].name.replace(/['"]+/g, "")) {
+        lobby.players[i].playerBattlesWon += amount;
+        lobby.players[i].score += 1;
+      }
+    }
+    lobbyUpdate();
+  });
+
+  socket.on("mon-knocked-out", (id, amount) => {
+    for (let i = 0; i < lobby.players.length; i++) {
+      if (id == lobby.players[i].name.replace(/['"]+/g, "")) {
+        lobby.players[i].score += amount;
+      }
+    }
+    console.log(id + " koed " + amount);
+    lobbyUpdate();
+  });
 });
 
 const startTrainerBattle = async () => {
-  if (lobby.round === 4 || lobby.round === 8 || lobby.round === 12) {
-    battle = new Battle(
-      io,
-      playersInLobby[0],
-      playersInLobby[1],
-      lobby.players[0].playerSocket,
-      lobby.players[1].playerSocket,
-      lobby.players[0].team,
-      lobby.players[1].team,
-      endBattle
-    );
-    console.log("---Starting Battle---");
-    const res = await battle.startBattle();
-    battleStart = true;
-    //console.log("in run");
-    battle.runBattle();
+  if (lobby.round === 6 || lobby.round === 12 || lobby.round === 18) {
+    let players = [];
+
+    for (let i = 0; i < playersInLobby.length; i++) {
+      let rand = Math.floor(Math.random() * playersInLobby.length);
+      if (!players.includes(rand)) players.push(rand);
+      else i--;
+    }
+
+    console.log(players);
+
+    let battleCount = 0;
+    let playerCount = 1;
+
+    while (battleCount < playersInLobby.length / 2) {
+      battle[battleCount] = new Battle(
+        io,
+        playersInLobby[players[playerCount - 1]],
+        playersInLobby[players[playerCount]],
+        lobby.players[players[playerCount - 1]].playerSocket,
+        lobby.players[players[playerCount]].playerSocket,
+        lobby.players[players[playerCount - 1]].team,
+        lobby.players[players[playerCount]].team,
+        endBattle,
+        battleCount
+      );
+      console.log("---Starting Battle---");
+      const res = await battle[battleCount].startBattle();
+      battleStart = true;
+      //console.log("in run");
+      battle[battleCount].runBattle();
+      battleCount++;
+      playerCount += 2;
+    }
   }
 };
 
@@ -209,7 +334,12 @@ const lobbyUpdate = () => {
     sendLobby.players[index] = {
       name: player.name,
       score: player.score,
+      monCaught: player.monCaught,
+      candiesSpent: player.candiesSpent,
+      npcBattlesWon: player.npcBattlesWon,
+      playerBattlesWon: player.playerBattlesWon,
       ready: player.ready,
+      sprite: player.sprite,
     };
   });
 
@@ -218,8 +348,11 @@ const lobbyUpdate = () => {
 };
 
 const checkForNewRound = () => {
+  if (lobby.round == 18 && readyToStart == lobby.players.length && gameStart) {
+    endGame();
+  }
   //update players with lobby info - Beginning of Round
-  if (readyToStart == lobby.players.length && gameStart) {
+  else if (readyToStart == lobby.players.length && gameStart) {
     //reset ready states of player
     for (let i = 0; i < lobby.players.length; i++) {
       lobby.players[i].ready = false;
@@ -239,45 +372,54 @@ const checkForNewRound = () => {
   }
 };
 
-const game = (socket, id) => {
-  //Generate Wild Pokemon Areas on non battle rounds
-  if (lobby.round % 3 != 0) {
-    var wildAreaOptions = genWildAreas(lobby.round);
-    socket.to(id).emit("wild-area-options", wildAreaOptions);
-  }
-};
-
-const genWildAreas = (round) => {
+const genWildAreas = (round, comeback) => {
   var choices = [];
-  for (let i = 0; i < 2; i++) {
-    if (i == 0) {
-      let rand = Math.floor(Math.random() * 100);
-      let area = wildArea(round, rand);
-      if (!choices.includes(area)) choices.push(area);
-      else i--;
-    } else {
-      let eventType = Math.floor(Math.random() * 100);
-      if (eventType >= 70) {
-        let rand = Math.floor(Math.random() * 100);
-        let area = wildArea(round, rand);
-        if (!choices.includes(area)) choices.push(area);
-        else i--;
-      } else {
-        let trainerRand = Math.floor(Math.random() * 100);
-        const trainer = trainerBattles(trainerRand);
-        choices.push(trainer);
-      }
-    }
+  for (let i = 0; i < 3; i++) {
+    let rand = Math.floor(Math.random() * 100);
+    let area = wildArea(round, rand, comeback);
+    if (!choices.includes(area)) choices.push(area);
+    else i--;
   }
   return choices;
 };
 
-const wildArea = (round, num) => {
+const genTrainerBattles = () => {
+  var choices = [];
+  for (let i = 0; i < 2; i++) {
+    let trainerRand = Math.floor(Math.random() * 100);
+    const trainer = trainerBattles(trainerRand);
+    choices.push(trainer);
+  }
+  return choices;
+};
+
+const wildArea = (round, num, comeback) => {
   var area = "";
-  if (round <= 3) {
-    area = l1Areas(num);
-  } else if (round > 4 && round <= 7) {
-    area = l2Areas(num);
+
+  switch (wildAreaRule) {
+    case "Classic":
+      if (round <= 6) {
+        area = l1Areas(num);
+      } else if (round > 6 && round <= 12) {
+        area = l2Areas(num, comeback);
+      } else if (round >= 13) {
+        area = l3Areas(num, comeback);
+      }
+      break;
+    case "Random":
+      let rand = Math.floor(Math.random() * 3);
+      switch (rand) {
+        case 0:
+          area = l1Areas(num);
+          break;
+        case 1:
+          area = l2Areas(num);
+          break;
+        case 2:
+          area = l3Areas(num);
+          break;
+      }
+      break;
   }
 
   return area;
@@ -295,16 +437,32 @@ const l1Areas = (num) => {
   return "error";
 };
 
-const l2Areas = (num) => {
+const l2Areas = (num, comeback) => {
+  if (comeback) num += 15;
   if (num < 19) return "Slowpoke Well|Common";
   if (19 <= num && num < 37) return "Ilex Forest|Common";
-  if (37 <= num && num < 55) return "Diglett's Cave|Common";
+  if (37 <= num && num < 55) return "Digletts Cave|Common";
   if (55 <= num && num < 70) return "Rock Tunnel|Uncommon";
   if (70 <= num && num < 85) return "National Park|Uncommon";
   if (85 <= num && num < 90) return "Safari Zone|Rare";
   if (90 <= num && num < 95) return "Ice Path|Rare";
   if (95 <= num && num < 99) return "Power Plant|Epic";
   if (num >= 99) return "Rocket Hideout|Legendary";
+
+  console.log(num);
+  return "error";
+};
+
+const l3Areas = (num, comeback) => {
+  if (comeback) num += 15;
+  if (num < 13) return "Pokemon Mansion|Common";
+  if (13 <= num && num < 26) return "Mt.Ember|Common";
+  if (26 <= num && num < 40) return "Whirl Islands|Common";
+  if (40 <= num && num < 57) return "Victory Road|Uncommon";
+  if (57 <= num && num < 75) return "Forest Route|Uncommon";
+  if (75 <= num && num < 90) return "Cerulean Cave|Rare";
+  if (90 <= num && num < 99) return "Mt.Silver|Epic";
+  if (num >= 99) return "Dragons Den|Legendary";
 
   console.log(num);
   return "error";
@@ -334,16 +492,35 @@ const startGameIfReady = () => {
   }
 };
 
-const endBattle = () => {
+const endBattle = (index) => {
   console.log("ending the battle");
   battleStart = false;
   readyToBattle = 0;
-  battle = null;
+  battle[index] = null;
 };
 
 const endWildBattle = (index) => {
   console.log("ending the battle");
   wildBattles[index] = null;
+};
+
+const endGame = () => {
+  sendLobby.round = lobby.round;
+  sendLobby.newRound = lobby.newRound;
+
+  lobby.players.map((player, index) => {
+    sendLobby.players[index] = {
+      name: player.name,
+      score: player.score,
+      monCaught: player.monCaught,
+      candiesSpent: player.candiesSpent,
+      npcBattlesWon: player.npcBattlesWon,
+      playerBattlesWon: player.playerBattlesWon,
+      ready: player.ready,
+    };
+  });
+
+  io.emit("game-finish", sendLobby);
 };
 
 httpServer.listen(3001);

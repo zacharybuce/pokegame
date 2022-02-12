@@ -1,21 +1,18 @@
-import { Box, Grid, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import React from "react";
-import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+import PlayerDisplayCard from "./PlayerDisplayCard";
+
 const PlayerDisplay = ({ lobby }) => {
   return (
-    <Grid container>
+    <Box sx={{ ml: "7vw" }}>
       {lobby.players.map((player) => {
         return (
-          <Grid item xs={12}>
-            <Box sx={{ textAlign: "center", mb: "5vh" }}>
-              <Typography>{player.name.replace(/['"]+/g, "")}</Typography>
-              <Typography>{player.score}</Typography>
-              {player.ready ? <CheckCircleOutlineIcon /> : "..."}
-            </Box>
-          </Grid>
+          <Box sx={{ mb: "1vh" }}>
+            <PlayerDisplayCard player={player} />
+          </Box>
         );
       })}
-    </Grid>
+    </Box>
   );
 };
 

@@ -11,7 +11,14 @@ import {
   CircularProgress,
 } from "@mui/material";
 
-const Board = ({ id, handleClose, setMoney, setCandies, rarity }) => {
+const Board = ({
+  id,
+  handleClose,
+  setMoney,
+  setCandies,
+  rarity,
+  setBattleMusic,
+}) => {
   const socket = useSocket();
   const [player1, setPlayer1] = useState();
   const [team, setTeam] = useState();
@@ -20,14 +27,16 @@ const Board = ({ id, handleClose, setMoney, setCandies, rarity }) => {
   const [winner, setWinner] = useState(null);
   const [candyReward, setCandyReward] = useState(0);
   const [moneyReward, setMoneyReward] = useState(0);
+  const [pointReward, setPointReward] = useState(0);
   const [hasSelected, setHasSelected] = useState();
   const [animsDone, setAnimsDone] = useState(true);
+  const [monKOed, setMonKOed] = useState(0);
 
   const fieldUpdate = () => {
     if (socket === undefined) return;
 
     socket.on("update", (fieldUpdate) => setField(fieldUpdate));
-    console.log(field);
+    //console.log(field);
     return () => socket.off("update");
   };
 
@@ -67,6 +76,7 @@ const Board = ({ id, handleClose, setMoney, setCandies, rarity }) => {
     if (socket === undefined) return;
 
     socket.on("update", (fieldUpdate) => setField(fieldUpdate));
+    if (field && setBattleMusic) setBattleMusic(true);
     console.log(field);
     setHasSelected(false);
     return () => socket.off("update");
@@ -90,6 +100,14 @@ const Board = ({ id, handleClose, setMoney, setCandies, rarity }) => {
       setMoneyReward(money);
       setMoney((prevState) => prevState + money);
       setCandies((prevState) => prevState + candies * len);
+      if (winner) {
+        socket.emit("won-a-player-battle", id, 1);
+        setPointReward((prevState) => prevState + 2);
+        socket.emit("mon-knocked-out", id, 1);
+      }
+      console.log("kos " + monKOed);
+      setPointReward((prevState) => prevState + monKOed);
+      socket.emit("mon-knocked-out", id, monKOed);
     } else if (winner) {
       let battleCandies = 0;
       let battleMoney = 0;
@@ -97,22 +115,27 @@ const Board = ({ id, handleClose, setMoney, setCandies, rarity }) => {
         case "Common":
           battleCandies = 2;
           battleMoney = 500;
+
           break;
         case "Uncommon":
           battleCandies = 2;
           battleMoney = 850;
+
           break;
         case "Rare":
           battleCandies = 2;
           battleMoney = 1000;
+
           break;
         case "Epic":
           battleCandies = 3;
           battleMoney = 1000;
+
           break;
         case "Legendary":
           battleCandies = 4;
           battleMoney = 1000;
+
           break;
       }
 
@@ -120,13 +143,14 @@ const Board = ({ id, handleClose, setMoney, setCandies, rarity }) => {
       setCandies((prevState) => prevState + battleCandies);
       setCandyReward(battleCandies);
       setMoneyReward(battleMoney);
+      socket.emit("won-a-npc-battle", id, 1);
+      setPointReward(2);
     } else {
       setCandyReward(1);
       setMoneyReward(0);
       setMoney((prevState) => prevState + 0);
       setCandies((prevState) => prevState + 1);
     }
-
     setWinner(winner);
   };
 
@@ -141,6 +165,8 @@ const Board = ({ id, handleClose, setMoney, setCandies, rarity }) => {
           setBattleEnd={setBattleEnd}
           setRewards={setRewards}
           setAnimsDone={setAnimsDone}
+          setMonKOed={setMonKOed}
+          monKOed={monKOed}
         />
       ) : (
         <Box sx={{ textAlign: "center", mt: "10vh", mb: "10vh" }}>
@@ -173,7 +199,7 @@ const Board = ({ id, handleClose, setMoney, setCandies, rarity }) => {
           )}
         </div>
       )}
-      <Dialog maxWidth={"sm"} open={battleEnd}>
+      <Dialog maxWidth={"sm"} fullWidth open={battleEnd}>
         <Box sx={{ p: 5, textAlign: "center" }}>
           <Typography variant="h2">
             You {winner ? "Won the Battle!" : "Lost..."}
@@ -185,8 +211,15 @@ const Board = ({ id, handleClose, setMoney, setCandies, rarity }) => {
             </Typography>
             <Typography variant="h6">Money: {moneyReward}</Typography>
             <Typography variant="h6">Candies: {candyReward}</Typography>
+            <Typography variant="h6">Points: {pointReward}</Typography>
           </Box>
-          <Button variant="contained" onClick={() => handleClose()}>
+          <Button
+            variant="contained"
+            onClick={() => {
+              if (setBattleMusic) setBattleMusic(false);
+              handleClose();
+            }}
+          >
             Close Battle
           </Button>
         </Box>

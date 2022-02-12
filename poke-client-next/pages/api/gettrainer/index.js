@@ -3,9 +3,9 @@ const TrainerData = require("../../../../Stats/trainer.json");
 const getTrainer = (TR, round) => {
   var leg = "";
 
-  if (round <= 4) leg = "Leg1";
-  if (round >= 5 && round <= 8) leg = "Leg2";
-  if (round >= 9 && round <= 12) leg = "Leg3";
+  if (round <= 6) leg = "Leg1";
+  if (round >= 7 && round <= 12) leg = "Leg2";
+  if (round >= 13) leg = "Leg3";
 
   const trainers = TrainerData[TR][leg];
   let randTrainer = Math.floor(Math.random() * trainers.length);

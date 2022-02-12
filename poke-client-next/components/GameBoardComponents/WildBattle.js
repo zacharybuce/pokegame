@@ -13,6 +13,7 @@ import { useSocket } from "../../contexts/SocketProvider";
 import CatchingPokemonIcon from "@mui/icons-material/CatchingPokemon";
 import { useSnackbar } from "notistack";
 import Board from "../Board";
+import TeamWildArea from "./TeamWildArea";
 const WildBattle = ({
   id,
   balls,
@@ -22,6 +23,10 @@ const WildBattle = ({
   setBox,
   handleClose,
   round,
+  team,
+  setTeam,
+  candies,
+  setBag,
 }) => {
   const [wildAreas, setWildAreas] = useState(null);
   const [areaChoice, setAreaChoice] = useState(null);
@@ -47,6 +52,7 @@ const WildBattle = ({
 
   useEffect(() => {
     socket.emit("get-wild-areas", id);
+    console.log("asking");
     setAreaChoice(null);
   }, []);
 
@@ -54,10 +60,17 @@ const WildBattle = ({
     if (areaChoice !== null) {
       if (!areaChoice.startsWith("Trainer")) getWildMon();
       else {
-        if (round >= 5) {
+        if (round >= 8 && round < 13) {
           const evs = genEvs();
           let newTeam = oppTeam;
           newTeam[0].evs = evs;
+          newTeam[0].level = 23;
+          setOppTeam(newTeam);
+        } else if (round >= 13) {
+          const evs = genEvs();
+          let newTeam = oppTeam;
+          newTeam[0].evs = evs;
+          newTeam[0].level = 25;
           setOppTeam(newTeam);
         }
         socket.emit("start-wild-battle", id, "Opponent", oppTeam);
@@ -67,9 +80,7 @@ const WildBattle = ({
   }, [areaChoice]);
 
   useEffect(() => {
-    console.log("in useEffect");
     if (socket === undefined) return;
-
     socket.on("wild-area-options", (options) => {
       setWildAreas(options);
       console.log(options);
@@ -87,8 +98,11 @@ const WildBattle = ({
         process.env.NEXT_PUBLIC_ROOT_URL + "/api/genmon/" + mon
       );
       const json = await res.json();
-
-      setOppTeam([json.data]);
+      var team = json.data;
+      if (!team.moves && team.newMoves) {
+        team.moves = team.newMoves;
+      }
+      setOppTeam([team]);
       setAreaChoice(name);
     }
   };
@@ -103,6 +117,7 @@ const WildBattle = ({
       }
     );
     setCandies((prevState) => prevState + ((wildMon.level - 20) / 5 + 1) * 2);
+    socket.emit("update-score", id, 1);
     handleClose();
   };
 
@@ -118,7 +133,7 @@ const WildBattle = ({
     var mon = pokeData.data;
     console.log(pokeData.data);
 
-    if (round >= 5) {
+    if (round >= 7) {
       const evs = genEvs();
       mon.evs = evs;
     }
@@ -145,6 +160,7 @@ const WildBattle = ({
       enqueueSnackbar(`The wild ${wildMon.species} was caught!`, {
         variant: "success",
       });
+      socket.emit("caught-a-mon", id, 1);
       setCandies((prevState) => prevState + ((wildMon.level - 20) / 5 + 1));
       handleClose();
     } else {
@@ -173,22 +189,27 @@ const WildBattle = ({
   if (!areaChoice)
     return (
       <Box sx={{ backgroundColor: "#fafafa" }}>
-        <DialogTitle>Choose a Wild Area to go to</DialogTitle>
+        <DialogTitle>
+          {round % 2 != 0
+            ? "Choose a Wild Area to go to"
+            : "Choose a Trainer to fight"}
+        </DialogTitle>
         <DialogContent>
           <Grid
             container
             alignItems="center"
             justifyContent="center"
             spacing={1}
-            sx={{ textAlign: "center" }}
+            sx={{ textAlign: "center", overflowY: "hidden", p: 3 }}
           >
             {wildAreas ? (
-              wildAreas.map((wildArea) => {
+              wildAreas.map((wildArea, index) => {
                 return (
                   <WildArea
                     name={wildArea}
                     chooseArea={chooseArea}
                     round={round}
+                    animTime={index * 500}
                   />
                 );
               })
@@ -196,6 +217,20 @@ const WildBattle = ({
               <div></div>
             )}
           </Grid>
+
+          {round % 2 == 0 ? (
+            <TeamWildArea
+              team={team}
+              setTeam={setTeam}
+              candies={candies}
+              setCandies={setCandies}
+              setBag={setBag}
+              setMoney={setMoney}
+              id={id}
+            />
+          ) : (
+            <div></div>
+          )}
         </DialogContent>
       </Box>
     );
@@ -216,7 +251,9 @@ const WildBattle = ({
         <Grid item xs={12} sx={{ textAlign: "center", mb: "10vh" }}>
           <img
             src={
-              "http://play.pokemonshowdown.com/sprites/ani/" +
+              (wildMon.shiny
+                ? "http://play.pokemonshowdown.com/sprites/ani-shiny/"
+                : "http://play.pokemonshowdown.com/sprites/ani/") +
               wildMon.species.replace("-", "").toLowerCase() +
               ".gif"
             }

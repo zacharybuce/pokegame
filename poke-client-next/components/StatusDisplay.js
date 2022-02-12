@@ -8,12 +8,14 @@ import HotelIcon from "@mui/icons-material/Hotel";
 import SpaIcon from "@mui/icons-material/Spa";
 import AutorenewIcon from "@mui/icons-material/Autorenew";
 import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
+import FireExtinguisherIcon from "@mui/icons-material/FireExtinguisher";
+import AcUnitIcon from "@mui/icons-material/AcUnit";
 import { Tooltip } from "@mui/material";
 const StatusDisplay = ({ statuses }) => {
   //boost atk
   //status slp
   const statusIcon = (status) => {
-    console.log(status);
+    //console.log(status);
     const tokens = status.split("|");
     if (tokens[0] == "boost") {
       switch (tokens[1]) {
@@ -50,6 +52,12 @@ const StatusDisplay = ({ statuses }) => {
         case "spa":
           return (
             <Tooltip title={"Special Attack Up"}>
+              <ArrowUpwardIcon />
+            </Tooltip>
+          );
+        case "evasion":
+          return (
+            <Tooltip title={"Evasion Up"}>
               <ArrowUpwardIcon />
             </Tooltip>
           );
@@ -132,6 +140,12 @@ const StatusDisplay = ({ statuses }) => {
               <HotelIcon key={"slp"} />
             </Tooltip>
           );
+        case "frz":
+          return (
+            <Tooltip title={"Frozen"}>
+              <AcUnitIcon key={"frz"} />
+            </Tooltip>
+          );
       }
     }
 
@@ -196,10 +210,16 @@ const StatusDisplay = ({ statuses }) => {
               <ChangeCircleIcon />
             </Tooltip>
           );
+        case "ability: Flash Fire":
+          return (
+            <Tooltip title={"Flash Fire - 1.5 x Attack"}>
+              <FireExtinguisherIcon />
+            </Tooltip>
+          );
       }
     }
   };
-  console.log(statuses);
+  //console.log(statuses);
   return (
     <div>
       {statuses.length ? (

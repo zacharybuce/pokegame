@@ -39,6 +39,23 @@ const evolvePokemon = (poke) => {
       evoData.ability = abilities[rand];
     }
   }
+  let bst = 0;
+
+  if (evoSpecies.length >= 1) {
+    bst = Dex.species.get(evo).bst;
+  } else {
+    bst = Dex.species.get(poke).bst;
+  }
+
+  if (evoSpecies.length >= 1) {
+    if (bst < 400) evoData.levelUp = 5;
+    if (400 <= bst && bst < 500) evoData.levelUp = 3;
+    if (500 <= bst) evoData.levelUp = 2;
+  } else {
+    if (bst < 400) evoData.levelUp = 10;
+    if (400 <= bst && bst < 500) evoData.levelUp = 7;
+    if (500 <= bst) evoData.levelUp = 3;
+  }
 
   return evoData;
 };

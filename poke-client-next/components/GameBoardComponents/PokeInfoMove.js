@@ -91,7 +91,11 @@ const PokeInfoMove = ({ move }) => {
         >
           <Typography>{move}</Typography>
         </AccordionSummary>
-        <AccordionDetails sx={{ color: "fafafa" }}>
+        <AccordionDetails
+          sx={{
+            color: "fafafa",
+          }}
+        >
           <Grid container>
             <Grid item xs={6}>
               <Typography>
@@ -116,7 +120,7 @@ const PokeInfoMove = ({ move }) => {
             </Grid>
             <Grid item xs={12}>
               <Typography>
-                <b>Desc:</b> {JSON.stringify(moveInfo.shortDesc)}
+                <b>Desc:</b> {JSON.stringify(moveInfo.desc)}
               </Typography>
             </Grid>
           </Grid>

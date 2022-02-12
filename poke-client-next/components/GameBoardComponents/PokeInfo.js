@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
 import { styled } from "@mui/material/styles";
 import PokeInfoMove from "./PokeInfoMove";
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 
 const HtmlTooltip = styled(({ className, ...props }) => (
   <Tooltip {...props} classes={{ popper: className }} />
@@ -112,8 +114,14 @@ const PokeInfo = ({ poke, setEditing, takeItem }) => {
         <HtmlTooltip
           title={
             <React.Fragment>
-              <Typography color="error">{minus}</Typography>
-              <Typography color="green">{plus}</Typography>
+              <Typography color="green">
+                {plus}
+                <ArrowUpwardIcon />
+              </Typography>
+              <Typography color="error">
+                {minus}
+                <ArrowDownwardIcon />
+              </Typography>
             </React.Fragment>
           }
         >
@@ -124,53 +132,77 @@ const PokeInfo = ({ poke, setEditing, takeItem }) => {
 
     return (
       <Grid container spacing={1}>
-        <Grid item xs={3}>
-          <Typography>
-            Type:{" "}
-            {poke.types.map((type) => (
-              <Box component="span" sx={{ color: typeColor(type) }}>
-                {type}{" "}
-              </Box>
-            ))}
-          </Typography>
+        <Grid
+          item
+          container
+          sx={12}
+          sx={{ backgroundColor: "#d9d9d9", boxShadow: 2, borderRadius: 1 }}
+        >
+          <Grid item xs={3} sx={{ p: 1 }}>
+            <Typography>
+              Type:{" "}
+              {poke.types.map((type) => (
+                <Box component="span" sx={{ color: typeColor(type) }}>
+                  {type}{" "}
+                </Box>
+              ))}
+            </Typography>
+          </Grid>
+          <Grid item xs={3} sx={{ p: 1 }}>
+            <Typography>
+              Item: {poke.item.split("|")[0]}{" "}
+              {poke.item ? (
+                <Button onClick={() => takeItem()} color="error">
+                  Take
+                </Button>
+              ) : (
+                <div></div>
+              )}
+            </Typography>
+          </Grid>
+          <Grid item xs={3} sx={{ p: 1 }}>
+            <Typography>Ability: {ability}</Typography>
+          </Grid>
+          <Grid item xs={3} sx={{ p: 1 }}>
+            <Typography>Nature: {nature}</Typography>
+          </Grid>
         </Grid>
-        <Grid item xs={3}>
-          <Typography>
-            Item: {poke.item.split("|")[0]}{" "}
-            {poke.item ? (
-              <Button onClick={() => takeItem()} color="error">
-                Take
-              </Button>
-            ) : (
-              <div></div>
-            )}
-          </Typography>
-        </Grid>
-        <Grid item xs={3}>
-          <Typography>Ability: {ability}</Typography>
-        </Grid>
-        <Grid item xs={3}>
-          <Typography>Nature: {nature}</Typography>
-        </Grid>
-        <Grid item xs={12} sx={{ mt: "1vh" }}>
-          <Typography variant="h6">
-            Moves{" "}
+        <Grid item container xs={12} spacing={1} sx={{ mt: "1vh" }}>
+          <Grid item xs={12} sx={{ mb: "1vh" }}>
+            <Box
+              component="span"
+              sx={{
+                p: 1,
+                backgroundColor: "#98c8e0",
+                borderRadius: 1,
+                border: "solid",
+                borderLeftWidth: "0px",
+                fontSize: "20px",
+                boxShadow: 2,
+                width: "100px",
+                textAlign: "center",
+                borderColor: "gray",
+              }}
+            >
+              Moves
+            </Box>
             <Button
               onClick={() => setEditing(true)}
               variant="contained"
               disabled={!poke.newMoves}
+              sx={{ ml: "1vw" }}
             >
               Edit
             </Button>
-          </Typography>{" "}
+          </Grid>
+          {poke.moves.map((move) => {
+            return (
+              <Grid item xs={6}>
+                <PokeInfoMove move={move} />
+              </Grid>
+            );
+          })}
         </Grid>
-        {poke.moves.map((move) => {
-          return (
-            <Grid item xs={6}>
-              <PokeInfoMove move={move} />
-            </Grid>
-          );
-        })}
       </Grid>
     );
   }
