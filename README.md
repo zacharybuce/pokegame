@@ -12,11 +12,11 @@
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-<p>Battle System uses the [Pokemon Showdown Simulator](https://github.com/smogon/pokemon-showdown/tree/master/sim)</p>
-<p>Pokemon gifs are from [pokemonshowdown/sprites](https://play.pokemonshowdown.com/sprites/)</p>
-<p>Pokemon icons are from [msikma/pokesprite-spritesheet](https://github.com/msikma/pokesprite-spritesheet/)</p>
-<p>Background gif is by [@emimonserrate](https://twitter.com/emimonserrate) and NOT MINE</p>
-<p>Music is [Pokemon Reorchestrated](https://twitter.com/pkmnreorch) by Braxton Burks|Materia Collective</p>
+* Battle System uses the [Pokemon Showdown Simulator](https://github.com/smogon/pokemon-showdown/tree/master/sim)
+* Pokemon gifs are from [pokemonshowdown/sprites](https://play.pokemonshowdown.com/sprites/)
+* Pokemon icons are from [msikma/pokesprite-spritesheet](https://github.com/msikma/pokesprite-spritesheet/)
+* Background gif is by [@emimonserrate](https://twitter.com/emimonserrate) and NOT MINE
+* Music is [Pokemon Reorchestrated](https://twitter.com/pkmnreorch) by Braxton Burks|Materia Collective
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
