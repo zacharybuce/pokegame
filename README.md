@@ -22,6 +22,7 @@
 ## About The Project
 
 A round-based game where you battle other players and create the best team possible. Over the course of 19 rounds you and other players compete to win the most points by catching Pokemon, besting trainers, and battling other players. You randomly encounter different Pokemon and trainers every play-through, creating endless replayability.
+Can only be played with an even amount of players.
 
 <h3>Round 1 - Choosing your Starter</h3>
 Choose between the original gen 1 starters or make it completley random in the pre-game settings.
@@ -66,6 +67,19 @@ Front-End
 Server  
 * [Socket.io](https://github.com/socketio/socket.io)
 
+## How to Run
+There are two servers that need to be run- PokeServerExpress and the poke-client-next. You can run each by using `npm run dev`. Requires you to have node installed.  
+
+For the client you need to create .env.local with the following:  
+`NEXT_PUBLIC_ROOT_URL="<URL OF CLIENT>:3000"` 
+`NEXT_PUBLIC_SERVER_URL="<URL OF SERVER>:3001"`  
+
+The url should be `http://<localhost or ip>:PORT` 
+To play with other people you need to either be on the same network, use a virtual LAN like hamachi, or port forward. You supply different links depending  
+
+For the Server you can edit the `setup.json` and change the ip field to the ip you want the server to start on. It starts on port 3001.
+
+To restart the game, have everyone refresh the page in their browser then just crtl-s on any file in the server, because of nodemon it will restart the server and the game.
 <!-- LICENSE -->
 ## License
 
