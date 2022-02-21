@@ -26,6 +26,7 @@ const PokemonPiece = ({
   setBag,
   setMoney,
   id,
+  inBox,
 }) => {
   const socket = useSocket();
   const [open, setOpen] = useState(false);
@@ -87,13 +88,17 @@ const PokemonPiece = ({
   };
 
   const increaseEVs = (evs) => {
-    const filteredTeam = team.filter(
-      (mem) => JSON.stringify(mem) != JSON.stringify(poke)
-    );
+    var filteredTeam = team;
     var newMon = poke;
-    newMon.evs = evs;
 
-    setTeam([...filteredTeam, newMon]);
+    filteredTeam.forEach((mem, index) => {
+      if (JSON.stringify(mem) == JSON.stringify(poke)) {
+        newMon.evs = evs;
+        filteredTeam[index] = newMon;
+      }
+    });
+
+    setTeam([...filteredTeam]);
   };
 
   const stars = () => {
@@ -132,35 +137,50 @@ const PokemonPiece = ({
     mon.newMoves = mon.newMoves.concat(evo.newMoves);
     if (evo.types) mon.types = evo.types;
     if (evo.ability) mon.ability = evo.ability;
-    const filteredTeam = team.filter(
-      (mem) => JSON.stringify(mem) != JSON.stringify(poke)
-    );
-    setTeam([...filteredTeam, mon]);
+
+    var filteredTeam = team;
+
+    filteredTeam.forEach((mem, index) => {
+      if (JSON.stringify(mem) == JSON.stringify(poke)) {
+        filteredTeam[index] = mon;
+      }
+    });
+
+    setTeam([...filteredTeam]);
+
     handleClose();
   };
 
   //submit for move changes
   const handleSubmit = (moves, newMoves) => {
-    const filteredTeam = team.filter(
-      (mem) => JSON.stringify(mem) != JSON.stringify(poke)
-    );
-
+    var filteredTeam = team;
     var newMon = poke;
-    newMon.moves = moves;
-    newMon.newMoves = newMoves;
-    setTeam([...filteredTeam, newMon]);
+
+    filteredTeam.forEach((mem, index) => {
+      if (JSON.stringify(mem) == JSON.stringify(poke)) {
+        newMon.moves = moves;
+        newMon.newMoves = newMoves;
+        filteredTeam[index] = newMon;
+      }
+    });
+
+    setTeam([...filteredTeam]);
     setEditing(false);
   };
 
   const takeItem = () => {
     console.log("taking item: " + poke.item);
     setBag((prevState) => [...prevState, poke.item]);
-    const filteredTeam = team.filter(
-      (mem) => JSON.stringify(mem) != JSON.stringify(poke)
-    );
+    var filteredTeam = team;
     var newMon = poke;
-    newMon.item = "";
-    setTeam([...filteredTeam, newMon]);
+    filteredTeam.forEach((mem, index) => {
+      if (JSON.stringify(mem) == JSON.stringify(poke)) {
+        newMon.item = "";
+        filteredTeam[index] = newMon;
+      }
+    });
+
+    setTeam([...filteredTeam]);
   };
 
   const releaseMon = (reward) => {
@@ -255,7 +275,7 @@ const PokemonPiece = ({
                   <Tooltip title="Release this Pokemon for 1 candy">
                     <Button
                       onClick={() => releaseMon("candy")}
-                      disabled={team.length == 1}
+                      disabled={team.length == 1 && !inBox}
                       variant="contained"
                       color="error"
                     >
@@ -267,7 +287,7 @@ const PokemonPiece = ({
                   <Tooltip title="Release this Pokemon for 500 Money">
                     <Button
                       onClick={() => releaseMon("money")}
-                      disabled={team.length == 1}
+                      disabled={team.length == 1 && !inBox}
                       variant="contained"
                       color="error"
                     >

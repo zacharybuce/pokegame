@@ -104,7 +104,7 @@
   },
   "Cerulean Cave": {
     "pokemon": ["Omanyte", "Kabuto", "Lickitung", "Aerodactyl", "Snorlax"],
-    "rates": [30, 30, 20, 19, 1]
+    "rates": [32, 32, 25, 10, 1]
   },
   "Mt.Silver": {
     "pokemon": ["Misdreavus", "Natu", "Skarmory", "Axew", "Larvitar"],

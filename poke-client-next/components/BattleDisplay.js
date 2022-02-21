@@ -14,14 +14,17 @@ export const BattleDisplay = ({
   setRewards,
   setAnimsDone,
   setMonKOed,
+  p2PokeHealth,
+  setP2PokeHealth,
 }) => {
   const { enqueueSnackbar } = useSnackbar();
+  const [p1Name, setP1Name] = useState();
+  const [p2Name, setP2Name] = useState();
   const [p1Poke, setP1Poke] = useState(null);
   const [p1PokeShiny, setP1PokeShiny] = useState(false);
   const [p2Poke, setP2Poke] = useState(null);
   const [p2PokeShiny, setP2PokeShiny] = useState(false);
   const [p1PokeHealth, setP1PokeHealth] = useState(100);
-  const [p2PokeHealth, setP2PokeHealth] = useState(100);
   const [p1PokeStatus, setP1PokeStatus] = useState([]);
   const [p2PokeStatus, setP2PokeStatus] = useState([]);
   const [weather, setWeather] = useState("none");
@@ -49,6 +52,16 @@ export const BattleDisplay = ({
 
     for (const token of stream) {
       snackDisplay(token);
+
+      //set player names
+      if (token.startsWith("|player|p1")) {
+        var splitToken = token.split("|");
+        setP1Name(splitToken[3].replace(/['"]+/g, ""));
+      }
+      if (token.startsWith("|player|p2")) {
+        var splitToken = token.split("|");
+        setP2Name(splitToken[3].replace(/['"]+/g, ""));
+      }
 
       //Set the images and health on switches
       if (token.startsWith("|switch|p1a:") || token.startsWith("|drag|p1a:")) {
@@ -891,6 +904,9 @@ export const BattleDisplay = ({
           <Grid item xs={3} sx={{ pt: "4px" }}>
             <WeatherDisplay weather={weather} />
           </Grid>
+        </Grid>
+        <Grid item container justifyContent="flex-end" xs={9}>
+          <Typography>{player1 ? p2Name : p1Name}</Typography>
         </Grid>
         <Grid item container sx={{ height: "140px" }}>
           <Grid item xs={6}>

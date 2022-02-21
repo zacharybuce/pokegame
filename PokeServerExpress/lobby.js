@@ -7,9 +7,11 @@ import { Server } from "socket.io";
 import { createServer } from "http";
 import Battle from "./battle.js";
 import WildBattle from "./wildbattle.js";
+import Trade from "./trade.js";
 import { readFile } from "fs/promises";
 
 const monList = JSON.parse(await readFile("../Stats/pokemon.json"));
+const setup = JSON.parse(await readFile("./setup.json"));
 
 const httpServer = createServer();
 const io = new Server(httpServer, {
@@ -35,6 +37,7 @@ var gameStart = false;
 var battleStart = false;
 var battle = [];
 var wildBattles = [];
+var trades = [];
 var starterRule = "Classic";
 var wildAreaRule = "Classic";
 var starters = [];
@@ -193,6 +196,13 @@ io.on("connection", (socket) => {
 
   //A player starts a battle with a npc trainer
   socket.on("start-wild-battle", async (id, opponent, oppTeam) => {
+    const used = process.memoryUsage();
+    for (let key in used) {
+      console.log(
+        `${key} ${Math.round((used[key] / 1024 / 1024) * 100) / 100} MB`
+      );
+    }
+
     let index = 0;
     for (let i = 0; i < lobby.players.length; i++) {
       if (id == lobby.players[i].name.replace(/['"]+/g, "")) {
@@ -204,6 +214,7 @@ io.on("connection", (socket) => {
       }
     }
 
+    //the team of the player
     let firstP1 = [lobby.players[index].team[0]];
 
     wildBattles[index] = new WildBattle(
@@ -261,7 +272,7 @@ io.on("connection", (socket) => {
     for (let i = 0; i < lobby.players.length; i++) {
       if (id == lobby.players[i].name.replace(/['"]+/g, "")) {
         lobby.players[i].npcBattlesWon += amount;
-        lobby.players[i].score += 2;
+        lobby.players[i].score += 1;
       }
     }
     lobbyUpdate();
@@ -496,12 +507,44 @@ const endBattle = (index) => {
   console.log("ending the battle");
   battleStart = false;
   readyToBattle = 0;
+
+  if (lobby.round < 18) {
+    //start trade
+    trades[index] = new Trade(
+      io,
+      battle[index].socket1,
+      battle[index].socket2,
+      index,
+      endTrade
+    );
+    trades[index].startTrade();
+  }
+
   battle[index] = null;
+
+  const used = process.memoryUsage();
+  for (let key in used) {
+    console.log(
+      `${key} ${Math.round((used[key] / 1024 / 1024) * 100) / 100} MB`
+    );
+  }
 };
 
 const endWildBattle = (index) => {
   console.log("ending the battle");
   wildBattles[index] = null;
+
+  const used = process.memoryUsage();
+  for (let key in used) {
+    console.log(
+      `${key} ${Math.round((used[key] / 1024 / 1024) * 100) / 100} MB`
+    );
+  }
+};
+
+const endTrade = (index) => {
+  console.log("ending the trade");
+  trades[index] = null;
 };
 
 const endGame = () => {
@@ -523,4 +566,4 @@ const endGame = () => {
   io.emit("game-finish", sendLobby);
 };
 
-httpServer.listen(3001);
+httpServer.listen(3001, setup.ip);

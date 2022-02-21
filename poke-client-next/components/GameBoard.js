@@ -16,6 +16,7 @@ import Sound from "react-sound";
 const PokeDisplay = dynamic(import("./GameBoardComponents/PokeDisplay"));
 import { styled } from "@mui/material/styles";
 import NextRoundDialog from "./GameBoardComponents/NextRoundDialog";
+import TradeDialog from "./GameBoardComponents/TradeDialog";
 
 const RoundContainer = styled("div")(({ theme }) => ({
   marginRight: "7vw",
@@ -31,11 +32,15 @@ const RoundContainer = styled("div")(({ theme }) => ({
 const AppContainer = styled("div")(({ theme }) => ({
   marginRight: "7vw",
   marginLeft: "7vw",
-  marginBottom: "7vh",
+  // marginBottom: "7vh",
   // paddingTop: "1vh",
   [theme.breakpoints.up("xl")]: {
     marginRight: "24vw",
     marginLeft: "24vw",
+  },
+  [theme.breakpoints.down("md")]: {
+    marginRight: "2vw",
+    marginLeft: "2vw",
   },
 }));
 
@@ -69,6 +74,8 @@ const GameBoard = ({ id }) => {
   const [songStatus, setSongStatus] = useState(Sound.status.PLAYING);
   const [battleMusic, setBattleMusic] = useState(false);
   const [newRoundDialog, setNewRoundDialog] = useState(false);
+  const [tradeDialogOpen, setTradeDialogOpen] = useState(false);
+  const [tradeInfo, setTradeInfo] = useState([]);
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -152,6 +159,28 @@ const GameBoard = ({ id }) => {
     return () => socket.off("lobby-update");
   }, [socket, lobby]);
 
+  //check for trades
+  useEffect(() => {
+    if (socket === undefined) return;
+
+    socket.on("start-trade", (player1, player2) => {
+      setTradeDialogOpen(true);
+      let isP1 = false;
+
+      if (player1.replace(/['"]+/g, "") == id) {
+        console.log("you are p1");
+        isP1 = true;
+      } else {
+        console.log("you are p2");
+        isP1 = false;
+      }
+
+      setTradeInfo([player1, player2, isP1]);
+    });
+
+    return () => socket.off("start-trade");
+  }, [socket, lobby]);
+
   //game finish
   useEffect(() => {
     if (socket === undefined) return;
@@ -177,6 +206,14 @@ const GameBoard = ({ id }) => {
 
     socket.emit("update-team", id, newTeam);
   }, [team]);
+
+  useEffect(() => {
+    if (!lobby) return;
+
+    if (roundParse() == "trainer" && roundDone) {
+      socket.emit("ready-to-trade", id);
+    }
+  }, [roundDone]);
 
   const endTurn = () => {
     if (roundDone) {
@@ -230,7 +267,7 @@ const GameBoard = ({ id }) => {
   };
 
   return (
-    <div>
+    <Box sx={{ overflow: "hidden" }}>
       <RoundContainer>
         <Box
           sx={{
@@ -407,8 +444,25 @@ const GameBoard = ({ id }) => {
           open={newRoundDialog}
           setOpen={setNewRoundDialog}
         />
+        {tradeInfo.length ? (
+          <TradeDialog
+            p1={tradeInfo[0]}
+            p2={tradeInfo[1]}
+            isP1={tradeInfo[2]}
+            id={id}
+            dialogOpen={tradeDialogOpen}
+            setDialogOpen={setTradeDialogOpen}
+            team={team}
+            box={box}
+            setTeam={setTeam}
+            setBox={setBox}
+            setTradeInfo={setTradeInfo}
+          />
+        ) : (
+          <div></div>
+        )}
       </AppContainer>
-    </div>
+    </Box>
   );
 };
 

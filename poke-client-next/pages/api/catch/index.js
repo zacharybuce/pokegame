@@ -1,6 +1,7 @@
-const { Teams, Dex } = require("pokemon-showdown");
+const { Dex } = require("pokemon-showdown");
 
-const catchMon = (mon) => {
+const catchMon = (data) => {
+  let mon = data.pokemon;
   let bst = Dex.species.get(mon.species.toLowerCase()).bst;
   let rand = Math.floor(Math.random() * 1001);
 
@@ -11,6 +12,8 @@ const catchMon = (mon) => {
 
   console.log("bst: " + bst);
   console.log("rand: " + rand);
+  console.log("currHp: " + data.currentHp);
+  rand += 100 - data.currentHp;
   if (rand > bst) return true;
 
   return false;

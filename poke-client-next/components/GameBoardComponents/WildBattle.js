@@ -33,6 +33,7 @@ const WildBattle = ({
   const [wildMon, setWildMon] = useState("mon");
   const [trainerBattle, setTrainerBattle] = useState(false);
   const [oppTeam, setOppTeam] = useState();
+  const [chooseTClass, setChooseTClass] = useState();
   const { enqueueSnackbar } = useSnackbar();
   const socket = useSocket();
   const fakeOpp = [
@@ -73,7 +74,7 @@ const WildBattle = ({
           newTeam[0].level = 25;
           setOppTeam(newTeam);
         }
-        socket.emit("start-wild-battle", id, "Opponent", oppTeam);
+        socket.emit("start-wild-battle", id, chooseTClass, oppTeam);
         setTrainerBattle(true);
       }
     }
@@ -138,16 +139,34 @@ const WildBattle = ({
       mon.evs = evs;
     }
     setWildMon(mon);
+    let newTeam = [mon];
+    if (round >= 8 && round < 13) {
+      const evs = genEvs();
+      newTeam[0].evs = evs;
+      newTeam[0].level = 23;
+    } else if (round >= 13) {
+      const evs = genEvs();
+      newTeam[0].evs = evs;
+      newTeam[0].level = 25;
+    }
+
+    console.log(newTeam);
+    socket.emit("start-wild-battle", id, "Wild Battle", newTeam);
+    setTrainerBattle(true);
   };
 
-  const throwBall = async () => {
+  const throwBall = async (hp) => {
+    let send = {
+      pokemon: wildMon,
+      currentHp: hp,
+    };
     const res = await fetch(process.env.NEXT_PUBLIC_ROOT_URL + "/api/catch", {
       method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(wildMon),
+      body: JSON.stringify(send),
     });
 
     const data = await res.json();
@@ -161,7 +180,8 @@ const WildBattle = ({
         variant: "success",
       });
       socket.emit("caught-a-mon", id, 1);
-      setCandies((prevState) => prevState + ((wildMon.level - 20) / 5 + 1));
+      socket.emit("end-wild-battle", id);
+      setCandies((prevState) => prevState + 1);
       handleClose();
     } else {
       enqueueSnackbar(`The wild ${wildMon.species} was not caught...`, {
@@ -210,6 +230,8 @@ const WildBattle = ({
                     chooseArea={chooseArea}
                     round={round}
                     animTime={index * 500}
+                    chooseTClass={chooseTClass}
+                    setChooseTClass={setChooseTClass}
                   />
                 );
               })
@@ -218,85 +240,94 @@ const WildBattle = ({
             )}
           </Grid>
 
-          {round % 2 == 0 ? (
-            <TeamWildArea
-              team={team}
-              setTeam={setTeam}
-              candies={candies}
-              setCandies={setCandies}
-              setBag={setBag}
-              setMoney={setMoney}
-              id={id}
-            />
-          ) : (
-            <div></div>
-          )}
+          <TeamWildArea
+            team={team}
+            setTeam={setTeam}
+            candies={candies}
+            setCandies={setCandies}
+            setBag={setBag}
+            setMoney={setMoney}
+            id={id}
+          />
         </DialogContent>
       </Box>
     );
 
   if (wildMon.species)
+    // return (
+    //   <Grid container sx={{ p: 1 }} spacing={1}>
+    //     <Grid item xs={12} sx={{ textAlign: "center", mb: "10vh" }}>
+    //       <Typography variant="h4">
+    //         A Wild {wildMon.species} Appeared!
+    //       </Typography>
+    //     </Grid>
+    //     <Grid item xs={12} sx={{ textAlign: "center", mb: "2vh" }}>
+    //       <Typography variant="h6">
+    //         {wildMon.species} Lvl {wildMon.level}
+    //       </Typography>
+    //     </Grid>
+    //     <Grid item xs={12} sx={{ textAlign: "center", mb: "10vh" }}>
+    //       <img
+    //         src={
+    //           (wildMon.shiny
+    //             ? "http://play.pokemonshowdown.com/sprites/ani-shiny/"
+    //             : "http://play.pokemonshowdown.com/sprites/ani/") +
+    //           wildMon.species.replace("-", "").toLowerCase() +
+    //           ".gif"
+    //         }
+    //       />
+    //     </Grid>
+    //     <Grid item xs={12}>
+    //       <Tooltip title="Balls in your bag" placement="top-start">
+    //         <Box sx={{ alignItems: "center", display: "flex", ml: "2vw" }}>
+    //           <CatchingPokemonIcon /> : {balls}
+    //         </Box>
+    //       </Tooltip>
+    //     </Grid>
+    //     <Grid item xs={6}>
+    //       <Button
+    //         onClick={() => throwBall()}
+    //         fullWidth
+    //         variant="contained"
+    //         disabled={balls == 0 ? true : false}
+    //       >
+    //         Throw Ball{" "}
+    //       </Button>
+    //     </Grid>
+    //     <Grid item xs={6}>
+    //       <Button
+    //         onClick={() => handleClose()}
+    //         fullWidth
+    //         variant="contained"
+    //         color="error"
+    //       >
+    //         Run
+    //       </Button>
+    //     </Grid>
+    //     <Grid item xs={12}>
+    //       <Button
+    //         onClick={() => fightMon()}
+    //         fullWidth
+    //         variant="contained"
+    //         color="warning"
+    //       >
+    //         Fight
+    //       </Button>
+    //     </Grid>
+    //   </Grid>
+    // );
     return (
-      <Grid container sx={{ p: 1 }} spacing={1}>
-        <Grid item xs={12} sx={{ textAlign: "center", mb: "10vh" }}>
-          <Typography variant="h4">
-            A Wild {wildMon.species} Appeared!
-          </Typography>
-        </Grid>
-        <Grid item xs={12} sx={{ textAlign: "center", mb: "2vh" }}>
-          <Typography variant="h6">
-            {wildMon.species} Lvl {wildMon.level}
-          </Typography>
-        </Grid>
-        <Grid item xs={12} sx={{ textAlign: "center", mb: "10vh" }}>
-          <img
-            src={
-              (wildMon.shiny
-                ? "http://play.pokemonshowdown.com/sprites/ani-shiny/"
-                : "http://play.pokemonshowdown.com/sprites/ani/") +
-              wildMon.species.replace("-", "").toLowerCase() +
-              ".gif"
-            }
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <Tooltip title="Balls in your bag" placement="top-start">
-            <Box sx={{ alignItems: "center", display: "flex", ml: "2vw" }}>
-              <CatchingPokemonIcon /> : {balls}
-            </Box>
-          </Tooltip>
-        </Grid>
-        <Grid item xs={6}>
-          <Button
-            onClick={() => throwBall()}
-            fullWidth
-            variant="contained"
-            disabled={balls == 0 ? true : false}
-          >
-            Throw Ball{" "}
-          </Button>
-        </Grid>
-        <Grid item xs={6}>
-          <Button
-            onClick={() => handleClose()}
-            fullWidth
-            variant="contained"
-            color="error"
-          >
-            Run
-          </Button>
-        </Grid>
-        <Grid item xs={12}>
-          <Button
-            onClick={() => fightMon()}
-            fullWidth
-            variant="contained"
-            color="warning"
-          >
-            Fight
-          </Button>
-        </Grid>
-      </Grid>
+      <Box sx={{ p: 3 }}>
+        <Board
+          id={id}
+          handleClose={handleClose}
+          setMoney={setMoney}
+          setCandies={setCandies}
+          rarity={"wildmon"}
+          balls={balls}
+          throwBall={throwBall}
+        />
+      </Box>
     );
 
   if (trainerBattle)

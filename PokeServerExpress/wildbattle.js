@@ -68,18 +68,28 @@ export default class WildBattle {
   runBattle() {
     console.log("--Running Battle--");
     if (this.socket) console.log("sockets loaded");
+
     this.socket.on("send-move", (message, id) => {
-      console.log("Move from " + id + ": " + message);
-      this.stream.write(`>p1 move ${message}`);
-      console.log("wrote to sream p1");
-      this.stream.write(`>p2 move ${this.aiChoice()}`);
+      if (this.stream != null) {
+        console.log("Move from " + id + ": " + message);
+        this.stream.write(`>p1 move ${message}`);
+        console.log("wrote to sream p1");
+        this.stream.write(`>p2 move ${this.aiChoice()}`);
+      }
     });
 
     this.socket.on("send-switch", (message, id) => {
-      console.log("Switch from " + id + ": " + message);
-      console.log(this.playerArr);
-      this.stream.write(`>p1 switch ${message}`);
-      console.log("wrote to sream p1");
+      if (this.stream != null) {
+        console.log("Switch from " + id + ": " + message);
+        console.log(this.playerArr);
+        this.stream.write(`>p1 switch ${message}`);
+        console.log("wrote to sream p1");
+      }
+    });
+
+    this.socket.on("end-wild-battle", (id) => {
+      this.endBattle(this.index);
+      this.stream = null;
     });
 
     //Battle Stream

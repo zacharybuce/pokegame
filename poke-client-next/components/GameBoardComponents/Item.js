@@ -79,14 +79,18 @@ const Item = ({ name, items, team, setTeam, setItems, setMoney }) => {
 
   const giveItem = (index) => {
     var mon = team[index];
+    var filteredTeam = team;
 
-    const filteredTeam = team.filter(
-      (mem) => JSON.stringify(mem) != JSON.stringify(mon)
-    );
+    filteredTeam.forEach((mem, index) => {
+      if (JSON.stringify(mem) == JSON.stringify(mon)) {
+        mon.item = name;
+        filteredTeam[index] = mon;
+      }
+    });
+
     console.log("giving item: " + name);
-    mon.item = name;
     console.log("holding " + mon.item);
-    setTeam([...filteredTeam, mon]);
+    setTeam([...filteredTeam]);
 
     var newBag = items;
     let removed = false;

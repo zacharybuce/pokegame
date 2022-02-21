@@ -996,7 +996,7 @@
   },
   "aerodactyl2": {
     "species": "Aerodactyl",
-    "newMoves": ["Stone Edge", "Stealth Rock", "Earthquake", "Iron Head"],
+    "newMoves": ["Stone Edge", "Stealth Rock", "Bulldoze", "Iron Head"],
     "evolveCandies": "MAX"
   },
   "snorlax": {
@@ -1100,7 +1100,7 @@
   },
   "spinarak": {
     "species": "Spinarak",
-    "moves": ["Poison Sting", "Absorb", "Infestation", "Shadow Sneak"],
+    "moves": ["Poison Sting", "Mega Drain", "Infestation", "Shadow Sneak"],
     "evolveCandies": 6
   },
   "ariados": {
@@ -1712,7 +1712,7 @@
   },
   "absol2": {
     "species": "Absol",
-    "moves": ["Night Slash", "Swords Dance", "Megahorn", "Play Rough"],
+    "newMoves": ["Night Slash", "Swords Dance", "Megahorn", "Play Rough"],
     "evolveCandies": "MAX"
   },
   "wynaut": { "species": "Wynaut", "moves": [], "evolveCandies": "" },

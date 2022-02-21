@@ -224,6 +224,7 @@ const TeamDisplay = ({
                                 setBag={setBag}
                                 setMoney={setMoney}
                                 id={id}
+                                inBox
                               />
                             </Box>
                           )}

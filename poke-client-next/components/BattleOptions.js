@@ -14,8 +14,13 @@ export const BattleOptions = ({
   const [trapped, setTrapped] = useState(false);
 
   useEffect(() => {
-    if (JSON.parse(team).active) setTrapped(JSON.parse(team).active[0].trapped);
-    else setTrapped(false);
+    if (JSON.parse(team).active) {
+      if (JSON.parse(team).active[0].trapped) {
+        setTrapped(JSON.parse(team).active[0].trapped);
+      } else if (JSON.parse(team).active[0].maybeTrapped) {
+        setTrapped(JSON.parse(team).active[0].maybeTrapped);
+      }
+    } else setTrapped(false);
   }, [team]);
   //console.log(team);
 

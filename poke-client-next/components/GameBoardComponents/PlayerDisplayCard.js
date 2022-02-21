@@ -2,10 +2,44 @@ import { Box, Tooltip } from "@mui/material";
 import React from "react";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import HourglassEmptyIcon from "@mui/icons-material/HourglassEmpty";
+import PetsIcon from "@mui/icons-material/Pets";
 
-const PlayerDisplayCard = ({ player }) => {
+const PlayerDisplayCard = ({ player, underdog, round }) => {
   return (
-    <Box sx={{ width: "220px" }}>
+    <Box sx={{ width: "250px" }}>
+      <Box
+        component="span"
+        sx={{
+          position: "relative",
+          top: "9px",
+        }}
+      >
+        {underdog && round > 6 ? (
+          <Tooltip title="Underdog - Better chance at finding rare areas">
+            <PetsIcon />
+          </Tooltip>
+        ) : (
+          ""
+        )}
+      </Box>
+      <Box
+        component="span"
+        sx={{
+          position: "relative",
+          top: "9px",
+        }}
+      >
+        {player.ready ? (
+          <Tooltip title="Ready">
+            <CheckCircleOutlineIcon />
+          </Tooltip>
+        ) : (
+          <Tooltip title="Not Ready...">
+            <HourglassEmptyIcon />
+          </Tooltip>
+        )}
+      </Box>
+
       <Box
         component="span"
         className={player.ready ? "uncommon" : ""}
@@ -65,25 +99,6 @@ const PlayerDisplayCard = ({ player }) => {
           className="playerIcon"
           src={"/OverWorld/" + player.sprite + ".png"}
         ></img>
-      </Box>
-
-      <Box
-        component="span"
-        sx={{
-          position: "relative",
-          right: "210px",
-          top: "9px",
-        }}
-      >
-        {player.ready ? (
-          <Tooltip title="Ready">
-            <CheckCircleOutlineIcon />
-          </Tooltip>
-        ) : (
-          <Tooltip title="Not Ready...">
-            <HourglassEmptyIcon />
-          </Tooltip>
-        )}
       </Box>
     </Box>
   );

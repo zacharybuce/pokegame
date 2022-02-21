@@ -9,7 +9,10 @@ import {
   Divider,
   Box,
   CircularProgress,
+  Grid,
+  Tooltip,
 } from "@mui/material";
+import CatchingPokemonIcon from "@mui/icons-material/CatchingPokemon";
 
 const Board = ({
   id,
@@ -18,6 +21,8 @@ const Board = ({
   setCandies,
   rarity,
   setBattleMusic,
+  balls,
+  throwBall,
 }) => {
   const socket = useSocket();
   const [player1, setPlayer1] = useState();
@@ -31,6 +36,7 @@ const Board = ({
   const [hasSelected, setHasSelected] = useState();
   const [animsDone, setAnimsDone] = useState(true);
   const [monKOed, setMonKOed] = useState(0);
+  const [p2PokeHealth, setP2PokeHealth] = useState(100);
 
   const fieldUpdate = () => {
     if (socket === undefined) return;
@@ -66,6 +72,7 @@ const Board = ({
     socket.on("side-update", (team, player1) => {
       setTeam(team);
       setPlayer1(player1);
+      console.log(team);
     });
     setHasSelected(false);
     return () => socket.off("side-update");
@@ -108,6 +115,13 @@ const Board = ({
       console.log("kos " + monKOed);
       setPointReward((prevState) => prevState + monKOed);
       socket.emit("mon-knocked-out", id, monKOed);
+    } else if (rarity == "wildmon" && winner) {
+      setCandyReward(2);
+      setMoneyReward(0);
+      setPointReward(1);
+      socket.emit("update-score", id, 1);
+      setMoney((prevState) => prevState + 0);
+      setCandies((prevState) => prevState + 2);
     } else if (winner) {
       let battleCandies = 0;
       let battleMoney = 0;
@@ -144,7 +158,7 @@ const Board = ({
       setCandyReward(battleCandies);
       setMoneyReward(battleMoney);
       socket.emit("won-a-npc-battle", id, 1);
-      setPointReward(2);
+      setPointReward(1);
     } else {
       setCandyReward(1);
       setMoneyReward(0);
@@ -167,6 +181,8 @@ const Board = ({
           setAnimsDone={setAnimsDone}
           setMonKOed={setMonKOed}
           monKOed={monKOed}
+          p2PokeHealth={p2PokeHealth}
+          setP2PokeHealth={setP2PokeHealth}
         />
       ) : (
         <Box sx={{ textAlign: "center", mt: "10vh", mb: "10vh" }}>
@@ -199,6 +215,31 @@ const Board = ({
           )}
         </div>
       )}
+
+      {rarity == "wildmon" && animsDone ? (
+        <Grid container>
+          <Grid item xs={6}>
+            <Button
+              onClick={() => throwBall(p2PokeHealth)}
+              fullWidth
+              variant="contained"
+              disabled={balls == 0 ? true : false}
+            >
+              Throw Ball{" "}
+            </Button>
+          </Grid>
+          <Grid item xs={6}>
+            <Tooltip title="Balls in your bag" placement="top-start">
+              <Box sx={{ alignItems: "center", display: "flex", ml: "2vw" }}>
+                <CatchingPokemonIcon /> : {balls}
+              </Box>
+            </Tooltip>
+          </Grid>
+        </Grid>
+      ) : (
+        <div></div>
+      )}
+
       <Dialog maxWidth={"sm"} fullWidth open={battleEnd}>
         <Box sx={{ p: 5, textAlign: "center" }}>
           <Typography variant="h2">

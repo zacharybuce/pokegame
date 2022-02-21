@@ -16,7 +16,11 @@ const getTrainer = (TR, round) => {
   );
   const trainerMon = trainers[randTrainer].pokemon[randMon];
 
-  return { trainerClass: trainerClass, pokemon: trainerMon };
+  return {
+    trainerClass: trainerClass,
+    pokemon: trainerMon,
+    possibleMon: trainers[randTrainer].pokemon,
+  };
 };
 
 export default function handler(req, res) {
