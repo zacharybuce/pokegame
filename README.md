@@ -21,24 +21,43 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-A round-based game where you battle other players and create the best team possible. Over the course of 19 rounds you and other players compete to win the most points by catching Pokemon, besting trainers, and battling other players. You randomly encounter different Pokemon and trainers every play-through, creating endless replayability.
-Can only be played with an even amount of players.
+A round-based game where you battle other players and create the best team possible. Over the course of 19 rounds you and other players compete to win the most points by catching Pokemon, besting trainers, and battling other players. You randomly encounter different Pokemon and trainers every play-through, creating endless replayability.Can only be played with an even amount of players.
 
 <h3>Round 1 - Choosing your Starter</h3>
-Choose between the original gen 1 starters or make it completley random in the pre-game settings.
+<p>Choose between the original gen 1 starters or make it completley random in the pre-game settings.</p>  
+<br/>  
+
+<p align="center">
+<img src="/selectStarter.gif" width="720" height="480" />
+</p>
 
 <h3>Round 2 - The First Wild Encounter</h3>
-Choose between 3 different random locations to search for wild Pokemon. Some areas are more rare than others, this will be destinguished by a glowing color.  
-Once you choose, a random Pokemon from that area will appear. Choose to catch it and add it to your team, or make it faint to gain more candy.
+<p>Choose between 3 different random locations to search for wild Pokemon. Some areas are more rare than others, this will be destinguished by a glowing color.  
+Once you choose, a random Pokemon from that area will appear. Choose to catch it and add it to your team, or make it faint to gain more candy.</p>  
+<br/>  
+
+<p align="center">
+<img src="/wildbattle.gif" width="720" height="480" />
+</p>
 
 <h3>Round 3 - The First Trainer Battle</h3>
-These trainer battles are 1v1 NPC battles, and don't count as much towards your score. Similarly to the wild areas, trainers have different rarities, the more rare, the harder they are to beat. However, harder trainers give better rewards. Remember, these battles are a 1v1.
+<p>These trainer battles are 1v1 NPC battles, and don't count as much towards your score. Similarly to the wild areas, trainers have different rarities, the more rare, the harder they are to beat. However, harder trainers give better rewards. Remember, these battles are a 1v1.</p>  
+<br/>  
+
+<p align="center">
+<img src="/trainerbattle.gif" width="720" height="480" />
+</p>
 
 <h3>Round 4 - Round 6</h3>
 Wild battles and trainer battles will alternate.
 
 <h3>Round 7 - The First Player Battle</h3>
-Everyone will be randomly put against another player and participate in a 3v3 battle. You gain 1 point for each Pokemon you knock out and 1 more point if you win.
+<p>Everyone will be randomly put against another player and participate in a 3v3 battle. You gain 1 point for each Pokemon you knock out and 1 more point if you win.</p>  
+<br/>  
+
+<p align="center">
+<img src="/playerbattle.gif" width="720" height="480" />
+</p>
 
 <h3>Round 8 - Round 12</h3>
 New Trainers and Pokemon now appear. Wild battles and trainer battles will alternate.
@@ -52,11 +71,25 @@ New Trainers and Pokemon now appear. Wild battles and trainer battles will alter
 <h3>Round 19 - The Final Player Battle</h3>
 Everyone will be randomly put against another player and participate in a 3v3 battle. You gain 1 point for each Pokemon you knock out and 1 more point if you win. The winner is then decided based on the most points
 
+<h3>Train Your Pokemon!</h3>
+<p>Pokemon in this game get stronger by giving them candy. You can get candy by defeating and catching other Pokemon. You can select a pecific stat to increase. After
+enough increases, the Pokemon will evolve, making it stronger and learning new moves.</p>  
+<br/>  
+
+<p align="center">
+<img src="/evolve.gif" width="720" height="480" />
+</p>
+
 <h3>Trading</h3>
 After a Player battle, you and your opponent are given the opportunity to trade 1 Pokemon for 1 Pokemon.
 
 <h3>Shop</h3>
-Every round the shop contains 3 new random items. These items range in rarity and can be held by a pokemon. You can reroll the shop by spending money as well as buy Pokeballs. 
+<p>Every round the shop contains 3 new random items. These items range in rarity and can be held by a pokemon. You can reroll the shop by spending money as well as buy Pokeballs.</p>  
+<br/>  
+
+<p align="center">
+<img src="/shop.gif" width="720" height="480" />
+</p>
 
 ### Built With
 
