@@ -42,6 +42,7 @@ const PokeStats = ({ poke, statInc, candies, candiesUsed }) => {
                 width: "150px",
                 textAlign: "center",
                 borderColor: "gray",
+                display: { xs: "none", md: "block" },
               }}
             >
               Stats
@@ -60,7 +61,7 @@ const PokeStats = ({ poke, statInc, candies, candiesUsed }) => {
               Candies used: {candiesUsed}
             </Box>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12} md={6}>
             <Typography>
               {poke.evs.hp != 252 ? (
                 <Button
@@ -77,7 +78,7 @@ const PokeStats = ({ poke, statInc, candies, candiesUsed }) => {
               HP: {stats.hp}
             </Typography>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12} md={6}>
             <Typography>
               {poke.evs.spe != 252 ? (
                 <Button
@@ -95,7 +96,7 @@ const PokeStats = ({ poke, statInc, candies, candiesUsed }) => {
               Speed: {stats.spe}
             </Typography>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12} md={6}>
             <Typography>
               {poke.evs.atk != 252 ? (
                 <Button
@@ -113,7 +114,7 @@ const PokeStats = ({ poke, statInc, candies, candiesUsed }) => {
               Attack: {stats.atk}
             </Typography>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12} md={6}>
             <Typography>
               {poke.evs.spa != 252 ? (
                 <Button
@@ -128,10 +129,10 @@ const PokeStats = ({ poke, statInc, candies, candiesUsed }) => {
               ) : (
                 ""
               )}{" "}
-              Special Attack: {stats.spa}
+              Sp. Attack: {stats.spa}
             </Typography>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12} md={6}>
             <Typography>
               {poke.evs.def != 252 ? (
                 <Button
@@ -149,7 +150,7 @@ const PokeStats = ({ poke, statInc, candies, candiesUsed }) => {
               Defence: {stats.def}
             </Typography>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12} md={6}>
             <Typography>
               {poke.evs.spd != 252 ? (
                 <Button
@@ -164,12 +165,17 @@ const PokeStats = ({ poke, statInc, candies, candiesUsed }) => {
               ) : (
                 ""
               )}{" "}
-              Special Defence: {stats.spd}
+              Sp. Defence: {stats.spd}
             </Typography>
           </Grid>
         </Grid>
 
-        <Grid item container xs={6} sx={{ mt: "2vh" }}>
+        <Grid
+          item
+          container
+          xs={6}
+          sx={{ mt: "2vh", display: { xs: "none", md: "flex" } }}
+        >
           <Grid item xs={12}>
             <Box
               sx={{
@@ -209,7 +215,12 @@ const PokeStats = ({ poke, statInc, candies, candiesUsed }) => {
           </Grid>
         </Grid>
 
-        <Grid item container xs={6} sx={{ mt: "2vh" }}>
+        <Grid
+          item
+          container
+          xs={6}
+          sx={{ mt: "2vh", display: { xs: "none", md: "flex" } }}
+        >
           <Grid item xs={12}>
             <Box
               sx={{

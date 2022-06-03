@@ -14,6 +14,8 @@ import CatchingPokemonIcon from "@mui/icons-material/CatchingPokemon";
 import { useSnackbar } from "notistack";
 import Board from "../Board";
 import TeamWildArea from "./TeamWildArea";
+import useWindowDimensions from "../../hooks/useWindowDimensions";
+
 const WildBattle = ({
   id,
   balls,
@@ -35,7 +37,9 @@ const WildBattle = ({
   const [oppTeam, setOppTeam] = useState();
   const [chooseTClass, setChooseTClass] = useState();
   const { enqueueSnackbar } = useSnackbar();
+  const { height, width } = useWindowDimensions();
   const socket = useSocket();
+
   const fakeOpp = [
     {
       name: "",
@@ -221,6 +225,7 @@ const WildBattle = ({
             justifyContent="center"
             spacing={1}
             sx={{ textAlign: "center", overflowY: "hidden", p: 3 }}
+            direction={width < 900 ? "column" : "row"}
           >
             {wildAreas ? (
               wildAreas.map((wildArea, index) => {

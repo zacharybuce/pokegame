@@ -10,6 +10,7 @@ export const BattleOptions = ({
   sendSwitchChoice,
   animsDone,
   hasSelected,
+  rarity,
 }) => {
   const [trapped, setTrapped] = useState(false);
 
@@ -83,9 +84,13 @@ export const BattleOptions = ({
         </Grid>
       )}
 
-      <Grid item xs={12}>
-        <Typography>Switch:</Typography>
-      </Grid>
+      {rarity != "wildmon" ? (
+        <Grid item xs={12}>
+          <Typography>Switch:</Typography>
+        </Grid>
+      ) : (
+        ""
+      )}
 
       {team ? (
         <Grid item container xs={6}>
@@ -93,7 +98,7 @@ export const BattleOptions = ({
             JSON.parse(team).side.pokemon.map((poke, index) => {
               if (!poke.active && poke.condition != "0 fnt")
                 return (
-                  <Grid item xs={2}>
+                  <Grid item xs={6} md={2}>
                     <SwitchButton
                       poke={poke}
                       sendSwitchChoice={sendSwitchChoice}

@@ -69,7 +69,7 @@ io.on("connection", (socket) => {
       playerSocket: socket,
       sprite: overWorldSprites[randSprite],
     });
-    overWorldSprites.splice(randSprite, 1);
+    //overWorldSprites.splice(randSprite, 1);
     playersInLobby.push(id);
     io.emit("player-joined", playersInLobby);
     console.log(id + " joined the lobby");
@@ -566,4 +566,4 @@ const endGame = () => {
   io.emit("game-finish", sendLobby);
 };
 
-httpServer.listen(3001, setup.ip);
+httpServer.listen(3001);

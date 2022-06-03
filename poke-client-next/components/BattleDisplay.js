@@ -898,10 +898,15 @@ export const BattleDisplay = ({
             fontSize: "20px",
           }}
         >
-          <Grid item xs={9} sx={{ textAlign: "center" }}>
+          <Grid
+            item
+            xs={0}
+            md={9}
+            sx={{ textAlign: "center", display: { xs: "none", md: "block" } }}
+          >
             Weather:
           </Grid>
-          <Grid item xs={3} sx={{ pt: "4px" }}>
+          <Grid item xs={12} md={3} sx={{ textAlign: "center", pt: "4px" }}>
             <WeatherDisplay weather={weather} />
           </Grid>
         </Grid>

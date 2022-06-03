@@ -200,6 +200,7 @@ const Board = ({
           sendSwitchChoice={sendSwitchChoice}
           animsDone={animsDone}
           hasSelected={hasSelected}
+          rarity={rarity}
         />
       ) : (
         <div>
@@ -224,6 +225,7 @@ const Board = ({
               fullWidth
               variant="contained"
               disabled={balls == 0 ? true : false}
+              sx={{ fontSize: "13px" }}
             >
               Throw Ball{" "}
             </Button>

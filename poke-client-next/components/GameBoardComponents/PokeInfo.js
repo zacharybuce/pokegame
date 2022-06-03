@@ -135,10 +135,10 @@ const PokeInfo = ({ poke, setEditing, takeItem }) => {
         <Grid
           item
           container
-          sx={12}
+          xs={12}
           sx={{ backgroundColor: "#d9d9d9", boxShadow: 2, borderRadius: 1 }}
         >
-          <Grid item xs={3} sx={{ p: 1 }}>
+          <Grid item xs={12} md={3} sx={{ p: 1 }}>
             <Typography>
               Type:{" "}
               {poke.types.map((type) => (
@@ -148,7 +148,10 @@ const PokeInfo = ({ poke, setEditing, takeItem }) => {
               ))}
             </Typography>
           </Grid>
-          <Grid item xs={3} sx={{ p: 1 }}>
+          <Grid item xs={12} md={3} sx={{ p: 1 }}>
+            <Typography>Nature: {nature}</Typography>
+          </Grid>
+          <Grid item xs={12} md={3} sx={{ p: 1 }}>
             <Typography>
               Item: {poke.item.split("|")[0]}{" "}
               {poke.item ? (
@@ -160,14 +163,17 @@ const PokeInfo = ({ poke, setEditing, takeItem }) => {
               )}
             </Typography>
           </Grid>
-          <Grid item xs={3} sx={{ p: 1 }}>
+          <Grid item xs={12} md={3} sx={{ p: 1 }}>
             <Typography>Ability: {ability}</Typography>
           </Grid>
-          <Grid item xs={3} sx={{ p: 1 }}>
-            <Typography>Nature: {nature}</Typography>
-          </Grid>
         </Grid>
-        <Grid item container xs={12} spacing={1} sx={{ mt: "1vh" }}>
+        <Grid
+          item
+          container
+          xs={12}
+          spacing={1}
+          sx={{ mt: "1vh", display: { xs: "none", md: "flex" } }}
+        >
           <Grid item xs={12} sx={{ mb: "1vh" }}>
             <Box
               component="span"

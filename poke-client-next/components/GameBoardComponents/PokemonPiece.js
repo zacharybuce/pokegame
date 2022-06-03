@@ -6,6 +6,10 @@ import {
   DialogContent,
   Grid,
   Tooltip,
+  Tabs,
+  Tab,
+  Typography,
+  ButtonGroup,
 } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { useSocket } from "../../contexts/SocketProvider";
@@ -16,6 +20,42 @@ import StarIcon from "@mui/icons-material/Star";
 import CookieIcon from "@mui/icons-material/Cookie";
 import EditMovesDialog from "./EditMovesDialog";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+import useWindowDimensions from "../../hooks/useWindowDimensions";
+import PropTypes from "prop-types";
+import PokeInfoMove from "./PokeInfoMove";
+
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `simple-tab-${index}`,
+    "aria-controls": `simple-tabpanel-${index}`,
+  };
+}
 
 const PokemonPiece = ({
   poke,
@@ -27,12 +67,21 @@ const PokemonPiece = ({
   setMoney,
   id,
   inBox,
+  otherSet,
+  isTeam,
+  teamAmount,
 }) => {
   const socket = useSocket();
   const [open, setOpen] = useState(false);
   const [canEvolve, setCanEvolve] = useState(false);
   const [editing, setEditing] = useState(false);
   const [candiesUsed, setCandiesUsed] = useState(0);
+  const [value, setValue] = React.useState(0);
+  const { height, width } = useWindowDimensions();
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
   const handleClickOpen = () => {
     console.log(poke);
@@ -195,6 +244,27 @@ const PokemonPiece = ({
     handleClose();
   };
 
+  //ret true if cant switch
+  const cantSwitch = () => {
+    console.log(team.length);
+    if (isTeam && team.length == 1) {
+      return true;
+    } else if (!isTeam && teamAmount == 3) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  const switchTo = () => {
+    otherSet((prev) => [...prev, poke]);
+    const filteredTeam = team.filter(
+      (mem) => JSON.stringify(mem) != JSON.stringify(poke)
+    );
+    setTeam(filteredTeam);
+    handleClose();
+  };
+
   useEffect(() => {
     checkCanEvolve();
   }, [team]);
@@ -219,93 +289,327 @@ const PokemonPiece = ({
             <div></div>
           )}
         </Button>
-        <Dialog
-          fullWidth={true}
-          maxWidth={"md"}
-          open={open}
-          onClose={handleClose}
-        >
-          <Box sx={{ backgroundColor: "#fafafa" }}>
-            <DialogTitle
-              sx={{
-                backgroundColor: "#f0c870",
-                border: "solid",
-                borderWidth: "3px",
-                borderColor: "gray",
-                borderRadius: 1,
-              }}
-            >
-              {poke.species}
-              {stars()} Lvl: {poke.level + " "}
-            </DialogTitle>
-            <DialogContent sx={{ mt: "1vh" }}>
-              <Grid container>
-                <Grid item xs={12} sx={{ mb: "1.5vh", textAlign: "center" }}>
-                  <Tooltip title={"Candies to Evolve: " + poke.evolveCandies}>
-                    <span>
+        {width > 900 ? (
+          <Dialog
+            fullWidth={true}
+            maxWidth={"md"}
+            open={open}
+            onClose={handleClose}
+          >
+            <Box sx={{ backgroundColor: "#fafafa" }}>
+              <DialogTitle
+                sx={{
+                  backgroundColor: "#f0c870",
+                  border: "solid",
+                  borderWidth: "3px",
+                  borderColor: "gray",
+                  borderRadius: 1,
+                }}
+              >
+                {poke.species}
+                {stars()} Lvl: {poke.level + " "}
+              </DialogTitle>
+              <DialogContent sx={{ mt: "1vh" }}>
+                <Grid container>
+                  <Grid item xs={12} sx={{ mb: "1.5vh", textAlign: "center" }}>
+                    <Tooltip title={"Candies to Evolve: " + poke.evolveCandies}>
+                      <span>
+                        <Button
+                          onClick={() => handleEvolve()}
+                          variant="contained"
+                          color="success"
+                          disabled={!canEvolve}
+                          fullWidth
+                          sx={{ width: "75%" }}
+                        >
+                          Evolve
+                        </Button>
+                      </span>
+                    </Tooltip>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <PokeInfo
+                      poke={poke}
+                      setEditing={setEditing}
+                      takeItem={takeItem}
+                    />
+                  </Grid>
+                  <Grid item xs={12} sx={{ mt: "1vh" }}>
+                    <PokeStats
+                      poke={poke}
+                      statInc={handleStatIncrease}
+                      candies={candies}
+                      candiesUsed={candiesUsed}
+                    />
+                  </Grid>
+                  <Grid item xs={2} sx={{ mt: "1vh" }}>
+                    <Tooltip title="Release this Pokemon for 1 candy">
                       <Button
-                        onClick={() => handleEvolve()}
+                        onClick={() => releaseMon("candy")}
+                        disabled={team.length == 1 && !inBox}
                         variant="contained"
-                        color="success"
-                        disabled={!canEvolve}
-                        fullWidth
-                        sx={{ width: "75%" }}
+                        color="error"
                       >
-                        Evolve
+                        Release <CookieIcon sx={{ ml: ".5vw" }} />
                       </Button>
-                    </span>
-                  </Tooltip>
+                    </Tooltip>
+                  </Grid>
+                  <Grid item xs={2} sx={{ mt: "1vh" }}>
+                    <Tooltip title="Release this Pokemon for 500 Money">
+                      <Button
+                        onClick={() => releaseMon("money")}
+                        disabled={team.length == 1 && !inBox}
+                        variant="contained"
+                        color="error"
+                      >
+                        Release
+                        <AttachMoneyIcon sx={{ ml: ".5vw" }} />
+                      </Button>
+                    </Tooltip>
+                  </Grid>
                 </Grid>
-                <Grid item xs={12}>
-                  <PokeInfo
-                    poke={poke}
-                    setEditing={setEditing}
-                    takeItem={takeItem}
-                  />
-                </Grid>
-                <Grid item xs={12} sx={{ mt: "1vh" }}>
-                  <PokeStats
-                    poke={poke}
-                    statInc={handleStatIncrease}
-                    candies={candies}
-                    candiesUsed={candiesUsed}
-                  />
-                </Grid>
-                <Grid item xs={2} sx={{ mt: "1vh" }}>
-                  <Tooltip title="Release this Pokemon for 1 candy">
-                    <Button
-                      onClick={() => releaseMon("candy")}
-                      disabled={team.length == 1 && !inBox}
-                      variant="contained"
-                      color="error"
+                <EditMovesDialog
+                  editing={editing}
+                  setEditing={setEditing}
+                  poke={poke}
+                  handleSubmit={handleSubmit}
+                />
+              </DialogContent>
+            </Box>
+          </Dialog>
+        ) : (
+          <Dialog
+            fullWidth={true}
+            maxWidth={"md"}
+            open={open}
+            onClose={handleClose}
+          >
+            <Box sx={{ backgroundColor: "#fafafa" }}>
+              <DialogTitle
+                sx={{
+                  backgroundColor: "#f0c870",
+                  border: "solid",
+                  borderWidth: "3px",
+                  borderColor: "gray",
+                  borderRadius: 1,
+                }}
+              >
+                {poke.species}
+                {stars()} Lvl: {poke.level + " "}
+              </DialogTitle>
+              <DialogContent sx={{ mt: "1vh" }}>
+                <Grid container>
+                  <Grid item xs={12} sx={{ mb: "1.5vh", textAlign: "center" }}>
+                    <Tooltip title={"Candies to Evolve: " + poke.evolveCandies}>
+                      <span>
+                        <Button
+                          onClick={() => handleEvolve()}
+                          variant="contained"
+                          color="success"
+                          disabled={!canEvolve}
+                          fullWidth
+                          sx={{ width: "75%" }}
+                        >
+                          Evolve
+                        </Button>
+                      </span>
+                    </Tooltip>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Box sx={{ maxWidth: { xs: 320, sm: 480 } }}>
+                      <Tabs
+                        value={value}
+                        onChange={handleChange}
+                        aria-label="basic tabs example"
+                        variant="scrollable"
+                        scrollButtons
+                        allowScrollButtonsMobile
+                      >
+                        <Tab label="info" {...a11yProps(0)} />
+                        <Tab label="Stats" {...a11yProps(1)} />
+                        <Tab label="Moves" {...a11yProps(2)} />
+                        <Tab label="Evs/Ivs" {...a11yProps(3)} />
+                      </Tabs>
+                    </Box>
+                  </Grid>
+
+                  <TabPanel value={value} index={0}>
+                    <Grid item xs={12} sx={{ height: "276px" }}>
+                      <PokeInfo
+                        poke={poke}
+                        setEditing={setEditing}
+                        takeItem={takeItem}
+                      />
+                    </Grid>
+                  </TabPanel>
+                  <TabPanel value={value} index={1}>
+                    <Grid item xs={12} sx={{ mt: "1vh", height: "276px" }}>
+                      <PokeStats
+                        poke={poke}
+                        statInc={handleStatIncrease}
+                        candies={candies}
+                        candiesUsed={candiesUsed}
+                      />
+                    </Grid>
+                  </TabPanel>
+                  <TabPanel value={value} index={2}>
+                    <Grid
+                      item
+                      container
+                      xs={12}
+                      spacing={1}
+                      sx={{ height: "276px", overflowY: "scroll" }}
                     >
-                      Release <CookieIcon sx={{ ml: ".5vw" }} />
-                    </Button>
-                  </Tooltip>
-                </Grid>
-                <Grid item xs={2} sx={{ mt: "1vh" }}>
-                  <Tooltip title="Release this Pokemon for 500 Money">
+                      <Grid item xs={12} sx={{ mb: "1vh" }}>
+                        <Button
+                          onClick={() => setEditing(true)}
+                          variant="contained"
+                          disabled={!poke.newMoves}
+                          sx={{ ml: "1vw" }}
+                        >
+                          Edit
+                        </Button>
+                      </Grid>
+                      {poke.moves.map((move) => {
+                        return (
+                          <Grid item xs={12}>
+                            <PokeInfoMove move={move} />
+                          </Grid>
+                        );
+                      })}
+                    </Grid>
+                  </TabPanel>
+                  <TabPanel value={value} index={3}>
+                    <Box sx={{ height: "276px" }}>
+                      <Grid item container xs={12}>
+                        <Grid item xs={12}>
+                          <Box
+                            sx={{
+                              p: 0.5,
+                              backgroundColor: "#98c8e0",
+                              borderRadius: 1,
+                              border: "solid",
+                              borderLeftWidth: "0px",
+                              fontSize: "18px",
+                              boxShadow: 2,
+                              width: "100px",
+                              textAlign: "center",
+                              borderColor: "gray",
+                              mb: "1vh",
+                            }}
+                          >
+                            EVs
+                          </Box>
+                        </Grid>
+                        <Grid item xs={6}>
+                          <Typography>HP: {poke.evs.hp}</Typography>
+                        </Grid>
+                        <Grid item xs={6}>
+                          <Typography>Speed: {poke.evs.spe}</Typography>
+                        </Grid>
+                        <Grid item xs={6}>
+                          <Typography>Attack: {poke.evs.atk}</Typography>
+                        </Grid>
+                        <Grid item xs={6}>
+                          <Typography>Sp. Atk: {poke.evs.spa}</Typography>
+                        </Grid>
+                        <Grid item xs={6}>
+                          <Typography>Defence: {poke.evs.def}</Typography>
+                        </Grid>
+                        <Grid item xs={6}>
+                          <Typography>Sp. Def: {poke.evs.spd}</Typography>
+                        </Grid>
+                      </Grid>
+
+                      <Grid item container xs={12} sx={{ mt: "1vh" }}>
+                        <Grid item xs={12}>
+                          <Box
+                            sx={{
+                              p: 0.5,
+                              backgroundColor: "#98c8e0",
+                              borderRadius: 1,
+                              border: "solid",
+                              borderLeftWidth: "0px",
+                              fontSize: "18px",
+                              boxShadow: 2,
+                              width: "100px",
+                              textAlign: "center",
+                              borderColor: "gray",
+                              mb: "1vh",
+                            }}
+                          >
+                            IVs
+                          </Box>
+                        </Grid>
+                        <Grid item xs={6}>
+                          <Typography>HP: {poke.ivs.hp}</Typography>
+                        </Grid>
+                        <Grid item xs={6}>
+                          <Typography>Speed: {poke.ivs.spe}</Typography>
+                        </Grid>
+                        <Grid item xs={6}>
+                          <Typography>Attack: {poke.ivs.atk}</Typography>
+                        </Grid>
+                        <Grid item xs={6}>
+                          <Typography>Sp. Atk: {poke.ivs.spa}</Typography>
+                        </Grid>
+                        <Grid item xs={6}>
+                          <Typography>Defence: {poke.ivs.def}</Typography>
+                        </Grid>
+                        <Grid item xs={6}>
+                          <Typography>Sp. Def: {poke.ivs.spd}</Typography>
+                        </Grid>
+                      </Grid>
+                    </Box>
+                  </TabPanel>
+
+                  <Grid item xs={6} md={2} sx={{ mt: "1vh" }}>
+                    <Tooltip title="Release this Pokemon for 1 candy">
+                      <Button
+                        onClick={() => releaseMon("candy")}
+                        disabled={team.length == 1 && !inBox}
+                        variant="contained"
+                        color="error"
+                      >
+                        Release <CookieIcon sx={{ ml: ".5vw" }} />
+                      </Button>
+                    </Tooltip>
+                  </Grid>
+                  <Grid item xs={6} md={2} sx={{ mt: "1vh" }}>
+                    <Tooltip title="Release this Pokemon for 500 Money">
+                      <Button
+                        onClick={() => releaseMon("money")}
+                        disabled={team.length == 1 && !inBox}
+                        variant="contained"
+                        color="error"
+                      >
+                        Release
+                        <AttachMoneyIcon sx={{ ml: ".5vw" }} />
+                      </Button>
+                    </Tooltip>
+                  </Grid>
+                  <Grid item xs={12}>
                     <Button
-                      onClick={() => releaseMon("money")}
-                      disabled={team.length == 1 && !inBox}
+                      fullWidth
                       variant="contained"
-                      color="error"
+                      sx={{ mt: "1vh" }}
+                      disabled={cantSwitch()}
+                      onClick={() => switchTo()}
                     >
-                      Release
-                      <AttachMoneyIcon sx={{ ml: ".5vw" }} />
+                      Move to {isTeam ? "Box" : "Party"}
                     </Button>
-                  </Tooltip>
+                  </Grid>
                 </Grid>
-              </Grid>
-              <EditMovesDialog
-                editing={editing}
-                setEditing={setEditing}
-                poke={poke}
-                handleSubmit={handleSubmit}
-              />
-            </DialogContent>
-          </Box>
-        </Dialog>
+                <EditMovesDialog
+                  editing={editing}
+                  setEditing={setEditing}
+                  poke={poke}
+                  handleSubmit={handleSubmit}
+                />
+              </DialogContent>
+            </Box>
+          </Dialog>
+        )}
       </Box>
     );
 

@@ -161,7 +161,7 @@ const ShopItem = ({ name, setBoughtItem, money, setMoney, animTime }) => {
         }}
       >
         <CardContent>
-          <Typography variant="h5" sx={{ mt: "30%" }}>
+          <Typography variant="h5" sx={{ mt: [0, 0, "30%"] }}>
             Bought
           </Typography>
         </CardContent>

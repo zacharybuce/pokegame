@@ -14,6 +14,7 @@ import ShopItem from "./ShopItem";
 import CatchingPokemonIcon from "@mui/icons-material/CatchingPokemon";
 import { useSnackbar } from "notistack";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+import useWindowDimensions from "../../hooks/useWindowDimensions";
 
 const Shop = ({
   money,
@@ -27,6 +28,7 @@ const Shop = ({
   const { enqueueSnackbar } = useSnackbar();
   const [open, setOpen] = useState(false);
   const [items, setItems] = useState(shopItems);
+  const { height, width } = useWindowDimensions();
 
   useEffect(() => {
     setItems(shopItems);
@@ -101,7 +103,7 @@ const Shop = ({
             <Grid
               container
               sx={{
-                width: "30%",
+                width: ["100%", "30%"],
                 textAlign: "center",
                 p: 1,
                 borderRadius: "5px",
@@ -121,7 +123,12 @@ const Shop = ({
               </Grid>
             </Grid>
             {items.length ? (
-              <Grid container spacing={1} sx={{ textAlign: "center" }}>
+              <Grid
+                container
+                spacing={1}
+                sx={{ textAlign: "center" }}
+                direction={width < 900 ? "column" : "row"}
+              >
                 {items.map((item, index) => {
                   return (
                     <ShopItem
@@ -140,15 +147,15 @@ const Shop = ({
               </Box>
             )}
             <Divider sx={{ mt: "1vh" }} />
-            <Grid container sx={{ mt: "3vh" }}>
-              <Grid item xs={6}>
+            <Grid container sx={{ mt: "3vh" }} spacing={1}>
+              <Grid item direction="column" container xs={12} md={6}>
                 <Tooltip title={"Buy a Pokeball"} placement="top">
                   <Button
                     fullWidth
                     variant="contained"
                     onClick={() => buyPokeBall()}
                     disabled={money < 150}
-                    sx={{ width: "30%", height: "5vh" }}
+                    sx={{ width: ["100%", "30%"], height: "5vh" }}
                   >
                     <CatchingPokemonIcon />
                     <AttachMoneyIcon />
@@ -161,7 +168,8 @@ const Shop = ({
                 direction="column"
                 container
                 sx={{ alignContent: "flex-end" }}
-                xs={6}
+                xs={12}
+                md={6}
               >
                 <Button
                   fullWidth

@@ -101,7 +101,7 @@ const WildArea = ({
 
   if (!name.startsWith("Trainer") && possibleEncounters)
     return (
-      <Grid item xs={4} sx={{ mt: "2vh", mb: "2vh" }}>
+      <Grid item xs={12} md={4} sx={{ mt: "2vh", mb: "2vh" }}>
         <Slide in={true} direction="up" timeout={animTime + 100}>
           <Card className={getAnim(name.split("|")[1])}>
             <CardActionArea
@@ -132,7 +132,7 @@ const WildArea = ({
                         "url(/" +
                         name.split("|")[0].replace(/['. ]+/g, "") +
                         ".png)",
-                      height: "160px",
+                      height: ["30px", "30px", "160px"],
                       backgroundRepeat: "no-repeat",
                       backgroundSize: "cover",
                       borderRadius: 1,
@@ -151,7 +151,7 @@ const WildArea = ({
 
   if (tClass && possibleTrainerMon)
     return (
-      <Grid item xs={4} sx={{ m: "2vh" }}>
+      <Grid item xs={12} md={4} sx={{ m: "2vh" }}>
         <Slide in={true} direction="up" timeout={animTime + 100}>
           <Card className={getAnim(name.split("|")[1])}>
             <CardActionArea
@@ -160,7 +160,7 @@ const WildArea = ({
             >
               <CardContent>
                 <Typography variant="h6" sx={{ mb: "1vh" }}>
-                  {"Trainer Battle"}
+                  {tClass}
                 </Typography>
                 <HtmlTooltip
                   title={
@@ -175,7 +175,7 @@ const WildArea = ({
                   <Box
                     sx={{
                       backgroundImage: "url(/" + tClass + ".png)",
-                      height: "160px",
+                      height: ["30px", "30px", "160px"],
                       backgroundRepeat: "no-repeat",
                       backgroundSize: "160px 160px",
                       backgroundPosition: "42px -7px",
@@ -194,7 +194,7 @@ const WildArea = ({
     );
 
   return (
-    <Grid item xs={4} sx={{ m: "2vh" }}>
+    <Grid item xs={12} md={4} sx={{ m: "2vh" }}>
       <Card>
         <CardContent>
           <CircularProgress />

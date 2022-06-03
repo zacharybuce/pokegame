@@ -1,26 +1,21 @@
 import React, { useEffect, useState } from "react";
-import {
-  Box,
-  Typography,
-  Button,
-  Alert,
-  Grid,
-  Divider,
-  Slider,
-  Stack,
-} from "@mui/material";
+import { Box, Typography, Button, Alert, Grid, Divider } from "@mui/material";
 import { useSocket } from "../contexts/SocketProvider";
-import VolumeDown from "@mui/icons-material/VolumeDown";
-import VolumeUp from "@mui/icons-material/VolumeUp";
 import Sound from "react-sound";
 import GameRulesDialog from "./GameRulesDialog";
 import { styled } from "@mui/material/styles";
+import OptionsDialog from "./OptionsDialog";
+import SettingsIcon from "@mui/icons-material/Settings";
 
 const AppContainer = styled("div")(({ theme }) => ({
   marginRight: "7vw",
   marginLeft: "7vw",
   marginBottom: "7vh",
   //paddingTop: "20vh",
+  [theme.breakpoints.down("sm")]: {
+    marginRight: "2vw",
+    marginLeft: "2vw",
+  },
   [theme.breakpoints.up("xl")]: {
     marginRight: "24vw",
     marginLeft: "24vw",
@@ -37,6 +32,7 @@ const Lobby = ({ id, setGameStart }) => {
   const [readyPlayers, setReadyPlayers] = useState([]);
   const [open, setOpen] = useState(false);
   const [volume, setVolume] = React.useState(30);
+  const [optionsMenuOpen, setOptionsMenuOpen] = useState(false);
 
   const handleChange = (event, newValue) => {
     setVolume(newValue);
@@ -80,18 +76,29 @@ const Lobby = ({ id, setGameStart }) => {
   if (lobby)
     return (
       <AppContainer>
-        <Box sx={{ mt: "10vh" }}>
-          <Typography variant="h1" sx={{ mb: "5vh", textAlign: "center" }}>
+        <Box sx={{ width: "100%", textAlign: "right" }}>
+          <Button onClick={() => setOptionsMenuOpen(true)}>
+            <SettingsIcon />
+          </Button>
+        </Box>
+        <Box sx={{ mt: "5vh" }}>
+          <Typography
+            sx={{
+              mb: "5vh",
+              textAlign: "center",
+              fontSize: ["50px", null, null, "75px"],
+            }}
+          >
             PokéQuest
           </Typography>
-          <Grid container sx={{ mb: "1vh" }}>
-            <Grid item xs={6} sx={{ pr: "5vw" }}>
+          <Grid container sx={{ mb: "4vh" }} spacing={2}>
+            <Grid item xs={12} md={6} sx={{ pr: "5vw" }}>
               <Typography variant="h6">Rules</Typography>
               <Divider></Divider>
               <Typography variant="h6">Starters: {starter}</Typography>
               <Typography variant="h6">Wild Areas: {wildArea}</Typography>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} md={6}>
               <Typography variant="h6">{journey}</Typography>
               <Box sx={{ justifyContent: "flex-end", display: "flex" }}>
                 <Box
@@ -201,33 +208,12 @@ const Lobby = ({ id, setGameStart }) => {
             autoLoad={true}
             volume={volume}
           />
-          <Stack
-            spacing={2}
-            direction="row"
-            sx={{
-              position: "fixed",
-              width: "15vw",
-              height: "5vh",
-              top: "90%",
-              left: "80%",
-              mb: 1,
-              borderRadius: "3px",
-              border: "solid",
-              borderWidth: "1px",
-              borderColor: "gray",
-              p: 1,
-              boxShadow: 5,
-            }}
-            alignItems="center"
-          >
-            <VolumeDown />
-            <Slider
-              aria-label="Volume"
-              value={volume}
-              onChange={handleChange}
-            />
-            <VolumeUp />
-          </Stack>
+          <OptionsDialog
+            volume={volume}
+            handleChange={handleChange}
+            optionsMenuOpen={optionsMenuOpen}
+            setOptionsMenuOpen={setOptionsMenuOpen}
+          />
         </Box>
       </AppContainer>
     );

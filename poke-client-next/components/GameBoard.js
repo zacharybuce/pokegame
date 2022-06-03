@@ -10,22 +10,29 @@ import PlayerDisplay from "./GameBoardComponents/PlayerDisplay";
 import StartTurn from "./GameBoardComponents/StartTurn";
 import RoundDialog from "./GameBoardComponents/RoundDialog";
 import GameFinishDialog from "./GameBoardComponents/GameFinishDialog";
-import VolumeDown from "@mui/icons-material/VolumeDown";
-import VolumeUp from "@mui/icons-material/VolumeUp";
+import OptionsDialog from "./OptionsDialog";
 import Sound from "react-sound";
 const PokeDisplay = dynamic(import("./GameBoardComponents/PokeDisplay"));
 import { styled } from "@mui/material/styles";
 import NextRoundDialog from "./GameBoardComponents/NextRoundDialog";
 import TradeDialog from "./GameBoardComponents/TradeDialog";
+import SettingsIcon from "@mui/icons-material/Settings";
+import PokeDisplayMobile from "./GameBoardComponents/PokeDisplayMobile";
+import useWindowDimensions from "../hooks/useWindowDimensions";
 
 const RoundContainer = styled("div")(({ theme }) => ({
   marginRight: "7vw",
   marginLeft: "7vw",
   marginBottom: "5vh",
-  paddingTop: "10vh",
+  //paddingTop: "3vh",
   [theme.breakpoints.up("xl")]: {
     marginRight: "20vw",
     marginLeft: "20vw",
+  },
+  [theme.breakpoints.down("md")]: {
+    marginRight: "7vw",
+    marginLeft: "7vw",
+    marginBottom: "2vh",
   },
 }));
 
@@ -39,8 +46,8 @@ const AppContainer = styled("div")(({ theme }) => ({
     marginLeft: "24vw",
   },
   [theme.breakpoints.down("md")]: {
-    marginRight: "2vw",
-    marginLeft: "2vw",
+    marginRight: "0vw",
+    marginLeft: "0vw",
   },
 }));
 
@@ -76,6 +83,8 @@ const GameBoard = ({ id }) => {
   const [newRoundDialog, setNewRoundDialog] = useState(false);
   const [tradeDialogOpen, setTradeDialogOpen] = useState(false);
   const [tradeInfo, setTradeInfo] = useState([]);
+  const [optionsMenuOpen, setOptionsMenuOpen] = useState(false);
+  const { height, width } = useWindowDimensions();
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -268,6 +277,11 @@ const GameBoard = ({ id }) => {
 
   return (
     <Box sx={{ overflow: "hidden" }}>
+      <Box sx={{ width: "100%", textAlign: "right" }}>
+        <Button onClick={() => setOptionsMenuOpen(true)}>
+          <SettingsIcon />
+        </Button>
+      </Box>
       <RoundContainer>
         <Box
           sx={{
@@ -285,7 +299,8 @@ const GameBoard = ({ id }) => {
           <Grid
             item
             container
-            xs={10}
+            xs={12}
+            md={10}
             spacing={1}
             sx={{
               backgroundColor: "#e9ebec",
@@ -302,7 +317,7 @@ const GameBoard = ({ id }) => {
                 candies={candies}
               />
             </Grid>
-            <Grid item xs={10}>
+            <Grid item xs={10} sx={{ display: { xs: "none", md: "flex" } }}>
               {winReady ? (
                 <PokeDisplay
                   team={team}
@@ -319,7 +334,27 @@ const GameBoard = ({ id }) => {
                 <div></div>
               )}
             </Grid>
-            <Grid item xs={2}>
+            <Grid item xs={12} sx={{ display: { xs: "flex", md: "none" } }}>
+              {winReady && lobby ? (
+                <PokeDisplayMobile
+                  team={team}
+                  setTeam={setTeam}
+                  box={box}
+                  setBox={setBox}
+                  candies={candies}
+                  setCandies={setCandies}
+                  setBag={setBag}
+                  setMoney={setMoney}
+                  id={id}
+                  items={items}
+                  setItems={setBag}
+                  lobby={lobby}
+                />
+              ) : (
+                <div></div>
+              )}
+            </Grid>
+            <Grid item xs={2} sx={{ display: { xs: "none", md: "block" } }}>
               <ItemBag
                 items={items}
                 team={team}
@@ -329,7 +364,7 @@ const GameBoard = ({ id }) => {
               />
             </Grid>
             <Grid item container xs={12}>
-              <Grid item xs={4}>
+              <Grid item xs={6} md={4}>
                 <Shop
                   money={money}
                   setMoney={setMoney}
@@ -341,7 +376,13 @@ const GameBoard = ({ id }) => {
                 />
               </Grid>
               {!ready ? (
-                <Grid item container sx={{ justifyContent: "flex-end" }} xs={8}>
+                <Grid
+                  item
+                  container
+                  sx={{ justifyContent: "flex-end", mt: "1vh" }}
+                  xs={12}
+                  md={8}
+                >
                   <Grid item xs={6} sx={{ mr: "1vw" }}>
                     {!roundDone ? (
                       <StartTurn startTurn={startTurn} />
@@ -365,9 +406,13 @@ const GameBoard = ({ id }) => {
               )}
             </Grid>
           </Grid>
-          <Grid item xs={2}>
-            {lobby ? <PlayerDisplay lobby={lobby} /> : <div></div>}
-          </Grid>
+          {width > 900 ? (
+            <Grid item xs={2}>
+              {lobby ? <PlayerDisplay lobby={lobby} /> : <div></div>}
+            </Grid>
+          ) : (
+            ""
+          )}
           {results ? (
             <GameFinishDialog
               finishDialogOpen={finishDialogOpen}
@@ -404,30 +449,12 @@ const GameBoard = ({ id }) => {
           volume={volume}
           onFinishedPlaying={handleSongFinishedPlaying}
         />
-        <Stack
-          spacing={2}
-          direction="row"
-          sx={{
-            backgroundColor: "#fafafa",
-            position: "fixed",
-            width: "15vw",
-            height: "5vh",
-            top: "90%",
-            left: "80%",
-            mb: 1,
-            borderRadius: "3px",
-            border: "solid",
-            borderWidth: "1px",
-            borderColor: "gray",
-            p: 1,
-            boxShadow: 5,
-          }}
-          alignItems="center"
-        >
-          <VolumeDown />
-          <Slider aria-label="Volume" value={volume} onChange={handleChange} />
-          <VolumeUp />
-        </Stack>
+        <OptionsDialog
+          volume={volume}
+          handleChange={handleChange}
+          optionsMenuOpen={optionsMenuOpen}
+          setOptionsMenuOpen={setOptionsMenuOpen}
+        />
         {battleMusic ? (
           <Sound
             url={"/music/BattleJohto.mp3"}

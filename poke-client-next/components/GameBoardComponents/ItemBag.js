@@ -4,53 +4,97 @@ import Item from "./Item";
 
 const ItemBag = ({ items, team, setTeam, setItems, setMoney }) => {
   return (
-    <Box textAlign={"center"} sx={{ mt: "2vh" }}>
+    <Box>
       <Box
-        sx={{
-          height: "58px",
-          backgroundImage: "url(/BAG.png)",
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          backgroundPositionY: "-5px",
-        }}
+        textAlign={"center"}
+        sx={{ mt: "2vh", display: { xs: "none", md: "block" } }}
       >
-        <Typography
+        <Box
           sx={{
-            color: "white",
-            fontSize: "30px",
-            textShadow: "2px 2px  #000000",
+            height: "58px",
+            backgroundImage: "url(/BAG.png)",
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
+            backgroundPositionY: "-5px",
           }}
         >
-          Items
-        </Typography>
+          <Typography
+            sx={{
+              color: "white",
+              fontSize: "30px",
+              textShadow: "2px 2px  #000000",
+            }}
+          >
+            Items
+          </Typography>
+        </Box>
+        <Box
+          sx={{
+            p: 1,
+            borderRadius: "3px",
+            border: "solid",
+            borderColor: "gray",
+            borderWidth: "3px",
+            minHeight: "15vh",
+            maxHeight: "16vh",
+            overflowY: "auto",
+            backgroundColor: "#e0d857",
+            boxShadow: "0px 5px gray",
+          }}
+        >
+          {items.map((item, index) => {
+            return (
+              <Item
+                name={item}
+                team={team}
+                items={items}
+                setTeam={setTeam}
+                setItems={setItems}
+                setMoney={setMoney}
+                key={index}
+              />
+            );
+          })}
+        </Box>
       </Box>
+
       <Box
-        sx={{
-          p: 1,
-          borderRadius: "3px",
-          border: "solid",
-          borderColor: "gray",
-          borderWidth: "3px",
-          minHeight: "15vh",
-          maxHeight: "16vh",
-          overflowY: "auto",
-          backgroundColor: "#e0d857",
-          boxShadow: "0px 5px gray",
-        }}
+        textAlign={"center"}
+        sx={{ mt: "2vh", display: { xs: "block", md: "none" } }}
       >
-        {items.map((item, index) => {
-          return (
-            <Item
-              name={item}
-              team={team}
-              items={items}
-              setTeam={setTeam}
-              setItems={setItems}
-              setMoney={setMoney}
-              key={index}
-            />
-          );
-        })}
+        <Box>
+          <Typography>Items</Typography>
+        </Box>
+        <Box
+          sx={{
+            width: "50%",
+            p: 1,
+            borderRadius: "3px",
+            border: "solid",
+            borderColor: "gray",
+            borderWidth: "3px",
+            minHeight: "15vh",
+            maxHeight: "16vh",
+            overflowY: "auto",
+            backgroundColor: "#e0d857",
+            boxShadow: "0px 5px gray",
+            m: "auto",
+          }}
+        >
+          {items.map((item, index) => {
+            return (
+              <Item
+                name={item}
+                team={team}
+                items={items}
+                setTeam={setTeam}
+                setItems={setItems}
+                setMoney={setMoney}
+                key={index}
+              />
+            );
+          })}
+        </Box>
       </Box>
     </Box>
   );

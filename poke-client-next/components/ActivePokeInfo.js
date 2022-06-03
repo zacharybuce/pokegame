@@ -3,6 +3,7 @@ import { CircularProgress, Grid, Typography } from "@mui/material";
 import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
 import { styled } from "@mui/material/styles";
 import { Box } from "@mui/material";
+import useWindowDimensions from "../hooks/useWindowDimensions";
 
 const HtmlTooltip = styled(({ className, ...props }) => (
   <Tooltip {...props} classes={{ popper: className }} />
@@ -18,6 +19,7 @@ const HtmlTooltip = styled(({ className, ...props }) => (
 
 const ActivePokeInfo = ({ team }) => {
   const [pokeData, setPokeData] = useState(null);
+  const { height, width } = useWindowDimensions();
 
   const getActiveMon = async () => {
     const poke = team.side.pokemon[0];
@@ -92,7 +94,7 @@ const ActivePokeInfo = ({ team }) => {
             {Object.keys(pokeData.stats).map(function (key, index) {
               return (
                 <Grid item xs={6}>
-                  <Typography>
+                  <Typography sx={{ fontSize: width < 900 ? "13px" : "1rem" }}>
                     <b>{key}</b> : {pokeData.stats[key]}
                   </Typography>
                 </Grid>

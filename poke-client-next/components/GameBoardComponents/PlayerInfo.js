@@ -18,25 +18,25 @@ const PlayerInfo = ({ id, money, balls, candies }) => {
       }}
     >
       <Grid container textAlign={"center"} spacing={1}>
-        <Grid item xs={3}>
+        <Grid item xs={3} sx={{ display: { xs: "none", md: "flex" } }}>
           <Typography>{id}</Typography>
         </Grid>
-        <Grid item container xs={3}>
+        <Grid item container xs={4} md={3}>
           <Tooltip title="Money">
             <AttachMoneyIcon />
           </Tooltip>
           : {money}
         </Grid>
-        <Grid item container xs={3}>
+        <Grid item container xs={4} md={3}>
           <Tooltip title="Pokeballs">
             <CatchingPokemonIcon />
           </Tooltip>{" "}
           : {balls}
         </Grid>
-        <Grid item container xs={3}>
+        <Grid item container xs={4} md={3}>
           <Tooltip title="Candies">
             <CookieIcon />
-          </Tooltip>{" "}
+          </Tooltip>
           :{candies}
         </Grid>
       </Grid>

@@ -259,7 +259,7 @@ const TradeDialog = ({
                     textAlign: "center",
                   }}
                 >
-                  Opponent's Offer
+                  Opp.'s Offer
                 </Box>
                 <Grid
                   container
@@ -318,15 +318,16 @@ const TradeDialog = ({
                 borderRadius: 2,
                 boxShadow: "0px 5px gray",
                 mb: "3vh",
+                overflowX: "scroll",
               }}
             >
               {team.map((poke) => (
-                <Grid item xs={1}>
+                <Grid item xs={3} md={1}>
                   <PokeTradeIcon poke={poke} tradeOffer={tradeOffer} />
                 </Grid>
               ))}
               {box.map((poke) => (
-                <Grid item xs={1}>
+                <Grid item xs={3} md={1}>
                   <PokeTradeIcon poke={poke} tradeOffer={tradeOffer} />
                 </Grid>
               ))}

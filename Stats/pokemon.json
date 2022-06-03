@@ -183,7 +183,7 @@
   "nidorina": {
     "species": "Nidorina",
     "evolveCandies": "15",
-    "newMoves": ["Bite", "Toxic", "Poison Fang", "Fury Swipes"]
+    "newMoves": ["Bite", "Toxic", "Poison Fang", "Dig"]
   },
   "nidoqueen": {
     "species": "Nidoqueen",
